@@ -144,7 +144,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100">
+        <div className="lg:hidden bg-white border-t border-gray-100 max-h-[calc(100vh-6rem)] overflow-y-auto">
           <div className="max-w-7xl mx-auto px-6 py-6 space-y-1">
             {navItems.map((item) => (
               <div key={item.label}>
