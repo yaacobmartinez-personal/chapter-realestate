@@ -1,4 +1,4 @@
-import { SocialLink, FooterLinkGroup } from "./types";
+import { SocialLink, FooterLinkGroup, FooterLink } from "./types";
 
 export const socialLinks: SocialLink[] = [
   {
