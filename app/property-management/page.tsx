@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import {
   Overview,
@@ -7,6 +8,23 @@ import {
   OwnerTenantPortals,
   FreeAnalysisCTA,
 } from "@/components/property-management";
+
+export const metadata: Metadata = {
+  title: "Property Management Winnipeg — Hands-Off, High Returns",
+  description:
+    "Chapter's property management services in Winnipeg handle everything — tenant screening, maintenance, rent collection, and reporting. Get a free rental analysis today.",
+  openGraph: {
+    title: "Property Management Winnipeg — Hands-Off, High Returns | Chapter",
+    description:
+      "Chapter's property management services in Winnipeg handle everything — tenant screening, maintenance, rent collection, and reporting. Get a free rental analysis today.",
+    url: "https://chapterrealestate.ca/property-management",
+  },
+  twitter: {
+    title: "Property Management Winnipeg — Hands-Off, High Returns | Chapter",
+    description:
+      "Chapter's property management services in Winnipeg handle everything — tenant screening, maintenance, rent collection, and reporting. Get a free rental analysis today.",
+  },
+};
 
 export default function PropertyManagementPage() {
   return (

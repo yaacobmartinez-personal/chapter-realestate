@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import {
   WhyJoin,
@@ -5,6 +6,23 @@ import {
   AgentBenefits,
   ApplyForm,
 } from "@/components/recruitment";
+
+export const metadata: Metadata = {
+  title: "Join Chapter — Grow Your Real Estate Career in Winnipeg",
+  description:
+    "Join Chapter Real Estate and elevate your career with industry-leading commission models, mentorship, and full agent support. Apply to join our Winnipeg team today.",
+  openGraph: {
+    title: "Join Chapter — Grow Your Real Estate Career in Winnipeg",
+    description:
+      "Join Chapter Real Estate and elevate your career with industry-leading commission models, mentorship, and full agent support. Apply to join our Winnipeg team today.",
+    url: "https://chapterrealestate.ca/recruitment",
+  },
+  twitter: {
+    title: "Join Chapter — Grow Your Real Estate Career in Winnipeg",
+    description:
+      "Join Chapter Real Estate and elevate your career with industry-leading commission models, mentorship, and full agent support. Apply to join our Winnipeg team today.",
+  },
+};
 
 export default function RecruitmentPage() {
   return (

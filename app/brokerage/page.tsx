@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import {
   SearchBar,
@@ -7,6 +8,23 @@ import {
   AgentsDirectory,
   MarketInsights,
 } from "@/components/brokerage";
+
+export const metadata: Metadata = {
+  title: "Real Estate Brokerage — Buy & Sell Homes in Winnipeg",
+  description:
+    "Browse Winnipeg listings, connect with expert agents, and get top dollar for your home. Chapter's brokerage team guides buyers and sellers every step of the way.",
+  openGraph: {
+    title: "Real Estate Brokerage — Buy & Sell Homes in Winnipeg | Chapter",
+    description:
+      "Browse Winnipeg listings, connect with expert agents, and get top dollar for your home. Chapter's brokerage team guides buyers and sellers every step of the way.",
+    url: "https://chapterrealestate.ca/brokerage",
+  },
+  twitter: {
+    title: "Real Estate Brokerage — Buy & Sell Homes in Winnipeg | Chapter",
+    description:
+      "Browse Winnipeg listings, connect with expert agents, and get top dollar for your home. Chapter's brokerage team guides buyers and sellers every step of the way.",
+  },
+};
 
 export default function BrokeragePage() {
   return (

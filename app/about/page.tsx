@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import {
   OurStory,
@@ -6,6 +7,23 @@ import {
   LeadershipTeam,
   Careers,
 } from "@/components/about";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn the story behind Chapter Real Estate — a Winnipeg-based company built on integrity, driven by vision, and committed to exceptional client outcomes.",
+  openGraph: {
+    title: "About Us | Chapter Real Estate",
+    description:
+      "Learn the story behind Chapter Real Estate — a Winnipeg-based company built on integrity, driven by vision, and committed to exceptional client outcomes.",
+    url: "https://chapterrealestate.ca/about",
+  },
+  twitter: {
+    title: "About Us | Chapter Real Estate",
+    description:
+      "Learn the story behind Chapter Real Estate — a Winnipeg-based company built on integrity, driven by vision, and committed to exceptional client outcomes.",
+  },
+};
 
 export default function AboutPage() {
   return (
