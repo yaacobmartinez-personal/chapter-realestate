@@ -1,14 +1,9 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const members = [
-  { name: "Alex Barsoum", role: "Managing Partner", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" },
-  { name: "Sarah Mitchell", role: "Director of Property Management", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" },
-  { name: "James Okafor", role: "Senior Broker", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" },
-  { name: "Priya Sharma", role: "Investment Relations", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" },
-];
+import { homeTeamMembers } from "@/lib/data/home";
 
 export default function Team() {
   return (
@@ -37,7 +32,7 @@ export default function Team() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {members.map(({ name, role, image }, i) => (
+          {homeTeamMembers.map(({ name, role, image }, i) => (
             <motion.div
               key={name}
               className="group"
@@ -47,11 +42,12 @@ export default function Team() {
               transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <div className="aspect-[3/4] overflow-hidden bg-gray-200 mb-4 relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
+                  fill
                   src={image}
                   alt={name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
                 <motion.div
                   className="absolute inset-0 bg-[#c8a96e]/10"

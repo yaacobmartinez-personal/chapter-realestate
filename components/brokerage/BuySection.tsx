@@ -1,22 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-
-const categories = [
-  { image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80", label: "Residential" },
-  { image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80", label: "Commercial" },
-  { image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80", label: "Investment" },
-  { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", label: "Luxury" },
-];
-
-const benefits = [
-  "Access to all MLS listings + off-market properties",
-  "Dedicated buyer's agent at no cost to you",
-  "Neighbourhood expertise across all of Winnipeg",
-  "Negotiation specialists with proven track records",
-];
+import { buyCategories, buyBenefits } from "@/lib/data/brokerage";
 
 export default function BuySection() {
   return (
@@ -33,7 +21,7 @@ export default function BuySection() {
             <h2 className="text-4xl md:text-5xl font-light text-black leading-tight mb-6">Find Your<br /><span className="font-serif italic">Perfect Home</span></h2>
             <p className="text-gray-500 font-light leading-relaxed mb-8 max-w-sm text-sm">From first-time buyers to seasoned investors, our agents guide you through every step — from search to keys in hand.</p>
             <ul className="space-y-3 mb-10">
-              {benefits.map((item, i) => (
+              {buyBenefits.map((item, i) => (
                 <motion.li key={item} className="flex items-start gap-3 text-sm text-gray-600 font-light"
                   initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}>
@@ -44,7 +32,7 @@ export default function BuySection() {
             <Link href="/contact#book" className="inline-flex items-center gap-3 bg-black text-white text-sm font-light tracking-widest uppercase px-8 py-4 hover:bg-[#c8a96e] transition-colors">Book a Showing</Link>
           </motion.div>
           <div className="grid grid-cols-2 gap-4">
-            {categories.map(({ image, label }, i) => (
+            {buyCategories.map(({ image, label }, i) => (
               <motion.div key={label} className="relative overflow-hidden group cursor-pointer aspect-square"
                 initial={{ opacity: 0, scale: 0.92 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -52,8 +40,13 @@ export default function BuySection() {
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                 whileHover={{ scale: 1.02 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={image} alt={label} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image
+                  fill
+                  src={image}
+                  alt={label}
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
                 <div className="absolute inset-0 bg-black/30 flex items-end p-4">
                   <span className="text-white text-xs tracking-widest uppercase font-light">{label}</span>
                 </div>

@@ -4,13 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import DarkCTASection from "@/components/ui/DarkCTASection";
-
-const stats = [
-  { label: "Avg. Days on Market", value: "18", note: "Winnipeg 2025" },
-  { label: "Avg. Sale Price", value: "$432K", note: "YTD 2025" },
-  { label: "List-to-Sale Ratio", value: "101%", note: "Q1 2025" },
-  { label: "Active Listings", value: "2,840", note: "Current" },
-];
+import { brokerageMarketStats } from "@/lib/data/brokerage";
 
 export default function MarketInsights() {
   return (
@@ -28,7 +22,7 @@ export default function MarketInsights() {
       }
     >
       <div className="grid grid-cols-2 gap-4">
-        {stats.map(({ label, value, note }, i) => (
+        {brokerageMarketStats.map(({ label, value, note }, i) => (
           <motion.div key={label} className="border border-white/10 p-8"
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}

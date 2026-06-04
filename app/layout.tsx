@@ -6,6 +6,8 @@ import Footer from "@/components/footer";
 import PageTransition from "@/components/ui/PageTransition";
 import ScrollObserver from "@/components/ui/ScrollObserver";
 import JsonLd from "@/components/JsonLd";
+import { EditorProvider } from "@/lib/editor/EditorContext";
+import EditorPanel from "@/components/editor/EditorPanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,11 +86,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${playfair.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
-        <JsonLd />
-        <Navbar />
-        <ScrollObserver />
-        <main className="flex-1"><PageTransition>{children}</PageTransition></main>
-        <Footer />
+        <EditorProvider>
+          <JsonLd />
+          <Navbar />
+          <ScrollObserver />
+          <main className="flex-1"><PageTransition>{children}</PageTransition></main>
+          <Footer />
+          <EditorPanel />
+        </EditorProvider>
       </body>
     </html>
   );

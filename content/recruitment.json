@@ -1,0 +1,61 @@
+{
+  "whyJoinReasons": [
+    {
+      "iconKey": "BarChart3",
+      "title": "Industry-Leading Commission",
+      "desc": "Keep more of what you earn with competitive split structures designed to reward top producers."
+    },
+    {
+      "iconKey": "Laptop",
+      "title": "Modern Technology",
+      "desc": "CRM systems, marketing automation, digital transaction management, and AI tools — all included."
+    },
+    {
+      "iconKey": "Users",
+      "title": "Collaborative Culture",
+      "desc": "A team-first environment where senior agents mentor new talent and everyone wins together."
+    },
+    {
+      "iconKey": "Award",
+      "title": "Brand & Marketing",
+      "desc": "Professional marketing support, listing photography, social media assets, and a brand that attracts clients."
+    }
+  ],
+  "commissionModels": [
+    {
+      "name": "Brokerage Fee Model",
+      "structure": "100% Commission",
+      "fee": "Flat monthly fee",
+      "best": "High-volume producers",
+      "features": [
+        "Keep 100% of your commission",
+        "Flat monthly brokerage fee",
+        "Full access to all tools & support",
+        "Ideal for $500K+ annual GCI"
+      ]
+    },
+    {
+      "name": "Split Model",
+      "structure": "80/20 Split",
+      "fee": "No monthly fee",
+      "best": "Growing agents",
+      "features": [
+        "80% to agent, 20% to Chapter",
+        "No monthly overhead",
+        "All training & mentorship included",
+        "Ideal for agents building their business"
+      ],
+      "featured": true
+    }
+  ],
+  "agentBenefits": [
+    "Professional listing photography & videography",
+    "Branded social media content & templates",
+    "Lead generation & CRM integration",
+    "In-house transaction coordinator",
+    "Mentorship from top-producing agents",
+    "Regular training & market education",
+    "Flexible office & co-working access",
+    "Referral network across all divisions"
+  ]
+}

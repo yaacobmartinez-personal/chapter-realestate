@@ -1,14 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail } from "lucide-react";
-
-const agents = [
-  { name: "James Okafor", specialties: "Luxury · River Heights · Tuxedo", phone: "(204) 555-0101", email: "james@chapterrealestate.ca", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&q=80", listings: 12 },
-  { name: "Maria Santos", specialties: "First-Time Buyers · St. Vital · Transcona", phone: "(204) 555-0102", email: "maria@chapterrealestate.ca", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80", listings: 8 },
-  { name: "Tyler Nguyen", specialties: "Investment · Commercial · Fort Rouge", phone: "(204) 555-0103", email: "tyler@chapterrealestate.ca", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80", listings: 15 },
-  { name: "Aisha Kamara", specialties: "Condos · Downtown · The Exchange", phone: "(204) 555-0104", email: "aisha@chapterrealestate.ca", image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=80", listings: 9 },
-];
+import { agents } from "@/lib/data/brokerage";
 
 export default function AgentsDirectory() {
   return (
@@ -26,9 +21,14 @@ export default function AgentsDirectory() {
               transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
             >
-              <div className="overflow-hidden bg-gray-100 aspect-3/4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={image} alt={name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
+              <div className="relative overflow-hidden bg-gray-100 aspect-3/4">
+                <Image
+                  fill
+                  src={image}
+                  alt={name}
+                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
               </div>
               <div className="p-5">
                 <p className="text-sm font-light text-black">{name}</p>

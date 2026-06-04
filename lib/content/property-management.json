@@ -1,0 +1,63 @@
+{
+  "pmBenefits": [
+    { "iconKey": "BarChart3", "title": "Maximize Returns", "desc": "Strategic pricing and low vacancy rates keep your income consistent and growing." },
+    { "iconKey": "Shield", "title": "Quality Tenants", "desc": "Rigorous screening process ensures only qualified, reliable tenants occupy your property." },
+    { "iconKey": "Wrench", "title": "Full Maintenance", "desc": "24/7 emergency response, preventative programs, and trusted vendor networks." },
+    { "iconKey": "Clock", "title": "Save Time", "desc": "We handle everything — you check your statement and collect your returns." }
+  ],
+  "pmServiceTypes": [
+    {
+      "title": "Leasing Services",
+      "items": ["Property marketing & advertising", "Tenant screening & background checks", "Lease preparation & signing", "Move-in/out coordination"]
+    },
+    {
+      "title": "Full Management",
+      "items": ["Rent collection & disbursement", "Maintenance coordination", "Regular property inspections", "Monthly financial reporting"]
+    },
+    {
+      "title": "Maintenance Services",
+      "items": ["24/7 emergency maintenance", "Trusted vendor network", "Preventative maintenance programs", "Renovation coordination"]
+    }
+  ],
+  "pmPropertyTypes": [
+    { "iconKey": "Home", "title": "Residential", "subtitle": "Single-Family & Condos", "desc": "Single-family homes, duplexes, and condominiums — we manage the full spectrum of residential properties with care.", "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" },
+    { "iconKey": "Building2", "title": "Multi-Family", "subtitle": "Apartment Buildings", "desc": "Streamlined management for multi-unit buildings with centralized reporting and efficient tenant coordination.", "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" },
+    { "iconKey": "Building2", "title": "Commercial", "subtitle": "Office, Retail & Mixed-Use", "desc": "Commercial leasing, tenant coordination, and full facilities management for office, retail, and mixed-use assets.", "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" }
+  ],
+  "pmPlans": [
+    {
+      "name": "Leasing Only",
+      "fee": "One Month's Rent",
+      "desc": "Perfect for landlords who want help finding quality tenants.",
+      "features": ["Property marketing", "Tenant screening", "Lease preparation", "Move-in coordination"],
+      "cta": "Get Started"
+    },
+    {
+      "name": "Full Management",
+      "fee": "8–10% of Rent",
+      "desc": "Complete hands-off management from lease to lease.",
+      "features": ["Everything in Leasing", "Rent collection", "Maintenance coordination", "Inspections & reporting", "24/7 emergency support"],
+      "cta": "Get Started",
+      "featured": true
+    },
+    {
+      "name": "Premium Portfolio",
+      "fee": "Custom Pricing",
+      "desc": "Tailored for multi-unit and commercial property owners.",
+      "features": ["Everything in Full Management", "Dedicated portfolio manager", "Commercial leasing", "Custom reporting", "Investor dashboard"],
+      "cta": "Contact Us"
+    }
+  ],
+  "ownerPortalFeatures": [
+    "Monthly statements & reports",
+    "Maintenance request tracking",
+    "Lease documentation",
+    "Year-end tax summaries"
+  ],
+  "tenantPortalFeatures": [
+    "Pay rent online",
+    "Submit maintenance requests",
+    "View lease documents",
+    "Track maintenance status"
+  ]
+}

@@ -1,19 +1,5 @@
 import { CheckCircle } from "lucide-react";
-
-const serviceTypes = [
-  {
-    title: "Leasing Services",
-    items: ["Property marketing & advertising", "Tenant screening & background checks", "Lease preparation & signing", "Move-in/out coordination"],
-  },
-  {
-    title: "Full Management",
-    items: ["Rent collection & disbursement", "Maintenance coordination", "Regular property inspections", "Monthly financial reporting"],
-  },
-  {
-    title: "Maintenance Services",
-    items: ["24/7 emergency maintenance", "Trusted vendor network", "Preventative maintenance programs", "Renovation coordination"],
-  },
-];
+import { pmServiceTypes } from "@/lib/data/property-management";
 
 export default function Services() {
   return (
@@ -24,7 +10,7 @@ export default function Services() {
           <h2 data-reveal className="text-4xl md:text-5xl font-light text-black">Everything Included</h2>
         </div>
         <div data-stagger className="grid md:grid-cols-3 gap-6">
-          {serviceTypes.map(({ title, items }) => (
+          {pmServiceTypes.map(({ title, items }) => (
             <div key={title} className="bg-white p-10">
               <h3 className="text-xl font-light text-black mb-6 pb-6 border-b border-gray-100">{title}</h3>
               <ul className="space-y-3">

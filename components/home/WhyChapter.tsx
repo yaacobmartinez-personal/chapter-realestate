@@ -2,13 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const pillars = [
-  { number: "01", title: "Local Expertise", description: "Deep roots in Winnipeg's market. We know every neighbourhood, every trend, every opportunity." },
-  { number: "02", title: "Modern Technology", description: "AI-powered tools, online portals, and market analytics at your fingertips 24/7." },
-  { number: "03", title: "Full-Service Platform", description: "From first purchase to long-term management, we handle every step of your real estate journey." },
-  { number: "04", title: "Proven Results", description: "500+ properties sold, 1,200+ units managed, and a 98% client satisfaction rate." },
-];
+import { whyPillars } from "@/lib/data/home";
 
 export default function WhyChapter() {
   return (
@@ -31,7 +25,7 @@ export default function WhyChapter() {
           </motion.div>
 
           <div className="divide-y divide-gray-100">
-            {pillars.map(({ number, title, description }, i) => (
+            {whyPillars.map(({ number, title, description }, i) => (
               <motion.div
                 key={number}
                 className="py-8 flex gap-8 hover:bg-gray-50 px-4 -mx-4 transition-colors group"

@@ -3,13 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const steps = [
-  { step: "01", title: "Free Home Valuation", desc: "We assess your property's market value using real data and local expertise." },
-  { step: "02", title: "Custom Marketing Strategy", desc: "Professional photography, virtual tours, social media campaigns, and MLS exposure." },
-  { step: "03", title: "Agent Representation", desc: "Your dedicated listing agent handles all showings, negotiations, and paperwork." },
-  { step: "04", title: "Close & Move", desc: "We guide you through conditions, inspections, and a smooth closing process." },
-];
+import { sellingSteps } from "@/lib/data/brokerage";
 
 export default function SellSection() {
   return (
@@ -25,7 +19,7 @@ export default function SellSection() {
             </Link>
           </motion.div>
           <div className="divide-y divide-gray-200">
-            {steps.map(({ step, title, desc }, i) => (
+            {sellingSteps.map(({ step, title, desc }, i) => (
               <motion.div key={step} className="py-8 flex gap-8"
                 initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-40px" }}

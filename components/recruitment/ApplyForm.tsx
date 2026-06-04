@@ -1,4 +1,3 @@
-"use client";
 import DarkCTASection from "@/components/ui/DarkCTASection";
 
 export default function ApplyForm() {

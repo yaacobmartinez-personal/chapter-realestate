@@ -1,0 +1,72 @@
+{
+  "stats": [
+    { "value": 500, "suffix": "+", "label": "Properties Sold" },
+    { "value": 1200, "suffix": "+", "label": "Units Managed" },
+    { "value": 98, "suffix": "%", "label": "Client Satisfaction" },
+    { "value": 15, "suffix": "+", "label": "Years of Experience" }
+  ],
+  "services": [
+    {
+      "iconKey": "Home",
+      "title": "Real Estate Brokerage",
+      "description": "Residential and commercial buying and selling with dedicated agents who know Winnipeg's market.",
+      "href": "/brokerage",
+      "accent": "Buy · Sell · Invest"
+    },
+    {
+      "iconKey": "Building2",
+      "title": "Property Management",
+      "description": "Full-service residential and commercial property management. From leasing to maintenance to reporting.",
+      "href": "/property-management",
+      "accent": "Residential · Commercial"
+    },
+    {
+      "iconKey": "TrendingUp",
+      "title": "Investments & Development",
+      "description": "Joint ventures, multifamily opportunities, and development projects through the Barso Group.",
+      "href": "/investments",
+      "accent": "Joint Ventures · Development"
+    },
+    {
+      "iconKey": "Users",
+      "title": "Join Chapter",
+      "description": "Elevate your real estate career with industry-leading commission structures, tools, and support.",
+      "href": "/recruitment",
+      "accent": "Agents · Brokers"
+    }
+  ],
+  "featuredListings": [
+    { "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80", "price": "$879,000", "address": "142 Wellington Crescent", "area": "Crescentwood", "beds": 4, "baths": 3, "sqft": "3,200", "tag": "New Listing" },
+    { "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80", "price": "$1,250,000", "address": "890 Waverly St", "area": "River Heights", "beds": 5, "baths": 4, "sqft": "4,500", "tag": "Luxury" },
+    { "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80", "price": "$425,000", "address": "33 Linwood St", "area": "St. Vital", "beds": 3, "baths": 2, "sqft": "1,800", "tag": "Investment" }
+  ],
+  "whyPillars": [
+    { "number": "01", "title": "Local Expertise", "description": "Deep roots in Winnipeg's market. We know every neighbourhood, every trend, every opportunity." },
+    { "number": "02", "title": "Modern Technology", "description": "AI-powered tools, online portals, and market analytics at your fingertips 24/7." },
+    { "number": "03", "title": "Full-Service Platform", "description": "From first purchase to long-term management, we handle every step of your real estate journey." },
+    { "number": "04", "title": "Proven Results", "description": "500+ properties sold, 1,200+ units managed, and a 98% client satisfaction rate." }
+  ],
+  "teamMembers": [
+    { "name": "Alex Barsoum", "role": "Managing Partner", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" },
+    { "name": "Sarah Mitchell", "role": "Director of Property Management", "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" },
+    { "name": "James Okafor", "role": "Senior Broker", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" },
+    { "name": "Priya Sharma", "role": "Investment Relations", "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" }
+  ],
+  "testimonials": [
+    { "text": "Chapter made selling our home effortless. Their marketing strategy was unlike anything we'd seen — we had multiple offers within days.", "author": "David & Karen T.", "context": "Sellers, River Heights" },
+    { "text": "As a landlord with multiple properties, I can't imagine managing them without Chapter. The owner portal alone saves me hours every month.", "author": "Michael R.", "context": "Property Owner, 4 Units" },
+    { "text": "The investment team at Chapter helped me identify a multifamily opportunity I never would have found on my own. Exceptional guidance.", "author": "Linda H.", "context": "Investor" }
+  ],
+  "insightPosts": [
+    { "tag": "Market Update", "date": "May 2025", "title": "Winnipeg Housing Market: Spring 2025 Overview", "excerpt": "Inventory remains tight as buyer demand continues to outpace supply in key neighbourhoods." },
+    { "tag": "Investor Tips", "date": "April 2025", "title": "Why Multifamily in Winnipeg is Outperforming Single-Family", "excerpt": "Rental demand is hitting record highs. Here's what investors need to know." },
+    { "tag": "Property Management", "date": "April 2025", "title": "5 Ways Professional PM Maximizes Your ROI", "excerpt": "From reducing vacancy to preventative maintenance, professional management pays for itself." }
+  ],
+  "pmCtaBenefits": [
+    "Full rent collection & financial reporting",
+    "24/7 maintenance coordination",
+    "Tenant screening & leasing",
+    "Regular property inspections",
+    "Transparent owner portal"
+  ]
+}

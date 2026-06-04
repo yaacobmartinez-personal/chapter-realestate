@@ -1,14 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { BarChart3, Shield, Wrench, Clock } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { pmBenefits } from "@/lib/data/property-management";
 
-const benefits = [
-  { icon: BarChart3, title: "Maximize Returns", desc: "Strategic pricing and low vacancy rates keep your income consistent and growing." },
-  { icon: Shield, title: "Quality Tenants", desc: "Rigorous screening process ensures only qualified, reliable tenants occupy your property." },
-  { icon: Wrench, title: "Full Maintenance", desc: "24/7 emergency response, preventative programs, and trusted vendor networks." },
-  { icon: Clock, title: "Save Time", desc: "We handle everything — you check your statement and collect your returns." },
-];
+const iconMap: Record<string, LucideIcon> = { BarChart3, Shield, Wrench, Clock };
 
 export default function Overview() {
   return (
@@ -36,22 +34,26 @@ export default function Overview() {
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
+              fill
               src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"
               alt="Property Management"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              className="object-cover hover:scale-105 transition-transform duration-700"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>
         </div>
         <div data-stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100">
-          {benefits.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="bg-white p-10">
-              <Icon size={24} className="text-[#c8a96e] mb-6" strokeWidth={1} />
-              <h3 className="text-lg font-light text-black mb-3">{title}</h3>
-              <p className="text-sm text-gray-500 font-light leading-relaxed">{desc}</p>
-            </div>
-          ))}
+          {pmBenefits.map(({ iconKey, title, desc }) => {
+            const Icon = iconMap[iconKey];
+            return (
+              <div key={title} className="bg-white p-10">
+                <Icon size={24} className="text-[#c8a96e] mb-6" strokeWidth={1} />
+                <h3 className="text-lg font-light text-black mb-3">{title}</h3>
+                <p className="text-sm text-gray-500 font-light leading-relaxed">{desc}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

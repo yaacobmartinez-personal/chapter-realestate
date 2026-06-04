@@ -1,0 +1,41 @@
+{
+  "buyCategories": [
+    { "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80", "label": "Residential" },
+    { "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80", "label": "Commercial" },
+    { "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80", "label": "Investment" },
+    { "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", "label": "Luxury" }
+  ],
+  "buyBenefits": [
+    "Access to all MLS listings + off-market properties",
+    "Dedicated buyer's agent at no cost to you",
+    "Neighbourhood expertise across all of Winnipeg",
+    "Negotiation specialists with proven track records"
+  ],
+  "sellingSteps": [
+    { "step": "01", "title": "Free Home Valuation", "desc": "We assess your property's market value using real data and local expertise." },
+    { "step": "02", "title": "Custom Marketing Strategy", "desc": "Professional photography, virtual tours, social media campaigns, and MLS exposure." },
+    { "step": "03", "title": "Agent Representation", "desc": "Your dedicated listing agent handles all showings, negotiations, and paperwork." },
+    { "step": "04", "title": "Close & Move", "desc": "We guide you through conditions, inspections, and a smooth closing process." }
+  ],
+  "featuredListings": [
+    { "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80", "price": "$879,000", "address": "142 Wellington Crescent", "area": "Crescentwood", "beds": 4, "baths": 3, "sqft": "3,200", "tag": "New Listing" },
+    { "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80", "price": "$1,250,000", "address": "890 Waverly St", "area": "River Heights", "beds": 5, "baths": 4, "sqft": "4,500", "tag": "Luxury" },
+    { "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80", "price": "$425,000", "address": "33 Linwood St", "area": "St. Vital", "beds": 3, "baths": 2, "sqft": "1,800", "tag": "Investment" },
+    { "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80", "price": "$649,000", "address": "55 Academy Rd", "area": "Tuxedo", "beds": 4, "baths": 3, "sqft": "2,600", "tag": "New Listing" },
+    { "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80", "price": "$2,100,000", "address": "12 Oakenwald Ave", "area": "Fort Garry", "beds": 6, "baths": 5, "sqft": "6,200", "tag": "Luxury" },
+    { "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80", "price": "$339,000", "address": "201 Leila Ave", "area": "Garden City", "beds": 3, "baths": 2, "sqft": "1,450", "tag": "Investment" }
+  ],
+  "listingFilters": ["All", "Residential", "Luxury", "Investment"],
+  "agents": [
+    { "name": "James Okafor", "specialties": "Luxury · River Heights · Tuxedo", "phone": "(204) 555-0101", "email": "james@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&q=80", "listings": 12 },
+    { "name": "Maria Santos", "specialties": "First-Time Buyers · St. Vital · Transcona", "phone": "(204) 555-0102", "email": "maria@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80", "listings": 8 },
+    { "name": "Tyler Nguyen", "specialties": "Investment · Commercial · Fort Rouge", "phone": "(204) 555-0103", "email": "tyler@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80", "listings": 15 },
+    { "name": "Aisha Kamara", "specialties": "Condos · Downtown · The Exchange", "phone": "(204) 555-0104", "email": "aisha@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&q=80", "listings": 9 }
+  ],
+  "brokerageMarketStats": [
+    { "label": "Avg. Days on Market", "value": "18", "note": "Winnipeg 2025" },
+    { "label": "Avg. Sale Price", "value": "$432K", "note": "YTD 2025" },
+    { "label": "List-to-Sale Ratio", "value": "101%", "note": "Q1 2025" },
+    { "label": "Active Listings", "value": "2,840", "note": "Current" }
+  ]
+}

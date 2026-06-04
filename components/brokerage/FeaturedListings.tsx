@@ -1,18 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-
-const listings = [
-  { image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80", price: "$879,000", address: "142 Wellington Crescent", area: "Crescentwood", beds: 4, baths: 3, sqft: "3,200", tag: "New Listing" },
-  { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80", price: "$1,250,000", address: "890 Waverly St", area: "River Heights", beds: 5, baths: 4, sqft: "4,500", tag: "Luxury" },
-  { image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80", price: "$425,000", address: "33 Linwood St", area: "St. Vital", beds: 3, baths: 2, sqft: "1,800", tag: "Investment" },
-  { image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80", price: "$649,000", address: "55 Academy Rd", area: "Tuxedo", beds: 4, baths: 3, sqft: "2,600", tag: "New Listing" },
-  { image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80", price: "$2,100,000", address: "12 Oakenwald Ave", area: "Fort Garry", beds: 6, baths: 5, sqft: "6,200", tag: "Luxury" },
-  { image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80", price: "$339,000", address: "201 Leila Ave", area: "Garden City", beds: 3, baths: 2, sqft: "1,450", tag: "Investment" },
-];
-
-const filters = ["All", "Residential", "Luxury", "Investment"];
+import { featuredListings, listingFilters } from "@/lib/data/brokerage";
 
 export default function FeaturedListings() {
   return (
@@ -24,13 +15,13 @@ export default function FeaturedListings() {
             <h2 className="text-4xl md:text-5xl font-light text-black">Featured Listings</h2>
           </motion.div>
           <motion.div className="flex gap-3" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
-            {filters.map((f) => (
+            {listingFilters.map((f) => (
               <button key={f} className={`text-xs tracking-widest uppercase font-light px-4 py-2 border transition-colors ${f === "All" ? "bg-black text-white border-black" : "border-gray-200 text-gray-500 hover:border-black hover:text-black"}`}>{f}</button>
             ))}
           </motion.div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {listings.map((l, i) => (
+          {featuredListings.map((l, i) => (
             <motion.div key={l.address} className="group bg-white border border-gray-100 overflow-hidden cursor-pointer"
               initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -38,8 +29,13 @@ export default function FeaturedListings() {
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
             >
               <div className="relative overflow-hidden aspect-4/3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.image} alt={l.address} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image
+                  fill
+                  src={l.image}
+                  alt={l.address}
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
                 <span className="absolute top-4 left-4 bg-black text-white text-xs tracking-widest uppercase px-3 py-1.5 font-light">{l.tag}</span>
               </div>
               <div className="p-6">

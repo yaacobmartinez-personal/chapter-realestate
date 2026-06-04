@@ -1,13 +1,9 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
-
-const listings = [
-  { image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80", price: "$879,000", address: "142 Wellington Crescent", area: "Crescentwood", beds: 4, baths: 3, sqft: "3,200", tag: "New Listing" },
-  { image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80", price: "$1,250,000", address: "890 Waverly St", area: "River Heights", beds: 5, baths: 4, sqft: "4,500", tag: "Luxury" },
-  { image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80", price: "$425,000", address: "33 Linwood St", area: "St. Vital", beds: 3, baths: 2, sqft: "1,800", tag: "Investment" },
-];
+import { homeFeaturedListings } from "@/lib/data/home";
 
 export default function FeaturedListings() {
   return (
@@ -36,7 +32,7 @@ export default function FeaturedListings() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {listings.map((l, i) => (
+          {homeFeaturedListings.map((l, i) => (
             <motion.div
               key={l.address}
               className="group bg-white overflow-hidden cursor-pointer"
@@ -47,8 +43,13 @@ export default function FeaturedListings() {
               whileHover={{ y: -4 }}
             >
               <div className="relative overflow-hidden aspect-[4/3]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.image} alt={l.address} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image
+                  fill
+                  src={l.image}
+                  alt={l.address}
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
                 <span className="absolute top-4 left-4 bg-black text-white text-xs tracking-widest uppercase px-3 py-1.5 font-light">{l.tag}</span>
               </div>
               <div className="p-6">

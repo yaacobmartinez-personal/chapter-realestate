@@ -3,8 +3,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useRef } from "react";
-
-const benefits = ["Full rent collection & financial reporting","24/7 maintenance coordination","Tenant screening & leasing","Regular property inspections","Transparent owner portal"];
+import { pmCtaBenefits } from "@/lib/data/home";
 
 export default function PMCta() {
   const ref = useRef(null);
@@ -32,7 +31,7 @@ export default function PMCta() {
 
           <div>
             <ul className="space-y-4 mb-10">
-              {benefits.map((b, i) => (
+              {pmCtaBenefits.map((b, i) => (
                 <motion.li
                   key={b}
                   className="flex items-start gap-3 text-sm text-gray-300 font-light"

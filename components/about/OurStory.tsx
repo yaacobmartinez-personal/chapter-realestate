@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 export default function OurStory() {
@@ -6,12 +7,13 @@ export default function OurStory() {
     <section className="py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div className="aspect-4/5 bg-gray-100 overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="relative aspect-4/5 bg-gray-100 overflow-hidden">
+            <Image
+              fill
               src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
               alt="Chapter Office"
-              className="w-full h-full object-cover"
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
           <div>

@@ -1,0 +1,96 @@
+{
+  "blogPosts": [
+    {
+      "tag": "Market Update",
+      "date": "May 2025",
+      "title": "Winnipeg Housing Market: Spring 2025 Overview",
+      "excerpt": "Inventory remains tight as buyer demand continues to outpace supply in key neighbourhoods.",
+      "readTime": "5 min read",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80"
+    },
+    {
+      "tag": "Investor Tips",
+      "date": "April 2025",
+      "title": "Why Multifamily in Winnipeg is Outperforming Single-Family",
+      "excerpt": "Rental demand is hitting record highs. Here's what investors need to know.",
+      "readTime": "7 min read",
+      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80"
+    },
+    {
+      "tag": "Property Management",
+      "date": "April 2025",
+      "title": "5 Ways Professional PM Maximizes Your ROI",
+      "excerpt": "From reducing vacancy to preventative maintenance, professional management pays for itself.",
+      "readTime": "4 min read",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80"
+    },
+    {
+      "tag": "Buying Guide",
+      "date": "March 2025",
+      "title": "First-Time Buyer's Complete Guide to Winnipeg Real Estate",
+      "excerpt": "Everything you need to know before making your first home purchase — from pre-approval to closing.",
+      "readTime": "10 min read",
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"
+    },
+    {
+      "tag": "Market Update",
+      "date": "March 2025",
+      "title": "Neighbourhood Spotlight: River Heights & Crescentwood",
+      "excerpt": "Two of Winnipeg's most sought-after neighbourhoods — what's driving demand in 2025.",
+      "readTime": "6 min read",
+      "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80"
+    },
+    {
+      "tag": "Company News",
+      "date": "February 2025",
+      "title": "Chapter Expands Property Management Portfolio to 1,200 Units",
+      "excerpt": "A milestone for Chapter as our property management division continues to grow.",
+      "readTime": "3 min read",
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
+    }
+  ],
+  "guides": [
+    {
+      "title": "First-Time Buyer's Guide",
+      "desc": "A complete walkthrough of the home buying process in Winnipeg — from mortgage to move-in.",
+      "tag": "Buyers"
+    },
+    {
+      "title": "Landlord's Guide to Property Management",
+      "desc": "Everything property owners need to know about maximizing returns and reducing headaches.",
+      "tag": "Landlords"
+    },
+    {
+      "title": "Tenant Handbook",
+      "desc": "Rights, responsibilities, and tips for tenants renting through Chapter.",
+      "tag": "Tenants"
+    },
+    {
+      "title": "Real Estate Investing 101",
+      "desc": "How to evaluate opportunities, build a portfolio, and generate passive income through real estate.",
+      "tag": "Investors"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How do I start working with Chapter as a buyer?",
+      "a": "Contact us or book a free consultation. We'll match you with an agent who specializes in your target neighbourhoods and price range."
+    },
+    {
+      "q": "What does property management cost?",
+      "a": "Our leasing-only service is one month's rent. Full management is 8–10% of monthly rent. Volume discounts apply for multi-unit portfolios."
+    },
+    {
+      "q": "How long does it take to find a tenant?",
+      "a": "Typically 2–4 weeks from marketing launch, depending on property type and price. Our average vacancy is under 18 days."
+    },
+    {
+      "q": "Do you work with investors looking to buy income properties?",
+      "a": "Yes — our investment team specializes in sourcing and evaluating income properties and off-market opportunities."
+    },
+    {
+      "q": "Can I transfer my license to Chapter?",
+      "a": "Yes. We accept license transfers from other brokerages. Contact our recruitment team for a confidential conversation."
+    }
+  ]
+}

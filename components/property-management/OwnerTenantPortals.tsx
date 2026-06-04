@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { CheckCircle, ArrowRight } from "lucide-react";
-
-const ownerFeatures = ["Monthly statements & reports", "Maintenance request tracking", "Lease documentation", "Year-end tax summaries"];
-const tenantFeatures = ["Pay rent online", "Submit maintenance requests", "View lease documents", "Track maintenance status"];
+import { ownerPortalFeatures, tenantPortalFeatures } from "@/lib/data/property-management";
 
 export default function OwnerTenantPortals() {
   return (
@@ -16,7 +14,7 @@ export default function OwnerTenantPortals() {
               Access monthly statements, maintenance logs, inspection reports, and financial summaries — anytime, anywhere.
             </p>
             <ul className="space-y-3 mb-10">
-              {ownerFeatures.map((f) => (
+              {ownerPortalFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3 text-sm text-gray-300 font-light">
                   <CheckCircle size={14} className="text-[#c8a96e] mt-0.5 shrink-0" />{f}
                 </li>
@@ -34,7 +32,7 @@ export default function OwnerTenantPortals() {
               Pay rent online, submit maintenance requests, and manage your lease documents — all in one easy portal.
             </p>
             <ul className="space-y-3 mb-10">
-              {tenantFeatures.map((f) => (
+              {tenantPortalFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3 text-sm text-gray-600 font-light">
                   <CheckCircle size={14} className="text-[#c8a96e] mt-0.5 shrink-0" />{f}
                 </li>

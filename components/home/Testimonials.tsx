@@ -1,12 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-
-const testimonials = [
-  { text: "Chapter made selling our home effortless. Their marketing strategy was unlike anything we'd seen — we had multiple offers within days.", author: "David & Karen T.", context: "Sellers, River Heights" },
-  { text: "As a landlord with multiple properties, I can't imagine managing them without Chapter. The owner portal alone saves me hours every month.", author: "Michael R.", context: "Property Owner, 4 Units" },
-  { text: "The investment team at Chapter helped me identify a multifamily opportunity I never would have found on my own. Exceptional guidance.", author: "Linda H.", context: "Investor" },
-];
+import { homeTestimonials } from "@/lib/data/home";
 
 export default function Testimonials() {
   return (
@@ -24,7 +19,7 @@ export default function Testimonials() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map(({ text, author, context }, i) => (
+          {homeTestimonials.map(({ text, author, context }, i) => (
             <motion.div
               key={author}
               className="p-8 bg-[#f7f7f7] flex flex-col gap-6 relative overflow-hidden"
@@ -34,7 +29,6 @@ export default function Testimonials() {
               transition={{ duration: 0.7, delay: i * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
             >
-              {/* Decorative quote */}
               <motion.span
                 className="absolute -top-4 -right-2 text-[120px] font-serif text-gray-100 leading-none select-none pointer-events-none"
                 initial={{ opacity: 0, scale: 0.8 }}

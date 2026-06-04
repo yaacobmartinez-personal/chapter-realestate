@@ -1,6 +1,7 @@
 "use client";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { homeStats } from "@/lib/data/home";
 
 function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -14,19 +15,12 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
   return <span ref={ref}>0{suffix}</span>;
 }
 
-const stats = [
-  { display: "500", suffix: "+", label: "Properties Sold", value: 500 },
-  { display: "1,200", suffix: "+", label: "Units Managed", value: 1200 },
-  { display: "98", suffix: "%", label: "Client Satisfaction", value: 98 },
-  { display: "15", suffix: "+", label: "Years of Experience", value: 15 },
-];
-
 export default function StatsBar() {
   return (
     <section className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-white/10">
-          {stats.map(({ value, suffix, label }, i) => (
+          {homeStats.map(({ value, suffix, label }, i) => (
             <motion.div
               key={label}
               className="px-8 py-10 text-center"

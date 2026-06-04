@@ -1,86 +1,21 @@
 "use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
-
-const posts = [
-  {
-    tag: "Market Update",
-    date: "May 2025",
-    title: "Winnipeg Housing Market: Spring 2025 Overview",
-    excerpt:
-      "Inventory remains tight as buyer demand continues to outpace supply in key neighbourhoods.",
-    readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
-  },
-  {
-    tag: "Investor Tips",
-    date: "April 2025",
-    title: "Why Multifamily in Winnipeg is Outperforming Single-Family",
-    excerpt:
-      "Rental demand is hitting record highs. Here's what investors need to know.",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80",
-  },
-  {
-    tag: "Property Management",
-    date: "April 2025",
-    title: "5 Ways Professional PM Maximizes Your ROI",
-    excerpt:
-      "From reducing vacancy to preventative maintenance, professional management pays for itself.",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
-  },
-  {
-    tag: "Buying Guide",
-    date: "March 2025",
-    title: "First-Time Buyer's Complete Guide to Winnipeg Real Estate",
-    excerpt:
-      "Everything you need to know before making your first home purchase — from pre-approval to closing.",
-    readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
-  },
-  {
-    tag: "Market Update",
-    date: "March 2025",
-    title: "Neighbourhood Spotlight: River Heights & Crescentwood",
-    excerpt:
-      "Two of Winnipeg's most sought-after neighbourhoods — what's driving demand in 2025.",
-    readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80",
-  },
-  {
-    tag: "Company News",
-    date: "February 2025",
-    title: "Chapter Expands Property Management Portfolio to 1,200 Units",
-    excerpt:
-      "A milestone for Chapter as our property management division continues to grow.",
-    readTime: "3 min read",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
-  },
-];
+import { blogPosts } from "@/lib/data/resources";
 
 export default function BlogInsights() {
-  const [featured, ...rest] = posts;
+  const [featured, ...rest] = blogPosts;
 
   return (
     <section className="py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">
-            Blog & Insights
-          </p>
-          <h2 className="text-4xl md:text-5xl font-light text-black">
-            Latest from <span className="font-serif italic">Chapter</span>
-          </h2>
+        <motion.div className="mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Blog & Insights</p>
+          <h2 className="text-4xl md:text-5xl font-light text-black">Latest from <span className="font-serif italic">Chapter</span></h2>
         </motion.div>
 
-        {/* Featured */}
+        {/* Featured post */}
         <motion.div
           className="group grid md:grid-cols-2 gap-8 mb-12 cursor-pointer border border-gray-100 overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
@@ -89,38 +24,26 @@ export default function BlogInsights() {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           whileHover={{ y: -4, transition: { duration: 0.25 } }}
         >
-          <div className="overflow-hidden" style={{ aspectRatio: "4/3" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+          <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+            <Image
+              fill
               src={featured.image}
               alt={featured.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           <div className="p-10 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">
-                {featured.tag}
-              </span>
+              <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">{featured.tag}</span>
               <span className="text-gray-200">·</span>
-              <span className="text-xs text-gray-400 font-light">
-                {featured.readTime}
-              </span>
+              <span className="text-xs text-gray-400 font-light">{featured.readTime}</span>
             </div>
-            <h3 className="text-2xl font-light text-black mb-4 leading-snug group-hover:text-[#c8a96e] transition-colors">
-              {featured.title}
-            </h3>
-            <p className="text-sm text-gray-500 font-light leading-relaxed mb-6">
-              {featured.excerpt}
-            </p>
+            <h3 className="text-2xl font-light text-black mb-4 leading-snug group-hover:text-[#c8a96e] transition-colors">{featured.title}</h3>
+            <p className="text-sm text-gray-500 font-light leading-relaxed mb-6">{featured.excerpt}</p>
             <div className="flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors">
-              <span className="tracking-widest uppercase font-light">
-                Read Article
-              </span>
-              <ArrowRight
-                size={12}
-                className="group-hover:translate-x-1 transition-transform"
-              />
+              <span className="tracking-widest uppercase font-light">Read Article</span>
+              <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </motion.div>
@@ -134,45 +57,29 @@ export default function BlogInsights() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{
-                duration: 0.7,
-                delay: i * 0.1,
-                ease: [0.25, 0.1, 0.25, 1],
-              }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
             >
-              <div className="overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                <Image
+                  fill
                   src={image}
                   alt={title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">
-                    {tag}
-                  </span>
+                  <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">{tag}</span>
                   <span className="text-gray-200">·</span>
-                  <span className="text-xs text-gray-400 font-light">
-                    {readTime}
-                  </span>
+                  <span className="text-xs text-gray-400 font-light">{readTime}</span>
                 </div>
-                <h3 className="text-lg font-light text-black mb-3 leading-snug group-hover:text-[#c8a96e] transition-colors">
-                  {title}
-                </h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed">
-                  {excerpt}
-                </p>
+                <h3 className="text-lg font-light text-black mb-3 leading-snug group-hover:text-[#c8a96e] transition-colors">{title}</h3>
+                <p className="text-sm text-gray-500 font-light leading-relaxed">{excerpt}</p>
                 <div className="mt-4 flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors">
-                  <span className="tracking-widest uppercase font-light">
-                    Read More
-                  </span>
-                  <ChevronRight
-                    size={12}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
+                  <span className="tracking-widest uppercase font-light">Read More</span>
+                  <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.article>

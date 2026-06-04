@@ -1,30 +1,6 @@
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
-
-const plans = [
-  {
-    name: "Leasing Only",
-    fee: "One Month's Rent",
-    desc: "Perfect for landlords who want help finding quality tenants.",
-    features: ["Property marketing", "Tenant screening", "Lease preparation", "Move-in coordination"],
-    cta: "Get Started",
-  },
-  {
-    name: "Full Management",
-    fee: "8–10% of Rent",
-    desc: "Complete hands-off management from lease to lease.",
-    features: ["Everything in Leasing", "Rent collection", "Maintenance coordination", "Inspections & reporting", "24/7 emergency support"],
-    cta: "Get Started",
-    featured: true,
-  },
-  {
-    name: "Premium Portfolio",
-    fee: "Custom Pricing",
-    desc: "Tailored for multi-unit and commercial property owners.",
-    features: ["Everything in Full Management", "Dedicated portfolio manager", "Commercial leasing", "Custom reporting", "Investor dashboard"],
-    cta: "Contact Us",
-  },
-];
+import { pmPlans } from "@/lib/data/property-management";
 
 export default function Pricing() {
   return (
@@ -35,7 +11,7 @@ export default function Pricing() {
           <h2 data-reveal className="text-4xl md:text-5xl font-light text-black">Simple, Transparent Fees</h2>
         </div>
         <div data-stagger className="grid md:grid-cols-3 gap-px bg-gray-200">
-          {plans.map(({ name, fee, desc, features, cta, featured }) => (
+          {pmPlans.map(({ name, fee, desc, features, cta, featured }) => (
             <div key={name} className={`p-10 ${featured ? "bg-black text-white" : "bg-white"}`}>
               <p className={`text-xs tracking-widest uppercase font-light mb-4 ${featured ? "text-[#c8a96e]" : "text-gray-400"}`}>{name}</p>
               <p className={`text-3xl font-light mb-2 ${featured ? "text-white" : "text-black"}`}>{fee}</p>

@@ -2,12 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
-
-const posts = [
-  { tag: "Market Update", date: "May 2025", title: "Winnipeg Housing Market: Spring 2025 Overview", excerpt: "Inventory remains tight as buyer demand continues to outpace supply in key neighbourhoods." },
-  { tag: "Investor Tips", date: "April 2025", title: "Why Multifamily in Winnipeg is Outperforming Single-Family", excerpt: "Rental demand is hitting record highs. Here's what investors need to know." },
-  { tag: "Property Management", date: "April 2025", title: "5 Ways Professional PM Maximizes Your ROI", excerpt: "From reducing vacancy to preventative maintenance, professional management pays for itself." },
-];
+import { homeInsightPosts } from "@/lib/data/home";
 
 export default function MarketInsights() {
   return (
@@ -36,7 +31,7 @@ export default function MarketInsights() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {posts.map(({ tag, date, title, excerpt }, i) => (
+          {homeInsightPosts.map(({ tag, date, title, excerpt }, i) => (
             <motion.article
               key={title}
               className="bg-white p-8 group cursor-pointer relative overflow-hidden"
@@ -46,7 +41,6 @@ export default function MarketInsights() {
               transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
             >
-              {/* Hover gold line */}
               <motion.div
                 className="absolute bottom-0 left-0 h-px bg-[#c8a96e]"
                 initial={{ width: 0 }}

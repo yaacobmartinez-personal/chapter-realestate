@@ -1,0 +1,51 @@
+{
+  "investmentOpportunities": [
+    {
+      "iconKey": "TrendingUp",
+      "title": "Joint Ventures",
+      "desc": "Partner with Chapter on residential and commercial development projects. We bring the deals, you bring the capital — we share the returns.",
+      "tag": "Active"
+    },
+    {
+      "iconKey": "Building2",
+      "title": "Multifamily Acquisitions",
+      "desc": "Access off-market multifamily opportunities curated by our acquisition team. Build a cash-flowing portfolio with expert guidance.",
+      "tag": "Active"
+    },
+    {
+      "iconKey": "Building2",
+      "title": "Development Projects",
+      "desc": "Ground-up development opportunities in Winnipeg's fastest-growing corridors, through the Barso Group development arm.",
+      "tag": "Upcoming"
+    }
+  ],
+  "investmentStats": [
+    { "number": "$50M+", "label": "Assets Under Development" },
+    { "number": "22%", "label": "Average IRR" },
+    { "number": "18", "label": "Projects Completed" },
+    { "number": "85+", "label": "Active Investors" }
+  ],
+  "barsoEntities": [
+    {
+      "name": "Barso Homes",
+      "desc": "Residential development and custom home building across Winnipeg's premier neighbourhoods.",
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"
+    },
+    {
+      "name": "Barso Concrete",
+      "desc": "Commercial concrete and construction services supporting residential and commercial projects.",
+      "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
+    },
+    {
+      "name": "BGC Developments",
+      "desc": "Mixed-use and commercial real estate development projects across Manitoba.",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+    }
+  ],
+  "investorSteps": [
+    { "step": "01", "title": "Initial Consultation", "desc": "We learn your investment goals, timeline, and capital capacity." },
+    { "step": "02", "title": "Opportunity Matching", "desc": "We present curated deals that align with your strategy." },
+    { "step": "03", "title": "Due Diligence", "desc": "Full transparency on financials, projections, and risk factors." },
+    { "step": "04", "title": "Investment & Returns", "desc": "Structured agreements with clear return timelines and reporting." }
+  ]
+}
