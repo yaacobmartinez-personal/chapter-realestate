@@ -1,9 +1,31 @@
 "use client";
+
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { offices, businessHours } from "@/lib/data/contact";
+import { submitContactForm } from "@/actions/forms";
+import FormStatus from "@/components/ui/FormStatus";
+
+type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactSection() {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string>();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+    const result = await submitContactForm(new FormData(e.currentTarget));
+    if (result.ok) {
+      setStatus("success");
+      (e.target as HTMLFormElement).reset();
+    } else {
+      setStatus("error");
+      setErrorMsg(result.error);
+    }
+  }
+
   return (
     <section className="py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -58,15 +80,15 @@ export default function ContactSection() {
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Send a Message</p>
             <h2 className="text-3xl font-light text-black mb-8">Book a <span className="font-serif italic">Consultation</span></h2>
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <input type="text" placeholder="First Name" className="border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
-                <input type="text" placeholder="Last Name" className="border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
+                <input name="firstName" type="text" placeholder="First Name" required className="border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
+                <input name="lastName" type="text" placeholder="Last Name" className="border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
               </div>
-              <input type="email" placeholder="Email Address" className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
-              <input type="tel" placeholder="Phone Number" className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
-              <select className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-600 outline-none focus:border-black transition-colors font-light bg-white">
-                <option value="">I&apos;m interested in...</option>
+              <input name="email" type="email" placeholder="Email Address" required className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
+              <input name="phone" type="tel" placeholder="Phone Number" className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light" />
+              <select name="interest" className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-600 outline-none focus:border-black transition-colors font-light bg-white">
+                <option value="">I&apos;m interested in…</option>
                 <option>Buying a Home</option>
                 <option>Selling a Home</option>
                 <option>Property Management</option>
@@ -74,10 +96,19 @@ export default function ContactSection() {
                 <option>Joining Chapter as an Agent</option>
                 <option>Other</option>
               </select>
-              <textarea placeholder="Tell us more about your needs..." rows={4} className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light resize-none" />
-              <motion.button type="submit" className="w-full bg-black text-white text-sm font-light tracking-widest uppercase py-4 hover:bg-[#c8a96e] transition-colors" whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
-                Send Message
-              </motion.button>
+              <textarea name="message" placeholder="Tell us more about your needs…" rows={4} className="w-full border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-black transition-colors font-light resize-none" />
+              <FormStatus status={status} error={errorMsg} />
+              {status !== "success" && (
+                <motion.button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-black text-white text-sm font-light tracking-widest uppercase py-4 hover:bg-[#c8a96e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                >
+                  Send Message
+                </motion.button>
+              )}
               <p className="text-xs text-gray-400 font-light text-center">We typically respond within 24 hours.</p>
             </form>
           </motion.div>

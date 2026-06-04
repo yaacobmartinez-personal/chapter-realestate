@@ -1,6 +1,7 @@
 "use client";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { TrendingUp, Building2, ChevronRight } from "lucide-react";
+import { TrendingUp, Building2, ArrowRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { investmentOpportunities, investmentStats } from "@/lib/data/investments";
 
@@ -43,12 +44,12 @@ export default function Opportunities() {
           </div>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          {investmentOpportunities.map(({ iconKey, title, desc, tag }, i) => {
+          {investmentOpportunities.map(({ slug, iconKey, title, desc, tag }, i) => {
             const Icon = iconMap[iconKey];
             return (
               <motion.div
-                key={title}
-                className="group p-10 border border-gray-100 hover:border-black transition-colors cursor-pointer"
+                key={slug}
+                className="group p-10 border border-gray-100 hover:border-black transition-colors"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
@@ -63,10 +64,13 @@ export default function Opportunities() {
                 </div>
                 <h3 className="text-xl font-light text-black mb-3">{title}</h3>
                 <p className="text-sm text-gray-500 font-light leading-relaxed mb-6">{desc}</p>
-                <div className="flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors">
-                  <span className="tracking-widest uppercase font-light">Learn More</span>
-                  <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                </div>
+                <Link
+                  href={`/investments/${slug}`}
+                  className="inline-flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors"
+                >
+                  <span className="tracking-widest uppercase font-light">Explore {title}</span>
+                  <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
               </motion.div>
             );
           })}

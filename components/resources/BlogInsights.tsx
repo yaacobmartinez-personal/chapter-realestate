@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { blogPosts } from "@/lib/data/resources";
@@ -17,14 +18,14 @@ export default function BlogInsights() {
 
         {/* Featured post */}
         <motion.div
-          className="group grid md:grid-cols-2 gap-8 mb-12 cursor-pointer border border-gray-100 overflow-hidden"
+          className="group grid md:grid-cols-2 gap-8 mb-12 border border-gray-100 overflow-hidden"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           whileHover={{ y: -4, transition: { duration: 0.25 } }}
         >
-          <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
+          <Link href={`/resources/${featured.slug}`} className="relative overflow-hidden block" style={{ aspectRatio: "4/3" }}>
             <Image
               fill
               src={featured.image}
@@ -32,8 +33,8 @@ export default function BlogInsights() {
               className="object-cover group-hover:scale-105 transition-transform duration-700"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-          </div>
-          <div className="p-10 flex flex-col justify-center">
+          </Link>
+          <Link href={`/resources/${featured.slug}`} className="p-10 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">{featured.tag}</span>
               <span className="text-gray-200">·</span>
@@ -45,43 +46,45 @@ export default function BlogInsights() {
               <span className="tracking-widest uppercase font-light">Read Article</span>
               <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
             </div>
-          </div>
+          </Link>
         </motion.div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map(({ tag, title, excerpt, readTime, image }, i) => (
+          {rest.map(({ slug, tag, title, excerpt, readTime, image }, i) => (
             <motion.article
-              key={title}
-              className="group bg-white border border-gray-100 overflow-hidden cursor-pointer"
+              key={slug}
+              className="group bg-white border border-gray-100 overflow-hidden"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               whileHover={{ y: -4, transition: { duration: 0.25 } }}
             >
-              <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                <Image
-                  fill
-                  src={image}
-                  alt={title}
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">{tag}</span>
-                  <span className="text-gray-200">·</span>
-                  <span className="text-xs text-gray-400 font-light">{readTime}</span>
+              <Link href={`/resources/${slug}`} className="block">
+                <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                  <Image
+                    fill
+                    src={image}
+                    alt={title}
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
                 </div>
-                <h3 className="text-lg font-light text-black mb-3 leading-snug group-hover:text-[#c8a96e] transition-colors">{title}</h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed">{excerpt}</p>
-                <div className="mt-4 flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors">
-                  <span className="tracking-widest uppercase font-light">Read More</span>
-                  <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xs text-[#c8a96e] tracking-widest uppercase font-light">{tag}</span>
+                    <span className="text-gray-200">·</span>
+                    <span className="text-xs text-gray-400 font-light">{readTime}</span>
+                  </div>
+                  <h3 className="text-lg font-light text-black mb-3 leading-snug group-hover:text-[#c8a96e] transition-colors">{title}</h3>
+                  <p className="text-sm text-gray-500 font-light leading-relaxed">{excerpt}</p>
+                  <div className="mt-4 flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors">
+                    <span className="tracking-widest uppercase font-light">Read More</span>
+                    <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-              </div>
+              </Link>
             </motion.article>
           ))}
         </div>

@@ -1,22 +1,85 @@
 {
   "investmentOpportunities": [
     {
+      "slug": "joint-ventures",
       "iconKey": "TrendingUp",
       "title": "Joint Ventures",
       "desc": "Partner with Chapter on residential and commercial development projects. We bring the deals, you bring the capital — we share the returns.",
-      "tag": "Active"
+      "tag": "Active",
+      "body": [
+        { "type": "paragraph", "text": "Chapter's joint venture program connects qualified investors with curated real estate development opportunities in Winnipeg. We source the deals, manage the execution, and structure transparent agreements — so you can participate in development-level returns without the operational complexity." },
+        { "type": "heading", "text": "How It Works" },
+        { "type": "list", "items": [
+          "Chapter identifies and underwrites the opportunity — land acquisition, approvals, and project feasibility",
+          "We structure a joint venture agreement with clearly defined capital contributions, return splits, and timelines",
+          "Capital is deployed as project milestones are reached — reducing exposure at early stages",
+          "Returns are distributed at project completion or through periodic cash flow distributions"
+        ]},
+        { "type": "heading", "text": "What We Look For in Partners" },
+        { "type": "paragraph", "text": "Our joint venture partners are typically accredited investors with $250,000+ in investable capital and a 2–5 year investment horizon. We value partners who understand real estate fundamentals and are comfortable with development-stage risk in exchange for above-market returns." },
+        { "type": "heading", "text": "Current Opportunities" },
+        { "type": "paragraph", "text": "We currently have active joint venture opportunities in the Winnipeg residential market. These include infill townhome projects, small multi-unit developments, and a commercial mixed-use project in the inner city. Detailed information packages are available to qualified investors upon request." },
+        { "type": "heading", "text": "Historical Performance" },
+        { "type": "list", "items": [
+          "Average project IRR: 22%",
+          "Average hold period: 18–30 months",
+          "18 completed projects to date",
+          "100% of investors have received their projected returns or better"
+        ]},
+        { "type": "paragraph", "text": "To receive our current opportunity package, contact our investor relations team. All investments are subject to accredited investor qualification and standard due diligence." }
+      ]
     },
     {
+      "slug": "multifamily-acquisitions",
       "iconKey": "Building2",
       "title": "Multifamily Acquisitions",
       "desc": "Access off-market multifamily opportunities curated by our acquisition team. Build a cash-flowing portfolio with expert guidance.",
-      "tag": "Active"
+      "tag": "Active",
+      "body": [
+        { "type": "paragraph", "text": "Winnipeg's multifamily market is one of the strongest in the country — low vacancy, growing rental demand, and valuations that still make cash flow achievable. Chapter's acquisition team sources and evaluates multifamily properties before they reach the open market, giving our investor clients a significant edge." },
+        { "type": "heading", "text": "Why Multifamily in Winnipeg" },
+        { "type": "list", "items": [
+          "Vacancy rate at 1.4% — lowest in over a decade (CMHC 2025)",
+          "Average rents increasing 6–9% year-over-year",
+          "Strong population growth driven by immigration and university expansion",
+          "Affordable entry points relative to other Canadian cities",
+          "Stable, landlord-friendly regulatory environment"
+        ]},
+        { "type": "heading", "text": "What We Source" },
+        { "type": "paragraph", "text": "We focus on properties in the 4–50 unit range — large enough to justify professional management, small enough to remain accessible to individual investors. Our typical targets include purpose-built rental buildings, converted character homes, and stabilized income properties in Winnipeg's established inner-city and south-end neighbourhoods." },
+        { "type": "heading", "text": "Our Role in Your Acquisition" },
+        { "type": "list", "items": [
+          "Source and evaluate properties, including off-market opportunities",
+          "Provide full financial analysis — NOI, cap rate, cash-on-cash return, and 10-year projections",
+          "Negotiate on your behalf with full market knowledge",
+          "Transition acquired properties into our management portfolio if desired"
+        ]},
+        { "type": "heading", "text": "Getting Started" },
+        { "type": "paragraph", "text": "Whether you're building your first rental portfolio or adding to an existing one, our investment team will work with you to define your acquisition criteria and begin sourcing suitable properties. Contact us to schedule an initial consultation." }
+      ]
     },
     {
+      "slug": "development-projects",
       "iconKey": "Building2",
       "title": "Development Projects",
       "desc": "Ground-up development opportunities in Winnipeg's fastest-growing corridors, through the Barso Group development arm.",
-      "tag": "Upcoming"
+      "tag": "Upcoming",
+      "body": [
+        { "type": "paragraph", "text": "Through the Barso Group, Chapter is actively involved in ground-up real estate development across Winnipeg. Our upcoming development pipeline represents an opportunity for investors to participate in projects from the ground floor — capturing the full value created through the development process." },
+        { "type": "heading", "text": "The Barso Group" },
+        { "type": "paragraph", "text": "Barso is Chapter's sister development group, comprising three operating entities: Barso Homes (residential development), Barso Concrete (commercial construction), and BGC Developments (mixed-use and commercial). Together, they provide Chapter with a fully integrated development capability — from land to completed building." },
+        { "type": "heading", "text": "Upcoming Projects" },
+        { "type": "list", "items": [
+          "Infill townhome development in River Heights — 8 units, Q4 2025 launch",
+          "Mixed-use commercial and residential project in the Exchange District — planning phase",
+          "Purpose-built rental development in Fort Garry — 24 units, Q1 2026 launch",
+          "Custom residential subdivision in south Winnipeg — land secured"
+        ]},
+        { "type": "heading", "text": "Investor Participation" },
+        { "type": "paragraph", "text": "Development project investment is structured on a project-by-project basis with defined equity contributions, preferred returns, and profit-sharing arrangements. Minimum investment thresholds vary by project. Detailed project memoranda will be made available to qualified investors as each project approaches its capital-raise phase." },
+        { "type": "heading", "text": "Register Your Interest" },
+        { "type": "paragraph", "text": "Our development pipeline is in active preparation. Register your interest now to be among the first to receive project information packages when they become available. Contact our investor relations team with your investment capacity and timeline." }
+      ]
     }
   ],
   "investmentStats": [
@@ -29,17 +92,20 @@
     {
       "name": "Barso Homes",
       "desc": "Residential development and custom home building across Winnipeg's premier neighbourhoods.",
-      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+      "href": "https://barso.ca/property"
     },
     {
       "name": "Barso Concrete",
       "desc": "Commercial concrete and construction services supporting residential and commercial projects.",
-      "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
+      "href": "https://barso.ca/concrete-solutions"
     },
     {
       "name": "BGC Developments",
       "desc": "Mixed-use and commercial real estate development projects across Manitoba.",
-      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+      "href": "https://barso.ca/bgc-developments"
     }
   ],
   "investorSteps": [

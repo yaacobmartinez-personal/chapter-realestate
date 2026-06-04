@@ -1,38 +1,46 @@
 "use client";
-import { motion } from "framer-motion";
+
+import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
+import { MapPin } from "lucide-react";
+import "mapbox-gl/dist/mapbox-gl.css";
+
+const OFFICE = {
+  lng: -97.1384,
+  lat: 49.8954,
+  label: "Main Office",
+  address: "123 Portage Ave, Suite 400, Winnipeg, MB",
+};
 
 export default function MapEmbed() {
   return (
-    <motion.section
-      className="h-96 bg-gray-100 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1 }}
-    >
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-60"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=1800&q=80')",
-        }}
-      />
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.3 }}
+    <section className="relative h-[520px] w-full">
+      <Map
+        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+        initialViewState={{ longitude: OFFICE.lng, latitude: OFFICE.lat, zoom: 14 }}
+        style={{ width: "100%", height: "100%" }}
+        mapStyle="mapbox://styles/mapbox/light-v11"
+        attributionControl={false}
       >
-        <div className="bg-white px-8 py-4 text-center">
-          <p className="text-xs tracking-widest uppercase font-light text-gray-400 mb-1">
-            Main Office
-          </p>
-          <p className="text-sm font-light text-black">
-            123 Portage Ave, Suite 400, Winnipeg, MB
-          </p>
-        </div>
-      </motion.div>
-    </motion.section>
+        <NavigationControl position="bottom-right" showCompass={false} />
+
+        <Marker longitude={OFFICE.lng} latitude={OFFICE.lat} anchor="bottom">
+          <div className="flex flex-col items-center group cursor-default">
+            <div className="bg-black text-white text-xs font-light tracking-wide px-3 py-1.5 mb-1.5 whitespace-nowrap shadow-lg group-hover:bg-[#c8a96e] transition-colors duration-200">
+              {OFFICE.address}
+            </div>
+            <div className="w-3 h-3 bg-[#c8a96e] rotate-45 -mt-1 shadow-md" />
+          </div>
+        </Marker>
+      </Map>
+
+      {/* Office info overlay */}
+      <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm px-5 py-4 shadow-sm pointer-events-none">
+        <p className="text-xs tracking-widest uppercase font-light text-gray-400 mb-1">{OFFICE.label}</p>
+        <p className="flex items-center gap-2 text-sm font-light text-black">
+          <MapPin size={13} className="text-[#c8a96e] flex-shrink-0" />
+          {OFFICE.address}
+        </p>
+      </div>
+    </section>
   );
 }

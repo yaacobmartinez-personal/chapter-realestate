@@ -1,52 +1,163 @@
 {
   "blogPosts": [
     {
+      "slug": "winnipeg-housing-market-spring-2025",
       "tag": "Market Update",
       "date": "May 2025",
       "title": "Winnipeg Housing Market: Spring 2025 Overview",
       "excerpt": "Inventory remains tight as buyer demand continues to outpace supply in key neighbourhoods.",
       "readTime": "5 min read",
-      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80",
+      "body": [
+        { "type": "paragraph", "text": "Winnipeg's real estate market entered spring 2025 with remarkable momentum. After a comparatively quiet winter, March and April saw a surge of buyer activity that caught many in the industry off guard. Inventory remains historically low, and the gap between supply and demand is widening in key residential neighbourhoods." },
+        { "type": "heading", "text": "Inventory Tightens Across All Segments" },
+        { "type": "paragraph", "text": "Active listings across the Winnipeg Regional Real Estate Board (WRREB) area are down approximately 14% year-over-year as of April 2025. The shortage is most acute in the $400,000–$700,000 range, where first-time buyers and move-up purchasers compete for the same pool of properties." },
+        { "type": "paragraph", "text": "Neighbourhoods like River Heights, Crescentwood, and Linden Woods are seeing multiple-offer situations on virtually every well-priced listing. Days on market for these areas has dropped to a median of just 11 days — the lowest we've recorded in this market cycle." },
+        { "type": "heading", "text": "Prices Continue to Climb" },
+        { "type": "paragraph", "text": "The average residential sale price in Winnipeg reached $432,000 in Q1 2025, up 7.2% from the same period last year. Detached homes in south Winnipeg have seen the steepest appreciation, while condominium prices remain more stable, offering relative value for buyers willing to consider that segment." },
+        { "type": "list", "items": [
+          "Average sale price: $432,000 (up 7.2% YOY)",
+          "Median days on market: 18 days",
+          "List-to-sale ratio: 101% — sellers regularly achieving over asking",
+          "Active listings: down 14% year-over-year"
+        ]},
+        { "type": "heading", "text": "What This Means for Buyers" },
+        { "type": "paragraph", "text": "If you're planning to buy in 2025, preparation is everything. Get pre-approved before you begin your search, and be ready to move quickly when the right property comes up. Work with an agent who has strong relationships in the neighbourhoods you're targeting — off-market and pocket listings are increasingly how desirable homes are being sold." },
+        { "type": "heading", "text": "What This Means for Sellers" },
+        { "type": "paragraph", "text": "The spring market is as favourable for sellers as it's been in years. If you've been considering listing, now is an excellent time to act. Properly staged and priced homes are attracting multiple offers within days. Consult with one of our agents to understand exactly what your property is worth in today's conditions." }
+      ]
     },
     {
+      "slug": "multifamily-winnipeg-outperforming",
       "tag": "Investor Tips",
       "date": "April 2025",
       "title": "Why Multifamily in Winnipeg is Outperforming Single-Family",
       "excerpt": "Rental demand is hitting record highs. Here's what investors need to know.",
       "readTime": "7 min read",
-      "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80",
+      "body": [
+        { "type": "paragraph", "text": "Winnipeg's rental market is experiencing a convergence of demand drivers that makes multifamily real estate one of the most compelling investment categories in the country right now. Record immigration, a growing university population, and the lingering affordability gap between renting and owning are all pushing vacancy rates to historic lows." },
+        { "type": "heading", "text": "Vacancy Rates at Historic Lows" },
+        { "type": "paragraph", "text": "The Canada Mortgage and Housing Corporation (CMHC) reported Winnipeg's overall rental vacancy rate at 1.4% in its most recent survey — well below the national average and the lowest the city has seen in over a decade. Purpose-built rental buildings in desirable neighbourhoods are reporting near-zero vacancy, with tenant waitlists common." },
+        { "type": "heading", "text": "Why Multifamily Outperforms" },
+        { "type": "paragraph", "text": "When vacancy is this low, multifamily properties offer advantages that single-family rentals simply can't match. With multiple units under one roof, a vacancy in one unit doesn't halt all income. Operating costs per door are lower. Financing is often more favourable. And the sheer scale of demand means finding quality tenants quickly is rarely a challenge." },
+        { "type": "list", "items": [
+          "Lower vacancy risk — income continues even with one empty unit",
+          "Economies of scale on maintenance and insurance",
+          "Stronger lender appetite for income-producing properties",
+          "Easier to delegate to professional property management",
+          "Higher potential for forced appreciation through improvements"
+        ]},
+        { "type": "heading", "text": "Where to Look in Winnipeg" },
+        { "type": "paragraph", "text": "The best multifamily opportunities in Winnipeg right now are concentrated in inner-city neighbourhoods like Osborne Village, Fort Rouge, and the West End, where walkability and transit access drive tenant demand. South Winnipeg suburbs like Fort Garry and St. Vital also present strong opportunities, particularly for purpose-built duplexes and small apartment buildings." },
+        { "type": "heading", "text": "Getting Started" },
+        { "type": "paragraph", "text": "Multifamily investing requires a different analytical approach than single-family. You'll be evaluating net operating income, cap rates, and expense ratios rather than simply comparable sales. Our investment team specializes in sourcing and underwriting these opportunities — reach out if you'd like to explore what's available in the current market." }
+      ]
     },
     {
+      "slug": "professional-pm-maximizes-roi",
       "tag": "Property Management",
       "date": "April 2025",
       "title": "5 Ways Professional PM Maximizes Your ROI",
       "excerpt": "From reducing vacancy to preventative maintenance, professional management pays for itself.",
       "readTime": "4 min read",
-      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
+      "body": [
+        { "type": "paragraph", "text": "Many landlords hesitate at the cost of professional property management. But when you look at the full picture — reduced vacancy, better tenants, fewer maintenance emergencies, and your time back — the math almost always works in favour of hiring a professional. Here are five concrete ways professional management pays for itself." },
+        { "type": "heading", "text": "1. Lower Vacancy Through Better Marketing" },
+        { "type": "paragraph", "text": "Professional property managers have established tenant pipelines, professional photography, and multi-channel listing strategies that fill vacancies faster than most individual landlords can achieve on their own. At Chapter, our average days-to-lease is under 18 days. Every week a unit sits vacant is a week of lost revenue." },
+        { "type": "heading", "text": "2. Better Tenant Screening" },
+        { "type": "paragraph", "text": "Placing the wrong tenant costs far more than a month's rent once you factor in unpaid rent, property damage, and the legal cost of eviction. Professional managers run thorough credit, employment, and reference checks, and they know what to look for. The result is tenants who pay on time, respect the property, and renew their leases." },
+        { "type": "heading", "text": "3. Preventative Maintenance Saves Thousands" },
+        { "type": "paragraph", "text": "A leaky faucet that gets ignored becomes a mould problem. A worn furnace filter becomes a heating system failure. Professional property managers conduct regular inspections and coordinate preventative maintenance — catching small issues before they become expensive emergencies. This alone often covers the management fee." },
+        { "type": "heading", "text": "4. Rent Collection and Financial Reporting" },
+        { "type": "paragraph", "text": "Consistent rent collection requires systems, follow-up, and sometimes difficult conversations. Professional managers handle all of this, depositing income reliably and providing clear monthly statements and year-end reports that simplify your accounting and tax preparation." },
+        { "type": "heading", "text": "5. Legal Compliance" },
+        { "type": "paragraph", "text": "Manitoba's Residential Tenancies Act has specific requirements around lease agreements, rent increases, inspections, and the eviction process. Non-compliance can be costly. Professional managers stay current on all regulations, protecting you from legal exposure and ensuring every interaction with tenants is handled properly." },
+        { "type": "paragraph", "text": "If you're managing your own portfolio and feeling the weight of it, we'd be happy to walk you through what a professional management arrangement would look like. Contact us for a free portfolio review." }
+      ]
     },
     {
+      "slug": "first-time-buyer-guide-winnipeg",
       "tag": "Buying Guide",
       "date": "March 2025",
       "title": "First-Time Buyer's Complete Guide to Winnipeg Real Estate",
       "excerpt": "Everything you need to know before making your first home purchase — from pre-approval to closing.",
       "readTime": "10 min read",
-      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
+      "body": [
+        { "type": "paragraph", "text": "Buying your first home is one of the most significant financial decisions you'll ever make. The process can feel overwhelming, but with the right guidance it's entirely manageable. This guide walks you through every step of buying a home in Winnipeg — from getting your finances in order to picking up the keys." },
+        { "type": "heading", "text": "Step 1: Get Your Finances in Order" },
+        { "type": "paragraph", "text": "Before you start browsing listings, understand what you can actually afford. In Canada, you need a minimum 5% down payment for homes under $500,000, and 10% on the portion between $500,000 and $999,999. You'll also need to factor in closing costs — typically 1.5–4% of the purchase price — which cover land transfer tax, legal fees, and home inspection." },
+        { "type": "list", "items": [
+          "Minimum 5% down payment (homes under $500K)",
+          "Closing costs: approximately 1.5–4% of purchase price",
+          "CMHC mortgage insurance required if down payment is under 20%",
+          "First Home Savings Account (FHSA) — up to $8,000/year tax-deductible contribution"
+        ]},
+        { "type": "heading", "text": "Step 2: Get Pre-Approved" },
+        { "type": "paragraph", "text": "A mortgage pre-approval tells you exactly how much a lender is willing to lend you, at what interest rate, and for how long. It's an essential step before you start making offers — sellers in Winnipeg's competitive market will rarely accept an offer without it. Shop your pre-approval through a mortgage broker who can compare multiple lenders on your behalf." },
+        { "type": "heading", "text": "Step 3: Find Your Agent" },
+        { "type": "paragraph", "text": "As a buyer, working with a buyer's agent costs you nothing — agents are compensated by the seller's proceeds. But not all agents are equal. Look for someone with deep knowledge of the neighbourhoods you're targeting, a track record of helping buyers in your price range, and the availability to act quickly when the right property comes up." },
+        { "type": "heading", "text": "Step 4: The Home Search" },
+        { "type": "paragraph", "text": "Define your must-haves versus nice-to-haves before you start. In a tight market, you'll rarely find a property that checks every box — knowing your priorities helps you make fast, confident decisions. Your agent will give you access to all MLS listings and may also have knowledge of off-market opportunities." },
+        { "type": "heading", "text": "Step 5: Making an Offer" },
+        { "type": "paragraph", "text": "When you find the right home, your agent will prepare a purchase offer. In a multiple-offer situation, the highest price doesn't always win — sellers also consider conditions, deposit amount, and closing date. Your agent will advise on offer strategy based on the specific circumstances of each property." },
+        { "type": "heading", "text": "Step 6: Conditions, Inspection & Closing" },
+        { "type": "paragraph", "text": "A conditional offer typically includes a financing condition and a home inspection condition. The inspection is critical — a qualified inspector will assess the structural, mechanical, and electrical systems of the home. Once conditions are satisfied, the sale becomes firm and you move toward closing, where your lawyer handles title transfer and fund disbursement." }
+      ]
     },
     {
+      "slug": "neighbourhood-spotlight-river-heights-crescentwood",
       "tag": "Market Update",
       "date": "March 2025",
       "title": "Neighbourhood Spotlight: River Heights & Crescentwood",
       "excerpt": "Two of Winnipeg's most sought-after neighbourhoods — what's driving demand in 2025.",
       "readTime": "6 min read",
-      "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=80",
+      "body": [
+        { "type": "paragraph", "text": "River Heights and Crescentwood sit side by side in central Winnipeg, separated only by a few streets but sharing a common identity: tree-lined boulevards, character homes, walkable village-style retail, and some of the most consistently strong real estate values in the city. In 2025, demand in both neighbourhoods is showing no signs of slowing." },
+        { "type": "heading", "text": "River Heights" },
+        { "type": "paragraph", "text": "River Heights stretches roughly from Confusion Corner in the east to Waverley Street in the west, and from the Assiniboine River north to Grant Avenue. It's a diverse neighbourhood in the best sense — you'll find first homes, forever homes, luxury estates, and quality rentals all within a few blocks of each other." },
+        { "type": "paragraph", "text": "The Corydon Avenue strip is the social and commercial heart of River Heights, lined with restaurants, cafés, independent boutiques, and Winnipeg institutions like Segovia Tapas Bar and Luxalune Gastropub. The neighbourhood is walkable, bikeable, and has strong transit connections to downtown." },
+        { "type": "list", "items": [
+          "Average detached sale price: $615,000 (Q1 2025)",
+          "Median days on market: 14 days",
+          "Strong rental demand — very low vacancy in multifamily",
+          "Excellent school catchment areas"
+        ]},
+        { "type": "heading", "text": "Crescentwood" },
+        { "type": "paragraph", "text": "Crescentwood is widely considered one of Winnipeg's most prestigious residential neighbourhoods. Bounded by the Assiniboine River to the north, Wellington Crescent — with its iconic elm canopy — runs along the river's edge and features some of the city's most distinguished homes." },
+        { "type": "paragraph", "text": "The neighbourhood's housing stock is primarily pre-war and post-war character homes — many of them extensively renovated — alongside mid-century builds and occasional luxury new construction infills. Crescentwood consistently commands a price premium that reflects its enduring desirability." },
+        { "type": "heading", "text": "What's Driving Demand in 2025" },
+        { "type": "paragraph", "text": "Both neighbourhoods benefit from a combination of factors that are hard to replicate: mature tree canopy, walkable amenities, established school communities, and proximity to the Assiniboine Park and River Trail system. As Winnipeg's urban core continues to evolve, inner-city neighbourhoods like these are appreciating faster than suburban alternatives." },
+        { "type": "paragraph", "text": "If you're considering a purchase in River Heights or Crescentwood, expect competition. Work with an agent who has direct relationships in these areas and can surface opportunities before they hit MLS." }
+      ]
     },
     {
+      "slug": "chapter-expands-property-management-1200-units",
       "tag": "Company News",
       "date": "February 2025",
       "title": "Chapter Expands Property Management Portfolio to 1,200 Units",
       "excerpt": "A milestone for Chapter as our property management division continues to grow.",
       "readTime": "3 min read",
-      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
+      "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80",
+      "body": [
+        { "type": "paragraph", "text": "We're proud to announce that Chapter's property management division has surpassed 1,200 units under management — a milestone that reflects the trust Winnipeg property owners have placed in us and the growth of our team over the past several years." },
+        { "type": "heading", "text": "A Growing Responsibility" },
+        { "type": "paragraph", "text": "Managing 1,200 units isn't just a number — it represents 1,200 tenants who rely on us for their homes, and hundreds of property owners who trust us with their most significant assets. Reaching this milestone has required us to continuously invest in our team, our technology, and our processes." },
+        { "type": "paragraph", "text": "This year we expanded our maintenance coordination team, launched enhanced owner and tenant portal features, and added dedicated property managers to ensure each portfolio receives the attention it deserves. We're committed to maintaining our service standards as we grow." },
+        { "type": "heading", "text": "What Sets Chapter Apart" },
+        { "type": "list", "items": [
+          "Dedicated property managers with defined portfolio limits — no overloading",
+          "24/7 maintenance request system with response time guarantees",
+          "Transparent monthly reporting through our owner portal",
+          "Proactive leasing — we begin marketing before a vacancy occurs",
+          "In-house legal support for tenancy matters"
+        ]},
+        { "type": "heading", "text": "Looking Ahead" },
+        { "type": "paragraph", "text": "Our goal for 2025 is to reach 1,500 units while continuing to deliver the quality of service that has driven our growth through referrals and renewals. If you're a property owner considering professional management, we'd welcome the conversation. Contact our team for a no-obligation portfolio review and rental market analysis." }
+      ]
     }
   ],
   "guides": [

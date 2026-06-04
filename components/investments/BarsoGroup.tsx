@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { barsoEntities } from "@/lib/data/investments";
 
 export default function BarsoGroup() {
@@ -21,10 +22,14 @@ export default function BarsoGroup() {
           </p>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-6">
-          {barsoEntities.map(({ name, desc, image }, i) => (
-            <motion.div
+          {barsoEntities.map(({ name, desc, image, href }, i) => (
+            <motion.a
               key={name}
-              className="group overflow-hidden bg-white"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit the ${name} website`}
+              className="group overflow-hidden bg-white block"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -41,10 +46,16 @@ export default function BarsoGroup() {
                 />
               </div>
               <div className="p-8">
-                <h3 className="text-xl font-light text-black mb-3">{name}</h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed">{desc}</p>
+                <div className="flex items-start justify-between gap-4 mb-3">
+                  <h3 className="text-xl font-light text-black">{name}</h3>
+                  <ArrowUpRight size={16} className="text-gray-300 group-hover:text-[#c8a96e] transition-colors flex-shrink-0 mt-1" />
+                </div>
+                <p className="text-sm text-gray-500 font-light leading-relaxed mb-5">{desc}</p>
+                <span className="text-xs tracking-widest uppercase font-light text-gray-400 group-hover:text-[#c8a96e] transition-colors">
+                  Visit {name}
+                </span>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
