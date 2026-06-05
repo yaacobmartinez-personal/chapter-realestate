@@ -41,8 +41,27 @@ npm run dev:admin  # http://localhost:3001
    - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
    - `anon` public key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `service_role` secret key → `SUPABASE_SERVICE_ROLE_KEY` (admin + seed only)
-4. Create an admin user: **Authentication → Users → Add user** (email + password).
-   This is who logs into the CMS. Email/password sign-in is enabled by default.
+4. Run [`packages/db/profiles.sql`](packages/db/profiles.sql) in the SQL Editor.
+   This adds the `profiles` table (role + approval status) and a trigger that
+   creates a **pending** profile for every new sign-up.
+5. Create your first admin: **Authentication → Users → Add user** (email +
+   password), then bootstrap it in the SQL Editor:
+   ```sql
+   update public.profiles set role = 'admin', status = 'approved'
+   where email = 'you@example.com';
+   ```
+   Without this nobody can log into the CMS (chicken-and-egg). After that, manage
+   everyone else from the CMS **Users** page.
+
+### User roles & approval
+
+- CMS login is gated to **`role = admin` and `status = approved`**. Tenants,
+  owners, and pending/suspended accounts are signed out with a message.
+- New sign-ups land as `pending` and cannot log in until an admin approves them
+  on the Users page.
+- The Users page (service-role, admin-only) creates users, changes roles,
+  approves/suspends, resets passwords, and deletes accounts. You can't lock
+  yourself out (no self-demote/suspend/delete).
 
 ### Seed the database from the existing JSON content
 

@@ -15,10 +15,5 @@ export default async function EditResourcePage({
   const post = await getBlogPostBySlug(supabase, slug);
   if (!post) notFound();
 
-  return (
-    <div>
-      <h1 className="mb-6 text-2xl font-semibold tracking-tight">Edit article</h1>
-      <ResourceForm post={post} />
-    </div>
-  );
+  return <ResourceForm post={post} />;
 }

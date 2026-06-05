@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Loader2, Upload, X } from "lucide-react";
 
@@ -9,11 +9,22 @@ import { Loader2, Upload, X } from "lucide-react";
  * URLs. Emits the URL list as a JSON string in a hidden input named `images`
  * so it round-trips through a plain Server Action form.
  */
-export default function ImageUploader({ initial = [] }: { initial?: string[] }) {
+export default function ImageUploader({
+  initial = [],
+  onChange,
+}: {
+  initial?: string[];
+  onChange?: (urls: string[]) => void;
+}) {
   const [urls, setUrls] = useState<string[]>(initial);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    onChange?.(urls);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urls]);
 
   async function handleFiles(files: FileList | null) {
     if (!files || files.length === 0) return;

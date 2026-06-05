@@ -1,29 +1,81 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
+import Link from "next/link";
+import { ArrowLeft, Bed, Bath, Square, Car, MapPin, Calendar, Hash, Check } from "lucide-react";
 import type { Property } from "@chapter/db";
 import ImageUploader from "@/components/ImageUploader";
+import PreviewCarousel from "@/components/PreviewCarousel";
+import Button from "@/components/ui/Button";
+import { controlCls as inputCls } from "@/components/ui/Field";
 import { saveProperty, type SaveState } from "./actions";
 
-const inputCls =
-  "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm outline-none focus:border-accent";
+type FormState = {
+  slug: string;
+  address: string;
+  price: string;
+  mls: string;
+  area: string;
+  tag: string;
+  city: string;
+  province: string;
+  type: string;
+  status: string;
+  beds: string;
+  baths: string;
+  garage: string;
+  sqft: string;
+  lot: string;
+  yearBuilt: string;
+  lng: string;
+  lat: string;
+  description: string;
+  features: string;
+};
+
+function initialState(p?: Property): FormState {
+  return {
+    slug: p?.slug ?? "",
+    address: p?.address ?? "",
+    price: p?.price ?? "",
+    mls: p?.mls ?? "",
+    area: p?.area ?? "",
+    tag: p?.tag ?? "",
+    city: p?.city ?? "",
+    province: p?.province ?? "",
+    type: p?.type ?? "Residential",
+    status: p?.status ?? "For Sale",
+    beds: String(p?.beds ?? ""),
+    baths: String(p?.baths ?? ""),
+    garage: String(p?.garage ?? ""),
+    sqft: p?.sqft ?? "",
+    lot: p?.lot ?? "",
+    yearBuilt: String(p?.yearBuilt ?? ""),
+    lng: String(p?.coordinates.lng ?? ""),
+    lat: String(p?.coordinates.lat ?? ""),
+    description: p?.description ?? "",
+    features: p?.features.join("\n") ?? "",
+  };
+}
 
 function Field({
   label,
   name,
-  defaultValue,
   type = "text",
+  value,
+  onChange,
 }: {
   label: string;
   name: string;
-  defaultValue?: string | number;
   type?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium">{label}</span>
-      <input type={type} name={name} defaultValue={defaultValue} className={inputCls} />
+      <span className="mb-1 block text-sm font-medium text-muted">{label}</span>
+      <input type={type} name={name} value={value} onChange={onChange} className={inputCls} />
     </label>
   );
 }
@@ -31,100 +83,205 @@ function Field({
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="rounded-lg bg-foreground px-5 py-2 text-sm font-medium text-white disabled:opacity-60"
-    >
+    <Button type="submit" loading={pending}>
       {pending ? "Saving…" : "Save property"}
-    </button>
+    </Button>
   );
 }
 
 export default function PropertyForm({ property }: { property?: Property }) {
   const p = property;
   const [state, formAction] = useActionState<SaveState, FormData>(saveProperty, null);
+  const [f, setF] = useState<FormState>(() => initialState(p));
+  const [images, setImages] = useState<string[]>(p?.images ?? []);
+
+  const set = (key: keyof FormState) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => setF((prev) => ({ ...prev, [key]: e.target.value }));
+
+  const featureList = f.features.split("\n").map((x) => x.trim()).filter(Boolean);
 
   return (
-    <form action={formAction} className="max-w-3xl space-y-6">
-      {p && <input type="hidden" name="id" value={p.id} />}
+    <form action={formAction} className="grid gap-x-10 gap-y-6 lg:grid-cols-2">
+      {/* ─── Header bar: title + Save (top right) ───────────── */}
+      <div className="lg:col-span-2 sticky top-0 z-10 -mx-8 mb-2 flex items-center justify-between gap-4 border-b border-border bg-background/85 px-8 py-3 backdrop-blur">
+        <div className="flex items-center gap-3">
+          <Link
+            href="/properties"
+            className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-foreground"
+          >
+            <ArrowLeft size={15} /> Back
+          </Link>
+          <h1 className="text-xl font-semibold tracking-tight text-foreground">
+            {p ? "Edit property" : "New property"}
+          </h1>
+        </div>
+        <div className="flex items-center gap-3">
+          {state?.error && (
+            <span className="text-sm text-red-600" role="alert">
+              {state.error}
+            </span>
+          )}
+          <SubmitButton />
+        </div>
+      </div>
 
-      <section>
-        <h2 className="mb-3 text-sm font-semibold text-muted">Images</h2>
-        <ImageUploader initial={p?.images ?? []} />
-      </section>
+      {/* ─── Editor ─────────────────────────────────────────── */}
+      <div className="space-y-6">
+        {p && <input type="hidden" name="id" value={p.id} />}
 
-      <section className="grid grid-cols-2 gap-4">
-        <Field label="Address" name="address" defaultValue={p?.address} />
-        <Field label="Slug (optional)" name="slug" defaultValue={p?.slug} />
-        <Field label="Price" name="price" defaultValue={p?.price} />
-        <Field label="MLS #" name="mls" defaultValue={p?.mls} />
-        <Field label="Area / Neighbourhood" name="area" defaultValue={p?.area} />
-        <Field label="Tag (e.g. New, Featured)" name="tag" defaultValue={p?.tag} />
-        <Field label="City" name="city" defaultValue={p?.city} />
-        <Field label="Province" name="province" defaultValue={p?.province} />
-      </section>
+        <section>
+          <h2 className="mb-3 text-sm font-semibold text-muted">Images</h2>
+          <ImageUploader initial={p?.images ?? []} onChange={setImages} />
+        </section>
 
-      <section className="grid grid-cols-2 gap-4">
+        <section className="grid grid-cols-2 gap-4">
+          <Field label="Address" name="address" value={f.address} onChange={set("address")} />
+          <Field label="Slug (optional)" name="slug" value={f.slug} onChange={set("slug")} />
+          <Field label="Price" name="price" value={f.price} onChange={set("price")} />
+          <Field label="MLS® Number" name="mls" value={f.mls} onChange={set("mls")} />
+          <Field label="Area / Neighbourhood" name="area" value={f.area} onChange={set("area")} />
+          <Field label="Tag (e.g. New, Featured)" name="tag" value={f.tag} onChange={set("tag")} />
+          <Field label="City" name="city" value={f.city} onChange={set("city")} />
+          <Field label="Province" name="province" value={f.province} onChange={set("province")} />
+        </section>
+
+        <section className="grid grid-cols-2 gap-4">
+          <label className="block">
+            <span className="mb-1 block text-sm font-medium text-muted">Type</span>
+            <select name="type" value={f.type} onChange={set("type")} className={inputCls}>
+              <option>Residential</option>
+              <option>Luxury</option>
+              <option>Investment</option>
+            </select>
+          </label>
+          <label className="block">
+            <span className="mb-1 block text-sm font-medium text-muted">Status</span>
+            <select name="status" value={f.status} onChange={set("status")} className={inputCls}>
+              <option>For Sale</option>
+              <option>Pending</option>
+              <option>Sold</option>
+            </select>
+          </label>
+        </section>
+
+        <section className="grid grid-cols-3 gap-4">
+          <Field label="Beds" name="beds" type="number" value={f.beds} onChange={set("beds")} />
+          <Field label="Baths" name="baths" type="number" value={f.baths} onChange={set("baths")} />
+          <Field label="Garage" name="garage" type="number" value={f.garage} onChange={set("garage")} />
+          <Field label="Sqft" name="sqft" value={f.sqft} onChange={set("sqft")} />
+          <Field label="Lot" name="lot" value={f.lot} onChange={set("lot")} />
+          <Field label="Year built" name="yearBuilt" type="number" value={f.yearBuilt} onChange={set("yearBuilt")} />
+        </section>
+
+        <section className="grid grid-cols-2 gap-4">
+          <Field label="Longitude" name="lng" type="number" value={f.lng} onChange={set("lng")} />
+          <Field label="Latitude" name="lat" type="number" value={f.lat} onChange={set("lat")} />
+        </section>
+
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Type</span>
-          <select name="type" defaultValue={p?.type ?? "Residential"} className={inputCls}>
-            <option>Residential</option>
-            <option>Luxury</option>
-            <option>Investment</option>
-          </select>
+          <span className="mb-1 block text-sm font-medium text-muted">Description</span>
+          <textarea
+            name="description"
+            rows={5}
+            value={f.description}
+            onChange={set("description")}
+            className={inputCls}
+          />
         </label>
+
         <label className="block">
-          <span className="mb-1 block text-sm font-medium">Status</span>
-          <select name="status" defaultValue={p?.status ?? "For Sale"} className={inputCls}>
-            <option>For Sale</option>
-            <option>Pending</option>
-            <option>Sold</option>
-          </select>
+          <span className="mb-1 block text-sm font-medium text-muted">Features (one per line)</span>
+          <textarea
+            name="features"
+            rows={5}
+            value={f.features}
+            onChange={set("features")}
+            className={inputCls}
+          />
         </label>
-      </section>
 
-      <section className="grid grid-cols-3 gap-4">
-        <Field label="Beds" name="beds" type="number" defaultValue={p?.beds} />
-        <Field label="Baths" name="baths" type="number" defaultValue={p?.baths} />
-        <Field label="Garage" name="garage" type="number" defaultValue={p?.garage} />
-        <Field label="Sqft" name="sqft" defaultValue={p?.sqft} />
-        <Field label="Lot" name="lot" defaultValue={p?.lot} />
-        <Field label="Year built" name="yearBuilt" type="number" defaultValue={p?.yearBuilt} />
-      </section>
+      </div>
 
-      <section className="grid grid-cols-2 gap-4">
-        <Field label="Longitude" name="lng" type="number" defaultValue={p?.coordinates.lng} />
-        <Field label="Latitude" name="lat" type="number" defaultValue={p?.coordinates.lat} />
-      </section>
+      {/* ─── Live preview (mirrors the public listing) ──────── */}
+      <aside className="lg:sticky lg:top-8 self-start">
+        <p className="mb-3 text-sm font-semibold text-muted">Live preview</p>
+        <div className="overflow-hidden rounded-2xl border border-border bg-white">
+          {/* Hero carousel */}
+          <PreviewCarousel images={images} tag={f.tag} alt={f.address || "Property"} />
 
-      <label className="block">
-        <span className="mb-1 block text-sm font-medium">Description</span>
-        <textarea
-          name="description"
-          rows={5}
-          defaultValue={p?.description}
-          className={inputCls}
-        />
-      </label>
+          {/* Body */}
+          <div className="p-7">
+            <p className="mb-2 text-xs font-light uppercase tracking-[0.25em] text-accent">
+              {f.type}
+            </p>
+            <h1 className="mb-2 text-4xl font-light text-black">{f.price || "$—"}</h1>
+            <p className="mb-1 text-lg font-light text-gray-700">{f.address || "Address"}</p>
+            <p className="mb-8 flex items-center gap-1 text-sm font-light text-gray-400">
+              <MapPin size={13} /> {[f.area, f.city, f.province].filter(Boolean).join(", ")}
+            </p>
 
-      <label className="block">
-        <span className="mb-1 block text-sm font-medium">Features (one per line)</span>
-        <textarea
-          name="features"
-          rows={5}
-          defaultValue={p?.features.join("\n")}
-          className={inputCls}
-        />
-      </label>
+            {/* Stats */}
+            <div className="mb-8 grid grid-cols-4 gap-4 border-y border-gray-100 py-6">
+              {[
+                { icon: Bed, label: "Beds", value: f.beds || "0" },
+                { icon: Bath, label: "Baths", value: f.baths || "0" },
+                { icon: Square, label: "Sqft", value: f.sqft || "—" },
+                { icon: Car, label: "Garage", value: `${f.garage || "0"} car` },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label} className="text-center">
+                  <Icon size={18} className="mx-auto mb-2 text-accent" />
+                  <p className="text-lg font-light text-black">{value}</p>
+                  <p className="mt-0.5 text-xs font-light text-gray-400">{label}</p>
+                </div>
+              ))}
+            </div>
 
-      {state?.error && (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600" role="alert">
-          {state.error}
-        </p>
-      )}
+            {/* Description */}
+            <h2 className="mb-3 text-lg font-light text-black">About This Property</h2>
+            <p className="mb-8 whitespace-pre-wrap text-sm font-light leading-relaxed text-gray-600">
+              {f.description || "Description will appear here…"}
+            </p>
 
-      <SubmitButton />
+            {/* Features */}
+            {featureList.length > 0 && (
+              <>
+                <h2 className="mb-4 text-lg font-light text-black">Features &amp; Highlights</h2>
+                <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {featureList.map((feat) => (
+                    <li key={feat} className="flex items-start gap-2 text-sm font-light text-gray-600">
+                      <Check size={14} className="mt-0.5 flex-shrink-0 text-accent" />
+                      {feat}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {/* Details */}
+            <div className="rounded-xl bg-background p-6">
+              <h3 className="mb-5 text-sm font-light uppercase tracking-widest text-gray-400">
+                Property Details
+              </h3>
+              <dl className="space-y-3">
+                {[
+                  { icon: Calendar, label: "Year Built", value: f.yearBuilt || "—" },
+                  { icon: Square, label: "Lot Size", value: f.lot || "—" },
+                  { icon: Hash, label: "MLS®", value: f.mls || "—" },
+                  { icon: MapPin, label: "Neighbourhood", value: f.area || "—" },
+                ].map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="flex items-center justify-between">
+                    <span className="flex items-center gap-2 text-xs font-light text-gray-400">
+                      <Icon size={13} /> {label}
+                    </span>
+                    <span className="text-sm font-light text-black">{value}</span>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </aside>
     </form>
   );
 }

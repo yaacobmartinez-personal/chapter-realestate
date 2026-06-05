@@ -1,21 +1,75 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (toggled on <html> by next-themes). */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #f7f7f8;
-  --foreground: #0a0a0a;
-  --accent: #c8a96e;
+  /* Surfaces */
+  --background: #fafafa;
   --surface: #ffffff;
+  --surface-2: #f5f5f5;
   --border: #e5e5e5;
-  --muted: #6b6b6b;
+  /* Text */
+  --foreground: #262626;
+  --muted: #737373;
+  --subtle: #a3a3a3;
+  /* Brand */
+  --accent: #c8a96e;
+  --accent-foreground: #1a1a1a;
+  /* Primary action (neutral slate) */
+  --primary: #404040;
+  --primary-foreground: #ffffff;
+  /* Focus ring */
+  --ring: #c8a96e;
+  /* Semantic */
+  --success: #15803d;
+  --success-surface: #f0fdf4;
+  --warning: #b45309;
+  --warning-surface: #fffbeb;
+  --danger: #dc2626;
+  --danger-surface: #fef2f2;
+}
+
+.dark {
+  --background: #0e0e0f;
+  --surface: #18181a;
+  --surface-2: #232326;
+  --border: #2c2c30;
+  --foreground: #ededed;
+  --muted: #a1a1aa;
+  --subtle: #71717a;
+  --accent: #c8a96e;
+  --accent-foreground: #1a1a1a;
+  --primary: #e5e5e5;
+  --primary-foreground: #18181a;
+  --ring: #c8a96e;
+  --success: #4ade80;
+  --success-surface: #14241a;
+  --warning: #fbbf24;
+  --warning-surface: #2a2010;
+  --danger: #f87171;
+  --danger-surface: #2a1414;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-border: var(--border);
+  --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-surface: var(--success-surface);
+  --color-warning: var(--warning);
+  --color-warning-surface: var(--warning-surface);
+  --color-danger: var(--danger);
+  --color-danger-surface: var(--danger-surface);
   --font-sans: var(--font-geist-sans);
 }
 
@@ -23,7 +77,39 @@
   box-sizing: border-box;
 }
 
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Tabular figures for data (prices, dates, counts). */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

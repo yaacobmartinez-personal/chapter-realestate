@@ -15,10 +15,5 @@ export default async function EditPropertyPage({
   const property = (await getProperties(supabase)).find((p) => p.id === id);
   if (!property) notFound();
 
-  return (
-    <div>
-      <h1 className="mb-6 text-2xl font-semibold tracking-tight">Edit property</h1>
-      <PropertyForm property={property} />
-    </div>
-  );
+  return <PropertyForm property={property} />;
 }
