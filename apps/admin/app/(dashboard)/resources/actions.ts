@@ -18,7 +18,12 @@ function slugify(input: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-export async function saveBlogPost(formData: FormData): Promise<void> {
+export type SaveState = { error: string } | null;
+
+export async function saveBlogPost(
+  _prev: SaveState,
+  formData: FormData,
+): Promise<SaveState> {
   const supabase = await createClient();
 
   const title = str(formData, "title");
@@ -43,10 +48,14 @@ export async function saveBlogPost(formData: FormData): Promise<void> {
     body: parseBody(str(formData, "body")),
   };
 
-  await upsertBlogPost(supabase, post);
+  try {
+    await upsertBlogPost(supabase, post);
+  } catch (err) {
+    return { error: (err as Error).message };
+  }
 
   revalidatePath("/resources");
-  redirect("/resources");
+  redirect("/resources"); // throws NEXT_REDIRECT — must stay outside the try
 }
 
 export async function removeBlogPost(formData: FormData): Promise<void> {

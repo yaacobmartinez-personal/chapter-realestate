@@ -1,9 +1,10 @@
 "use client";
 
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import type { Property } from "@chapter/db";
 import ImageUploader from "@/components/ImageUploader";
-import { saveProperty } from "./actions";
+import { saveProperty, type SaveState } from "./actions";
 
 const inputCls =
   "w-full rounded-lg border border-border bg-white px-3 py-2 text-sm outline-none focus:border-accent";
@@ -42,9 +43,10 @@ function SubmitButton() {
 
 export default function PropertyForm({ property }: { property?: Property }) {
   const p = property;
+  const [state, formAction] = useActionState<SaveState, FormData>(saveProperty, null);
 
   return (
-    <form action={saveProperty} className="max-w-3xl space-y-6">
+    <form action={formAction} className="max-w-3xl space-y-6">
       {p && <input type="hidden" name="id" value={p.id} />}
 
       <section>
@@ -115,6 +117,12 @@ export default function PropertyForm({ property }: { property?: Property }) {
           className={inputCls}
         />
       </label>
+
+      {state?.error && (
+        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600" role="alert">
+          {state.error}
+        </p>
+      )}
 
       <SubmitButton />
     </form>

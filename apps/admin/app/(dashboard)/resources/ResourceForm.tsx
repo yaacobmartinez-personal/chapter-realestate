@@ -1,9 +1,10 @@
 "use client";
 
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import type { BlogPost } from "@chapter/db";
 import ImageUploader from "@/components/ImageUploader";
-import { saveBlogPost } from "./actions";
+import { saveBlogPost, type SaveState } from "./actions";
 import { serializeBody } from "./body";
 
 const inputCls =
@@ -42,8 +43,10 @@ function SubmitButton() {
 }
 
 export default function ResourceForm({ post }: { post?: BlogPost }) {
+  const [state, formAction] = useActionState<SaveState, FormData>(saveBlogPost, null);
+
   return (
-    <form action={saveBlogPost} className="max-w-3xl space-y-6">
+    <form action={formAction} className="max-w-3xl space-y-6">
       {post && <input type="hidden" name="originalSlug" value={post.slug} />}
 
       <section>
@@ -79,6 +82,12 @@ export default function ResourceForm({ post }: { post?: BlogPost }) {
           between paragraphs.
         </span>
       </label>
+
+      {state?.error && (
+        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600" role="alert">
+          {state.error}
+        </p>
+      )}
 
       <SubmitButton />
     </form>

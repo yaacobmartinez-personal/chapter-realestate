@@ -29,7 +29,12 @@ function str(formData: FormData, key: string): string {
   return String(formData.get(key) ?? "").trim();
 }
 
-export async function saveProperty(formData: FormData): Promise<void> {
+export type SaveState = { error: string } | null;
+
+export async function saveProperty(
+  _prev: SaveState,
+  formData: FormData,
+): Promise<SaveState> {
   const supabase = await createClient();
 
   const id = str(formData, "id") || randomUUID();
@@ -73,10 +78,14 @@ export async function saveProperty(formData: FormData): Promise<void> {
     coordinates: { lng: num(formData, "lng"), lat: num(formData, "lat") },
   };
 
-  await upsertProperty(supabase, property);
+  try {
+    await upsertProperty(supabase, property);
+  } catch (err) {
+    return { error: (err as Error).message };
+  }
 
   revalidatePath("/properties");
-  redirect("/properties");
+  redirect("/properties"); // throws NEXT_REDIRECT — must stay outside the try
 }
 
 export async function removeProperty(formData: FormData): Promise<void> {
