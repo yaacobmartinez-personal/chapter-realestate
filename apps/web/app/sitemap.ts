@@ -1,8 +1,34 @@
 import type { MetadataRoute } from "next";
+import { getProperties } from "@/lib/data/properties";
+import { getBlogPosts } from "@/lib/data/resources";
+import { investmentOpportunities } from "@/lib/data/investments";
 
 const BASE_URL = "https://chapterrealestate.ca";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [properties, posts] = await Promise.all([getProperties(), getBlogPosts()]);
+
+  const propertyPages: MetadataRoute.Sitemap = properties.map((p) => ({
+    url: `${BASE_URL}/properties/${p.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  const articlePages: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${BASE_URL}/resources/${p.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  const investmentPages: MetadataRoute.Sitemap = investmentOpportunities.map((o) => ({
+    url: `${BASE_URL}/investments/${o.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
   return [
     {
       url: BASE_URL,
@@ -21,6 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/properties`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/investments`,
@@ -52,5 +84,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    ...propertyPages,
+    ...articlePages,
+    ...investmentPages,
   ];
 }
