@@ -15,10 +15,13 @@ export default function BarsoGroup() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Development Group</p>
+          <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Our Ecosystem</p>
           <h2 className="text-4xl md:text-5xl font-light text-black">The Barso Group</h2>
-          <p className="text-gray-500 font-light text-sm mt-4 max-w-md leading-relaxed">
-            Chapter&apos;s sister development group, Barso, spans residential construction, commercial concrete, and mixed-use development.
+          <p className="text-gray-500 font-light text-sm mt-4 max-w-lg leading-relaxed">
+            Chapter Real Estate is part of the Barso Group — a vertically integrated real estate and
+            construction ecosystem spanning custom home building, structural concrete, large-scale
+            development, and property management. Founded on a mission to make a difference in
+            people&apos;s lives through craftsmanship: <span className="text-black italic">we don&apos;t just build projects — we own the results.</span>
           </p>
         </motion.div>
         <div className="grid md:grid-cols-3 gap-6">

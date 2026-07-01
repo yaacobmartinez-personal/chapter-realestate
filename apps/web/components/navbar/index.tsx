@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import TopBar from "./TopBar";
 import Logo from "./Logo";
 import DesktopNav from "./DesktopNav";
 import DesktopCTA from "./DesktopCTA";
@@ -26,11 +27,15 @@ export default function Navbar() {
         scrolled ? "bg-white border-b border-gray-100 shadow-sm" : "bg-transparent"
       }`}
     >
+      <TopBar scrolled={scrolled} />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           <Logo scrolled={scrolled} />
-          <DesktopNav scrolled={scrolled} />
-          <DesktopCTA scrolled={scrolled} />
+          <div className="hidden lg:flex items-center gap-8">
+            <DesktopNav scrolled={scrolled} />
+            <DesktopCTA scrolled={scrolled} />
+          </div>
           <MobileMenuToggle
             isOpen={mobileOpen}
             scrolled={scrolled}

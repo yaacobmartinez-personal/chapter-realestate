@@ -48,10 +48,10 @@ export const footerLinkGroups: FooterLinkGroup[] = [
     title: "Real Estate",
     links: [
       { label: "Buy a Home", href: "/brokerage#buy" },
-      { label: "Sell a Home", href: "/brokerage#sell" },
+      { label: "Buyer's Guide", href: "/buyers-guide" },
+      { label: "Sell a Home", href: "/sellers" },
       { label: "Featured Listings", href: "/brokerage#listings" },
       { label: "Our Agents", href: "/brokerage#agents" },
-      { label: "Market Insights", href: "/brokerage#insights" },
     ],
   },
   {
@@ -62,7 +62,6 @@ export const footerLinkGroups: FooterLinkGroup[] = [
       { label: "Commercial PM", href: "/property-management#commercial" },
       { label: "Owner Portal", href: "/property-management#owners" },
       { label: "Tenant Portal", href: "/property-management#tenants" },
-      { label: "Free Analysis", href: "/property-management#analysis" },
     ],
   },
   {

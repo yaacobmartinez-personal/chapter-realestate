@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "chapter-web",
+  "compatibility_date": "2025-03-25",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  }
+  // Secrets (set with `wrangler secret put <NAME>` or in the Cloudflare dashboard):
+  //   NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY  (also needed at build time)
+  //   SUPABASE_SERVICE_ROLE_KEY  (server-only — form submissions write with this)
+  //   NEXT_PUBLIC_MAPBOX_TOKEN / any other NEXT_PUBLIC_* used by the app
+  //
+  // For durable ISR, uncomment and create the bucket:
+  // "r2_buckets": [
+  //   { "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "chapter-web-cache" }
+  // ]
+}

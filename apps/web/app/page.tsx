@@ -6,7 +6,6 @@ import WhyChapter from "@/components/home/WhyChapter";
 import PMCta from "@/components/home/PMCta";
 import Team from "@/components/home/Team";
 import Testimonials from "@/components/home/Testimonials";
-import MarketInsights from "@/components/home/MarketInsights";
 import ContactCTA from "@/components/home/ContactCTA";
 import { getProperties } from "@/lib/data/properties";
 
@@ -24,7 +23,6 @@ export default async function HomePage() {
       <PMCta />
       <Team />
       <Testimonials />
-      <MarketInsights />
       <ContactCTA />
     </>
   );

@@ -5,31 +5,15 @@
     { "iconKey": "Target", "title": "Service", "description": "Client-first, always. We measure our success by the satisfaction of those we serve." },
     { "iconKey": "TrendingUp", "title": "Growth", "description": "We invest in our team, our clients, and our communities for sustainable long-term success." }
   ],
+  "_leadershipNote": "Confirm Avanish's surname, final bios, and real headshots before launch. Roles per company direction: Dylan & Armin Barsomian are Founders; Armin Barsomian is Managing Partner; Avanish is Broker/Partner.",
   "leadershipGroups": [
     {
-      "label": "Managing Partners",
-      "heading": "Leadership",
+      "label": "Leadership",
+      "heading": "Founders & Partners",
       "members": [
-        { "name": "Alex Barsoum", "role": "Managing Partner & Founder", "bio": "15+ years in Winnipeg real estate. Alex founded Chapter with a vision to modernize local property services.", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" },
-        { "name": "Priya Sharma", "role": "Managing Partner, Investments", "bio": "Background in finance and development, leading Chapter's investment and Barso Group divisions.", "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" }
-      ]
-    },
-    {
-      "label": "Brokerage",
-      "heading": "Broker Profiles",
-      "members": [
-        { "name": "Marcus Leblanc", "role": "Broker of Record", "bio": "Licensed since 2005, Marcus ensures Chapter maintains the highest compliance and ethical standards.", "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" },
-        { "name": "James Okafor", "role": "Senior Broker", "bio": "Award-winning agent specializing in luxury residential and commercial transactions.", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" },
-        { "name": "Diana Chen", "role": "Broker & Marketing Director", "bio": "Drives Chapter's brand, digital presence, and agent marketing support systems.", "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80" }
-      ]
-    },
-    {
-      "label": "Property Management",
-      "heading": "PM Leadership",
-      "members": [
-        { "name": "Sarah Mitchell", "role": "Director of Property Management", "bio": "A property management veteran with a track record of maximizing returns for landlord clients.", "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" },
-        { "name": "David Park", "role": "Senior Property Manager", "bio": "Oversees residential portfolios across Winnipeg with a focus on tenant satisfaction and NOI growth.", "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" },
-        { "name": "Nina Torres", "role": "Commercial PM Lead", "bio": "Specializes in office and retail asset management, lease renewals, and CAM reconciliations.", "image": "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&q=80" }
+        { "name": "Armin Barsomian", "role": "Founder & Managing Partner", "bio": "Co-founder of Chapter Real Estate, Armin leads the company's vision, growth, and day-to-day operations across Manitoba.", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" },
+        { "name": "Dylan", "role": "Founder & Partner", "bio": "Co-founder of Chapter Real Estate, Dylan helps shape the company's direction and long-term strategy.", "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" },
+        { "name": "Avanish", "role": "Broker & Partner", "bio": "Broker and partner at Chapter Real Estate, upholding the highest compliance and service standards for clients.", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80" }
       ]
     }
   ]

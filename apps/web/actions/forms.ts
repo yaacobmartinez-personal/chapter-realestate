@@ -1,18 +1,30 @@
 "use server";
 
-import type { SubmissionResult } from "@/lib/form-submission";
+import { submitForm, type FormPayload, type SubmissionResult } from "@/lib/form-submission";
 
-// Delivery is disabled until SMTP and Google Sheets accounts are configured.
-// Forms show a success state to users but no data is sent or stored yet.
-
-export async function submitContactForm(_formData: FormData): Promise<SubmissionResult> {
-  return { ok: true };
+function toFields(formData: FormData): Record<string, string> {
+  const fields: Record<string, string> = {};
+  for (const [key, value] of formData.entries()) {
+    if (typeof value === "string") fields[key] = value;
+  }
+  return fields;
 }
 
-export async function submitPropertyInquiry(_formData: FormData): Promise<SubmissionResult> {
-  return { ok: true };
+function handle(
+  formType: FormPayload["formType"],
+  formData: FormData,
+): Promise<SubmissionResult> {
+  return submitForm({ formType, fields: toFields(formData) });
 }
 
-export async function submitRecruitmentForm(_formData: FormData): Promise<SubmissionResult> {
-  return { ok: true };
+export async function submitContactForm(formData: FormData): Promise<SubmissionResult> {
+  return handle("contact", formData);
+}
+
+export async function submitPropertyInquiry(formData: FormData): Promise<SubmissionResult> {
+  return handle("property-inquiry", formData);
+}
+
+export async function submitRecruitmentForm(formData: FormData): Promise<SubmissionResult> {
+  return handle("recruitment", formData);
 }

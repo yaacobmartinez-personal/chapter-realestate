@@ -7,7 +7,7 @@ export default function LeadershipTeam() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mb-20">
           <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Leadership</p>
-          <h2 data-reveal className="text-4xl md:text-5xl font-light text-black">The People Behind Chapter</h2>
+          <h2 data-reveal className="text-4xl md:text-5xl font-light text-black">Our Leadership</h2>
         </div>
 
         <div className="space-y-20">

@@ -1,18 +1,22 @@
 /**
  * Core form submission handler.
- * Each submission is delivered via two channels (if configured):
- *   1. SMTP email via Nodemailer
- *   2. Google Sheets row append via the Sheets API
  *
- * Required env vars:
- *   SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_TO
- *   GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY, GOOGLE_SHEET_ID
+ * 1. Persists every submission to the Supabase `form_submissions` table
+ *    (source of truth — service-role client, server-only).
+ * 2. Best-effort email notification via Resend (HTTP API, Workers-compatible).
+ *    Email is optional: if it fails or isn't configured, the submission is
+ *    still saved and the user still sees success.
+ *
+ * Env vars:
+ *   NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY   (required, save)
+ *   RESEND_API_KEY, RESEND_TO                             (optional, email)
+ *   RESEND_FROM                                           (optional, defaults below)
  */
 
-import nodemailer from "nodemailer";
-import { google } from "googleapis";
+import { createServiceClient, createSubmission, type FormType } from "@chapter/db";
+import { Resend } from "resend";
 
-export type FormType = "contact" | "property-inquiry" | "recruitment";
+export type { FormType };
 
 export interface FormPayload {
   formType: FormType;
@@ -24,105 +28,120 @@ export interface SubmissionResult {
   error?: string;
 }
 
-// ─── Email ────────────────────────────────────────────────────────────────────
+const FORM_LABELS: Record<FormType, string> = {
+  contact: "Contact Enquiry",
+  "property-inquiry": "Property Inquiry",
+  recruitment: "Agent Application",
+};
+
+// Escape user-supplied values before placing them in HTML.
+function esc(v: string): string {
+  return v
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+// "firstName" → "First Name", "email" → "Email", "interest" → "Interest".
+function humanize(key: string): string {
+  return key
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .trim();
+}
 
 function buildEmailHtml(payload: FormPayload): string {
-  const rows = Object.entries(payload.fields)
+  const label = FORM_LABELS[payload.formType];
+  const dateStr = new Date().toLocaleString("en-CA", {
+    timeZone: "America/Winnipeg",
+    dateStyle: "long",
+    timeStyle: "short",
+  });
+
+  const fieldBlocks = Object.entries(payload.fields)
+    .filter(([, value]) => value && value.trim() !== "")
     .map(
-      ([key, value]) =>
-        `<tr>
-          <td style="padding:8px 12px;font-weight:600;color:#555;white-space:nowrap;border-bottom:1px solid #eee">${key}</td>
-          <td style="padding:8px 12px;color:#222;border-bottom:1px solid #eee">${value || "—"}</td>
-        </tr>`
+      ([key, value]) => `
+      <tr>
+        <td style="padding:0 0 18px;">
+          <p style="margin:0 0 5px;color:#b39a6d;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">${esc(humanize(key))}</p>
+          <p style="margin:0;padding:0 0 16px;border-bottom:1px solid #efece6;color:#1a1a1a;font-size:15px;line-height:1.5;font-family:Arial,Helvetica,sans-serif;">${esc(value).replace(/\n/g, "<br>")}</p>
+        </td>
+      </tr>`
     )
     .join("");
 
-  const label: Record<FormType, string> = {
-    contact: "Contact Form",
-    "property-inquiry": "Property Inquiry",
-    recruitment: "Agent Application",
-  };
-
   return `
-    <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-      <div style="background:#000;padding:24px 32px">
-        <p style="color:#c8a96e;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin:0">Chapter Real Estate</p>
-        <h1 style="color:#fff;font-size:22px;font-weight:300;margin:8px 0 0">New ${label[payload.formType]} Submission</h1>
-      </div>
-      <table style="width:100%;border-collapse:collapse;font-size:14px">
-        ${rows}
-      </table>
-      <div style="padding:16px 12px;background:#f7f7f7">
-        <p style="font-size:11px;color:#999;margin:0">Submitted via chapterrealestate.ca</p>
-      </div>
-    </div>
-  `;
+  <div style="margin:0;padding:0;background:#f4f3f0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f3f0;padding:32px 16px;">
+      <tr><td align="center">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border:1px solid #ece9e3;border-radius:2px;overflow:hidden;">
+          <tr><td style="background:#0a0a0a;padding:38px 40px 34px;">
+            <p style="margin:0 0 12px;color:#c8a96e;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">Chapter Real Estate</p>
+            <h1 style="margin:0;color:#ffffff;font-size:26px;font-weight:400;font-family:Georgia,'Times New Roman',serif;">New ${esc(label)}</h1>
+            <p style="margin:12px 0 0;color:#8c8c8c;font-size:13px;font-family:Arial,Helvetica,sans-serif;">${esc(dateStr)}</p>
+          </td></tr>
+          <tr><td style="height:3px;line-height:3px;font-size:0;background:#c8a96e;">&nbsp;</td></tr>
+          <tr><td style="padding:36px 40px 22px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${fieldBlocks}</table>
+          </td></tr>
+          <tr><td style="padding:22px 40px 28px;background:#faf9f7;border-top:1px solid #ece9e3;">
+            <p style="margin:0;color:#9a968e;font-size:12px;line-height:1.6;font-family:Arial,Helvetica,sans-serif;">
+              This lead was submitted via
+              <a href="https://chapterrealestate.ca" style="color:#b39a6d;text-decoration:none;">chapterrealestate.ca</a>.
+              Reply directly to reach the sender if their email is listed above.
+            </p>
+          </td></tr>
+        </table>
+        <p style="margin:20px 0 0;color:#b8b4ac;font-size:11px;font-family:Arial,Helvetica,sans-serif;">© Chapter Real Estate · Winnipeg, Manitoba</p>
+      </td></tr>
+    </table>
+  </div>`;
 }
 
+function buildEmailText(payload: FormPayload): string {
+  const label = FORM_LABELS[payload.formType];
+  const lines = Object.entries(payload.fields)
+    .filter(([, value]) => value && value.trim() !== "")
+    .map(([key, value]) => `${humanize(key)}: ${value}`);
+  return `New ${label} — Chapter Real Estate\n\n${lines.join("\n")}\n\nSubmitted via chapterrealestate.ca`;
+}
+
+/** Best-effort email — never throws; logs and returns on any failure. */
 async function sendEmail(payload: FormPayload): Promise<void> {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SMTP_TO } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !SMTP_TO) return;
+  const apiKey = process.env.RESEND_API_KEY;
+  const to = process.env.RESEND_TO;
+  if (!apiKey || !to) return; // email not configured — skip silently
 
-  const transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT ?? 587),
-    secure: Number(SMTP_PORT) === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
+  const from = process.env.RESEND_FROM ?? "Chapter Real Estate <onboarding@resend.dev>";
 
-  const subjects: Record<FormType, string> = {
-    contact: "New Contact Form Submission",
-    "property-inquiry": "New Property Inquiry",
-    recruitment: "New Agent Application",
-  };
+  // Let you reply straight to the person who submitted the form.
+  const replyTo = payload.fields.email?.trim() || undefined;
 
-  await transporter.sendMail({
-    from: SMTP_FROM ?? SMTP_USER,
-    to: SMTP_TO,
-    subject: subjects[payload.formType],
-    html: buildEmailHtml(payload),
-  });
+  try {
+    const resend = new Resend(apiKey);
+    const { error } = await resend.emails.send({
+      from,
+      to,
+      replyTo,
+      subject: `New ${FORM_LABELS[payload.formType]} — Chapter Real Estate`,
+      html: buildEmailHtml(payload),
+      text: buildEmailText(payload),
+    });
+    if (error) console.error("[submitForm] resend error:", error);
+  } catch (err) {
+    console.error("[submitForm] email failed:", err);
+  }
 }
-
-// ─── Google Sheets ────────────────────────────────────────────────────────────
-
-const SHEET_TABS: Record<FormType, string> = {
-  contact: "Contact",
-  "property-inquiry": "Property Inquiries",
-  recruitment: "Applications",
-};
-
-async function appendToSheet(payload: FormPayload): Promise<void> {
-  const { GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY, GOOGLE_SHEET_ID } = process.env;
-  if (!GOOGLE_SERVICE_ACCOUNT_EMAIL || !GOOGLE_PRIVATE_KEY || !GOOGLE_SHEET_ID) return;
-
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-    },
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-  });
-
-  const sheets = google.sheets({ version: "v4", auth });
-  const tab = SHEET_TABS[payload.formType];
-  const timestamp = new Date().toLocaleString("en-CA", { timeZone: "America/Winnipeg" });
-
-  await sheets.spreadsheets.values.append({
-    spreadsheetId: GOOGLE_SHEET_ID,
-    range: `${tab}!A1`,
-    valueInputOption: "USER_ENTERED",
-    requestBody: {
-      values: [[timestamp, ...Object.values(payload.fields)]],
-    },
-  });
-}
-
-// ─── Public handler ───────────────────────────────────────────────────────────
 
 export async function submitForm(payload: FormPayload): Promise<SubmissionResult> {
   try {
-    await Promise.all([sendEmail(payload), appendToSheet(payload)]);
+    // Save is critical — must succeed.
+    await createSubmission(createServiceClient(), payload);
+    // Email is best-effort — must never block or fail the submission.
+    await sendEmail(payload);
     return { ok: true };
   } catch (err) {
     console.error("[submitForm]", err);

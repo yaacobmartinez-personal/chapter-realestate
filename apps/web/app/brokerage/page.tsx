@@ -6,7 +6,6 @@ import {
   FeaturedListings,
   SellSection,
   AgentsDirectory,
-  MarketInsights,
 } from "@/components/brokerage";
 import { getProperties } from "@/lib/data/properties";
 
@@ -39,7 +38,6 @@ export default async function BrokeragePage() {
       <FeaturedListings properties={properties} />
       <SellSection />
       <AgentsDirectory />
-      <MarketInsights />
     </>
   );
 }

@@ -43,6 +43,14 @@ create table if not exists public.blog_posts (
   updated_at timestamptz not null default now()
 );
 
+-- ─── Form submissions ────────────────────────────────────────────────────────
+create table if not exists public.form_submissions (
+  id         uuid primary key default gen_random_uuid(),
+  form_type  text not null,
+  fields     jsonb not null default '{}',
+  created_at timestamptz not null default now()
+);
+
 -- ─── updated_at trigger ──────────────────────────────────────────────────────
 create or replace function public.set_updated_at()
 returns trigger language plpgsql as $$
@@ -62,6 +70,9 @@ create trigger blog_posts_set_updated_at before update on public.blog_posts
 -- ─── Row Level Security ──────────────────────────────────────────────────────
 alter table public.properties enable row level security;
 alter table public.blog_posts enable row level security;
+-- Form submissions: RLS on with NO public policies — only the service-role key
+-- (used server-side by the web app) can read or write. Never expose publicly.
+alter table public.form_submissions enable row level security;
 
 -- Public site: anyone may read.
 drop policy if exists "public read properties" on public.properties;
