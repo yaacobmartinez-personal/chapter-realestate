@@ -47,21 +47,14 @@ export const metadata: Metadata = {
     title: "Chapter Real Estate | Winnipeg's Full-Service Real Estate Company",
     description:
       "Chapter Real Estate is Winnipeg's full-service real estate company — brokerage, property management, and investment development all under one roof.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Chapter Real Estate",
-      },
-    ],
+    // Social share image is provided by app/opengraph-image.tsx (generated at build).
   },
   twitter: {
     card: "summary_large_image",
     title: "Chapter Real Estate | Winnipeg's Full-Service Real Estate Company",
     description:
       "Chapter Real Estate is Winnipeg's full-service real estate company — brokerage, property management, and investment development all under one roof.",
-    images: ["/og-image.png"],
+    // Falls back to the Open Graph image (app/opengraph-image.tsx).
   },
   robots: {
     index: true,
