@@ -57,7 +57,7 @@ export default function Services() {
                     <p className="text-sm text-gray-500 group-hover:text-gray-400 font-light leading-relaxed transition-colors">{description}</p>
                   </div>
                   <div className="mt-auto flex items-center gap-2 text-xs text-gray-400 group-hover:text-[#c8a96e] transition-colors">
-                    <span className="tracking-widest uppercase font-light">Learn More</span>
+                    <span className="tracking-widest uppercase font-light">Explore {title}</span>
                     <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
                   </div>
                 </Link>

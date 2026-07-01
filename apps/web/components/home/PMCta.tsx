@@ -51,8 +51,7 @@ export default function PMCta() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <Link href="/property-management#analysis" className="bg-[#c8a96e] text-black text-sm font-light tracking-widest uppercase px-8 py-4 hover:bg-white transition-colors">Free Rental Analysis</Link>
-              <Link href="/property-management" className="border border-white/20 text-white text-sm font-light tracking-widest uppercase px-8 py-4 hover:border-white transition-colors">Learn More</Link>
+              <Link href="/property-management" className="bg-[#c8a96e] text-black text-sm font-light tracking-widest uppercase px-8 py-4 hover:bg-white transition-colors">Explore Property Management</Link>
             </motion.div>
           </div>
         </div>

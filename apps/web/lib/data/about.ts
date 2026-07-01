@@ -66,3 +66,7 @@ const raw = rawContent as unknown as {
 };
 
 export const leadershipGroups = raw.leadershipGroups;
+
+// Flattened leadership list — shared by the homepage Team section so it stays
+// in sync with the About page leadership.
+export const leaders: TeamMember[] = leadershipGroups.flatMap((g) => g.members);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { homeTeamMembers } from "@/lib/data/home";
+import { leaders } from "@/lib/data/about";
 
 export default function Team() {
   return (
@@ -31,8 +31,8 @@ export default function Team() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {homeTeamMembers.map(({ name, role, image }, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl">
+          {leaders.map(({ name, role, image }, i) => (
             <motion.div
               key={name}
               className="group"

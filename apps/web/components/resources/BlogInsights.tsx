@@ -80,7 +80,7 @@ export default function BlogInsights({ posts }: { posts: BlogPost[] }) {
                   <h3 className="text-lg font-light text-black mb-3 leading-snug group-hover:text-[#c8a96e] transition-colors">{title}</h3>
                   <p className="text-sm text-gray-500 font-light leading-relaxed">{excerpt}</p>
                   <div className="mt-4 flex items-center gap-2 text-xs text-gray-400 group-hover:text-black transition-colors">
-                    <span className="tracking-widest uppercase font-light">Read More</span>
+                    <span className="tracking-widest uppercase font-light">Read Article</span>
                     <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
