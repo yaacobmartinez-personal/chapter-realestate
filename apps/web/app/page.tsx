@@ -8,11 +8,17 @@ import Team from "@/components/home/Team";
 import Testimonials from "@/components/home/Testimonials";
 import ContactCTA from "@/components/home/ContactCTA";
 import { getProperties } from "@/lib/data/properties";
+import { getLeadership } from "@/lib/data/leadership";
+import { getTestimonials } from "@/lib/data/testimonials";
 
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const properties = await getProperties();
+  const [properties, leaders, testimonials] = await Promise.all([
+    getProperties(),
+    getLeadership(),
+    getTestimonials(),
+  ]);
   return (
     <>
       <Hero />
@@ -21,8 +27,8 @@ export default async function HomePage() {
       <FeaturedListings properties={properties} />
       <WhyChapter />
       <PMCta />
-      <Team />
-      <Testimonials />
+      <Team leaders={leaders} />
+      <Testimonials testimonials={testimonials} />
       <ContactCTA />
     </>
   );

@@ -73,6 +73,58 @@ create table if not exists public.rentals (
   updated_at  timestamptz not null default now()
 );
 
+-- ─── Site content (Leadership, Testimonials, Values, Process, Social) ─────────
+create table if not exists public.team_members (
+  id          text primary key,
+  name        text not null default '',
+  role        text not null default '',
+  bio         text not null default '',
+  image       text not null default '',
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+create table if not exists public.testimonials (
+  id          text primary key,
+  quote       text not null default '',
+  author      text not null default '',
+  context     text not null default '',
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+create table if not exists public.company_values (
+  id          text primary key,
+  icon_key    text not null default '',
+  title       text not null default '',
+  description text not null default '',
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+create table if not exists public.process_steps (
+  id          text primary key,
+  step        text not null default '',
+  title       text not null default '',
+  description text not null default '',
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+create table if not exists public.social_links (
+  id          text primary key,
+  name        text not null default '',
+  href        text not null default '',
+  enabled     boolean not null default true,
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
 -- ─── Form submissions ────────────────────────────────────────────────────────
 create table if not exists public.form_submissions (
   id         uuid primary key default gen_random_uuid(),
@@ -105,11 +157,25 @@ drop trigger if exists rentals_set_updated_at on public.rentals;
 create trigger rentals_set_updated_at before update on public.rentals
   for each row execute function public.set_updated_at();
 
+do $$
+declare t text;
+begin
+  foreach t in array array['team_members','testimonials','company_values','process_steps','social_links'] loop
+    execute format('drop trigger if exists %I_set_updated_at on public.%I;', t, t);
+    execute format('create trigger %I_set_updated_at before update on public.%I for each row execute function public.set_updated_at();', t, t);
+  end loop;
+end $$;
+
 -- ─── Row Level Security ──────────────────────────────────────────────────────
 alter table public.properties enable row level security;
 alter table public.blog_posts enable row level security;
 alter table public.agents enable row level security;
 alter table public.rentals enable row level security;
+alter table public.team_members enable row level security;
+alter table public.testimonials enable row level security;
+alter table public.company_values enable row level security;
+alter table public.process_steps enable row level security;
+alter table public.social_links enable row level security;
 -- Form submissions: RLS on with NO public policies — only the service-role key
 -- (used server-side by the web app) can read or write. Never expose publicly.
 alter table public.form_submissions enable row level security;
@@ -147,3 +213,15 @@ create policy "auth write agents" on public.agents
 drop policy if exists "auth write rentals" on public.rentals;
 create policy "auth write rentals" on public.rentals
   for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
+
+-- Site content tables: public read, authenticated write.
+do $$
+declare t text;
+begin
+  foreach t in array array['team_members','testimonials','company_values','process_steps','social_links'] loop
+    execute format('drop policy if exists "public read %s" on public.%I;', t, t);
+    execute format('create policy "public read %s" on public.%I for select using (true);', t, t);
+    execute format('drop policy if exists "auth write %s" on public.%I;', t, t);
+    execute format($f$create policy "auth write %s" on public.%I for all using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');$f$, t, t);
+  end loop;
+end $$;

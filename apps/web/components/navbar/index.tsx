@@ -7,8 +7,9 @@ import DesktopNav from "./DesktopNav";
 import DesktopCTA from "./DesktopCTA";
 import MobileMenuToggle from "./MobileMenuToggle";
 import MobileMenu from "./MobileMenu";
+import type { SocialLink } from "@/lib/data/social";
 
-export default function Navbar() {
+export default function Navbar({ socialLinks }: { socialLinks: SocialLink[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -27,7 +28,7 @@ export default function Navbar() {
         scrolled ? "bg-white border-b border-gray-100 shadow-sm" : "bg-transparent"
       }`}
     >
-      <TopBar scrolled={scrolled} />
+      <TopBar scrolled={scrolled} socialLinks={socialLinks} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">

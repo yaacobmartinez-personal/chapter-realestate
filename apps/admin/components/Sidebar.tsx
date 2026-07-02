@@ -10,6 +10,7 @@ import {
   FileText,
   KeyRound,
   LayoutDashboard,
+  LayoutList,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
@@ -24,6 +25,7 @@ const nav = [
   { href: "/rentals", label: "Rentals", icon: KeyRound },
   { href: "/agents", label: "Agents", icon: Contact },
   { href: "/resources", label: "Resources", icon: FileText },
+  { href: "/content", label: "Site Content", icon: LayoutList },
   { href: "/users", label: "Users", icon: Users },
 ];
 

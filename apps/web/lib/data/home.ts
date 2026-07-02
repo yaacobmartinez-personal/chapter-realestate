@@ -35,20 +35,6 @@ export interface WhyPillar {
   description: string;
 }
 
-// ─── Team (home preview) ─────────────────────────────────────────────────────
-export interface HomeTeamMember {
-  name: string;
-  role: string;
-  image: string;
-}
-
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-export interface Testimonial {
-  text: string;
-  author: string;
-  context: string;
-}
-
 // ─── Market Insights (home preview) ──────────────────────────────────────────
 export interface InsightPost {
   tag: string;
@@ -57,13 +43,14 @@ export interface InsightPost {
   excerpt: string;
 }
 
+// Team & testimonials are now database-backed — see `@/lib/data/leadership` and
+// `@/lib/data/testimonials`.
+
 const raw = rawContent as unknown as {
   stats: HomeStat[];
   services: HomeService[];
   featuredListings: HomeListing[];
   whyPillars: WhyPillar[];
-  teamMembers: HomeTeamMember[];
-  testimonials: Testimonial[];
   insightPosts: InsightPost[];
   pmCtaBenefits: string[];
 };
@@ -72,7 +59,5 @@ export const homeStats = raw.stats;
 export const homeServices = raw.services;
 export const homeFeaturedListings = raw.featuredListings;
 export const whyPillars = raw.whyPillars;
-export const homeTeamMembers = raw.teamMembers;
-export const homeTestimonials = raw.testimonials;
 export const homeInsightPosts = raw.insightPosts;
 export const pmCtaBenefits = raw.pmCtaBenefits;

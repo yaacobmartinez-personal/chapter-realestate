@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import PageTransition from "@/components/ui/PageTransition";
 import ScrollObserver from "@/components/ui/ScrollObserver";
 import JsonLd from "@/components/JsonLd";
+import { getSocialLinks } from "@/lib/data/social";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,16 +70,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const socialLinks = await getSocialLinks();
   return (
     <html lang="en" className={`${geistSans.variable} ${playfair.variable} h-full`}>
       <body className="min-h-full flex flex-col antialiased">
         <JsonLd />
-        <Navbar />
+        <Navbar socialLinks={socialLinks} />
         <ScrollObserver />
         <main className="flex-1"><PageTransition>{children}</PageTransition></main>
         <Footer />

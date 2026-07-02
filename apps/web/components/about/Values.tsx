@@ -1,10 +1,11 @@
 import { Heart, Lightbulb, Users, Award, TrendingUp, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { companyValues } from "@/lib/data/about";
+import { getValues } from "@/lib/data/values";
 
 const iconMap: Record<string, LucideIcon> = { Heart, Lightbulb, Users, Award, TrendingUp, Zap };
 
-export default function Values() {
+export default async function Values() {
+  const companyValues = await getValues();
   return (
     <section className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -13,11 +14,11 @@ export default function Values() {
           <h2 data-reveal className="text-5xl md:text-6xl font-light text-black">Our Values</h2>
         </div>
         <div data-stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-100">
-          {companyValues.map(({ iconKey, title, description }, i) => {
-            const Icon = iconMap[iconKey];
+          {companyValues.map(({ id, iconKey, title, description }, i) => {
+            const Icon = iconMap[iconKey] ?? Heart;
             return (
               <div
-                key={title}
+                key={id}
                 className="group bg-white p-12 lg:p-14 flex flex-col hover:bg-[#faf8f4] transition-colors"
               >
                 <div className="flex items-center gap-5 mb-8">

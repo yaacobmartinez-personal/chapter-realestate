@@ -1,0 +1,8 @@
+{
+  "socialLinks": [
+    { "id": "s1", "name": "Instagram", "href": "#", "enabled": true, "sortOrder": 1 },
+    { "id": "s2", "name": "Facebook", "href": "#", "enabled": true, "sortOrder": 2 },
+    { "id": "s3", "name": "LinkedIn", "href": "#", "enabled": true, "sortOrder": 3 },
+    { "id": "s4", "name": "X", "href": "#", "enabled": true, "sortOrder": 4 }
+  ]
+}

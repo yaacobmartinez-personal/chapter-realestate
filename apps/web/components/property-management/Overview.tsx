@@ -5,11 +5,12 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { BarChart3, Award, Heart } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { pmStrengths, pmProcess } from "@/lib/data/property-management";
+import { pmStrengths } from "@/lib/data/property-management";
+import type { ProcessStep } from "@/lib/data/process";
 
 const iconMap: Record<string, LucideIcon> = { BarChart3, Award, Heart };
 
-export default function Overview() {
+export default function Overview({ steps }: { steps: ProcessStep[] }) {
   const processRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: processRef,
@@ -105,9 +106,9 @@ export default function Overview() {
             </p>
           </motion.div>
           <div className="relative grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-100">
-            {pmProcess.map(({ step, title, desc }, i) => (
+            {steps.map(({ id, step, title, desc }, i) => (
               <motion.div
-                key={step}
+                key={id}
                 className="bg-white p-10 lg:p-14 flex gap-8"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

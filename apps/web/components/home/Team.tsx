@@ -3,9 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { leaders } from "@/lib/data/about";
+import type { TeamMember } from "@/lib/data/leadership";
 
-export default function Team() {
+export default function Team({ leaders }: { leaders: TeamMember[] }) {
   return (
     <section className="py-28 bg-[#f7f7f7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -32,9 +32,9 @@ export default function Team() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl">
-          {leaders.map(({ name, role, image }, i) => (
+          {leaders.map(({ id, name, role, image }, i) => (
             <motion.div
-              key={name}
+              key={id}
               className="group"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}

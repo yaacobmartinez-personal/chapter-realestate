@@ -1,0 +1,7 @@
+{
+  "testimonials": [
+    { "id": "t1", "text": "Chapter made selling our home effortless. Their marketing strategy was unlike anything we'd seen — we had multiple offers within days.", "author": "David & Karen T.", "context": "Sellers, River Heights", "sortOrder": 1 },
+    { "id": "t2", "text": "As a landlord with multiple properties, I can't imagine managing them without Chapter. The owner portal alone saves me hours every month.", "author": "Michael R.", "context": "Property Owner, 4 Units", "sortOrder": 2 },
+    { "id": "t3", "text": "The investment team at Chapter helped me identify a multifamily opportunity I never would have found on my own. Exceptional guidance.", "author": "Linda H.", "context": "Investor", "sortOrder": 3 }
+  ]
+}

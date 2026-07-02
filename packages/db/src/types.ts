@@ -55,6 +55,49 @@ export interface RentalUnit {
   status: RentalStatus;
 }
 
+// ─── Site content (managed in admin → Site Content) ──────────────────────────
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  sortOrder: number;
+}
+
+export interface Testimonial {
+  id: string;
+  text: string;
+  author: string;
+  context: string;
+  sortOrder: number;
+}
+
+export interface CompanyValue {
+  id: string;
+  iconKey: string;
+  title: string;
+  description: string;
+  sortOrder: number;
+}
+
+export interface ProcessStep {
+  id: string;
+  step: string;
+  title: string;
+  desc: string;
+  sortOrder: number;
+}
+
+export interface SocialLink {
+  id: string;
+  name: string;
+  href: string;
+  enabled: boolean;
+  sortOrder: number;
+}
+
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
@@ -136,6 +179,57 @@ export interface RentalUnitRow {
   sqft: string;
   category: RentalCategory;
   status: RentalStatus;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface TeamMemberRow {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  image: string;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface TestimonialRow {
+  id: string;
+  quote: string;
+  author: string;
+  context: string;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface CompanyValueRow {
+  id: string;
+  icon_key: string;
+  title: string;
+  description: string;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface ProcessStepRow {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface SocialLinkRow {
+  id: string;
+  name: string;
+  href: string;
+  enabled: boolean;
+  sort_order: number;
   created_at?: string;
   updated_at?: string;
 }

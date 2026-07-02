@@ -7,6 +7,7 @@ import {
   LandlordLead,
 } from "@/components/property-management";
 import { getRentals } from "@/lib/data/rentals";
+import { getProcess } from "@/lib/data/process";
 
 export const revalidate = 60;
 
@@ -28,11 +29,11 @@ export const metadata: Metadata = {
 };
 
 export default async function PropertyManagementPage() {
-  const rentals = await getRentals();
+  const [rentals, steps] = await Promise.all([getRentals(), getProcess()]);
   return (
     <>
       <PageHero label="Property Management" heading="Hands-Off." headingAccent="High Returns." image="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&q=80" />
-      <Overview />
+      <Overview steps={steps} />
       <AvailableRentals rentals={rentals} />
       <OwnerTenantPortals />
       <LandlordLead />

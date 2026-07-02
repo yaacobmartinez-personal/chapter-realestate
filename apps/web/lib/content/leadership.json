@@ -1,0 +1,7 @@
+{
+  "leadership": [
+    { "id": "l1", "name": "Armin Barsomian", "role": "Founder & Managing Partner", "bio": "Co-founder of Chapter Real Estate, Armin leads the company's vision, growth, and day-to-day operations across Manitoba.", "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80", "sortOrder": 1 },
+    { "id": "l2", "name": "Dylan", "role": "Founder & Partner", "bio": "Co-founder of Chapter Real Estate, Dylan helps shape the company's direction and long-term strategy.", "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80", "sortOrder": 2 },
+    { "id": "l3", "name": "Avanish", "role": "Broker & Partner", "bio": "Broker and partner at Chapter Real Estate, upholding the highest compliance and service standards for clients.", "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80", "sortOrder": 3 }
+  ]
+}

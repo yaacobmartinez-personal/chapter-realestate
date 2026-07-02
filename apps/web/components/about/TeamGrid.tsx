@@ -1,21 +1,11 @@
 import Image from "next/image";
+import type { TeamMember } from "@/lib/data/leadership";
 
-interface TeamMember {
-  name: string;
-  role: string;
-  bio: string;
-  image: string;
-}
-
-interface TeamGridProps {
-  members: TeamMember[];
-}
-
-export default function TeamGrid({ members }: TeamGridProps) {
+export default function TeamGrid({ members }: { members: TeamMember[] }) {
   return (
     <div data-stagger className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      {members.map(({ name, role, bio, image }) => (
-        <div key={name} className="group">
+      {members.map(({ id, name, role, bio, image }) => (
+        <div key={id} className="group">
           <div className="relative aspect-3/4 overflow-hidden bg-gray-200 mb-4">
             <Image
               fill

@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import { homeTestimonials } from "@/lib/data/home";
+import type { Testimonial } from "@/lib/data/testimonials";
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   return (
     <section className="py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -19,9 +19,9 @@ export default function Testimonials() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {homeTestimonials.map(({ text, author, context }, i) => (
+          {testimonials.map(({ id, text, author, context }, i) => (
             <motion.div
-              key={author}
+              key={id}
               className="p-8 bg-[#f7f7f7] flex flex-col gap-6 relative overflow-hidden"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
