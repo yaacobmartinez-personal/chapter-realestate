@@ -252,32 +252,8 @@ export interface Listing {
 }
 
 // ─── Agents Directory ─────────────────────────────────────────────────────────
-export interface Agent {
-  id: string;
-  name: string;
-  specialties: string;
-  phone: string;
-  email: string;
-  image: string;
-  listings: number;
-}
-
-// ⚠️ PLACEHOLDER ROSTER — mock data showing how the agents grid renders.
-// Replace names, titles, contact details, and `image` URLs with the real
-// Chapter Real Estate roster and headshots before launch.
-const AGENT_PLACEHOLDER_PHOTO =
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80";
-
-export const agents: Agent[] = [
-  { id: "a1", name: "Agent Name", specialties: "Residential Sales", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a2", name: "Agent Name", specialties: "Luxury & Estates", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a3", name: "Agent Name", specialties: "First-Time Buyers", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a4", name: "Agent Name", specialties: "Investment Properties", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a5", name: "Agent Name", specialties: "Commercial", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a6", name: "Agent Name", specialties: "Condos & Lofts", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a7", name: "Agent Name", specialties: "New Construction", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-  { id: "a8", name: "Agent Name", specialties: "Relocation", phone: "204-000-0000", email: "agent@chapterrealestate.ca", image: AGENT_PLACEHOLDER_PHOTO, listings: 0 },
-];
+// Agents are now database-backed — see `@/lib/data/agents` (getAgents) and the
+// `agents` table in @chapter/db. The `Agent` type lives in @chapter/db.
 
 // ─── Market Stats ─────────────────────────────────────────────────────────────
 export interface MarketStat {

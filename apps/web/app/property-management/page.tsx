@@ -6,6 +6,9 @@ import {
   OwnerTenantPortals,
   LandlordLead,
 } from "@/components/property-management";
+import { getRentals } from "@/lib/data/rentals";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Property Management Winnipeg — Hands-Off, High Returns",
@@ -24,12 +27,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PropertyManagementPage() {
+export default async function PropertyManagementPage() {
+  const rentals = await getRentals();
   return (
     <>
       <PageHero label="Property Management" heading="Hands-Off." headingAccent="High Returns." image="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&q=80" />
       <Overview />
-      <AvailableRentals />
+      <AvailableRentals rentals={rentals} />
       <OwnerTenantPortals />
       <LandlordLead />
     </>

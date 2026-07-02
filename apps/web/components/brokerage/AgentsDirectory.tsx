@@ -4,15 +4,15 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail, Search } from "lucide-react";
-import { agents } from "@/lib/data/brokerage";
+import type { Agent } from "@/lib/data/agents";
 
-export default function AgentsDirectory() {
+export default function AgentsDirectory({ agents }: { agents: Agent[] }) {
   const [query, setQuery] = useState("");
   const [specialty, setSpecialty] = useState("All");
 
   const specialties = useMemo(
     () => ["All", ...Array.from(new Set(agents.map((a) => a.specialties)))],
-    []
+    [agents]
   );
 
   const filtered = useMemo(() => {
@@ -25,7 +25,7 @@ export default function AgentsDirectory() {
         a.specialties.toLowerCase().includes(q);
       return matchesSpecialty && matchesQuery;
     });
-  }, [query, specialty]);
+  }, [agents, query, specialty]);
 
   return (
     <section id="agents" className="py-28 bg-white overflow-hidden">

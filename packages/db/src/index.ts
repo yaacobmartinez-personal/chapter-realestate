@@ -4,3 +4,5 @@ export * from "./properties";
 export * from "./resources";
 export * from "./profiles";
 export * from "./submissions";
+export * from "./agents";
+export * from "./rentals";

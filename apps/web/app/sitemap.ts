@@ -1,12 +1,24 @@
 import type { MetadataRoute } from "next";
 import { getProperties } from "@/lib/data/properties";
 import { getBlogPosts } from "@/lib/data/resources";
+import { getRentals } from "@/lib/data/rentals";
 import { investmentOpportunities } from "@/lib/data/investments";
 
 const BASE_URL = "https://chapterrealestate.ca";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [properties, posts] = await Promise.all([getProperties(), getBlogPosts()]);
+  const [properties, posts, rentals] = await Promise.all([
+    getProperties(),
+    getBlogPosts(),
+    getRentals(),
+  ]);
+
+  const rentalPages: MetadataRoute.Sitemap = rentals.map((r) => ({
+    url: `${BASE_URL}/rentals/${r.id}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
 
   const propertyPages: MetadataRoute.Sitemap = properties.map((p) => ({
     url: `${BASE_URL}/properties/${p.slug}`,
@@ -97,6 +109,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     ...propertyPages,
+    ...rentalPages,
     ...articlePages,
     ...investmentPages,
   ];

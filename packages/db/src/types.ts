@@ -28,6 +28,33 @@ export interface Property {
   coordinates: { lng: number; lat: number };
 }
 
+export interface Agent {
+  id: string;
+  name: string;
+  specialties: string;
+  phone: string;
+  email: string;
+  image: string;
+  listings: number;
+}
+
+export type RentalCategory = "Residential" | "Commercial";
+export type RentalStatus = "Available" | "Leased";
+
+export interface RentalUnit {
+  id: string;
+  image: string;
+  images: string[];
+  rent: string;
+  address: string;
+  area: string;
+  beds: number;
+  baths: number;
+  sqft: string;
+  category: RentalCategory;
+  status: RentalStatus;
+}
+
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
@@ -81,6 +108,34 @@ export interface BlogPostRow {
   read_time: string;
   image: string;
   body: ContentBlock[];
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface AgentRow {
+  id: string;
+  name: string;
+  specialties: string;
+  phone: string;
+  email: string;
+  image: string;
+  listings: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface RentalUnitRow {
+  id: string;
+  image: string;
+  images: string[];
+  rent: string;
+  address: string;
+  area: string;
+  beds: number;
+  baths: number;
+  sqft: string;
+  category: RentalCategory;
+  status: RentalStatus;
   created_at?: string;
   updated_at?: string;
 }

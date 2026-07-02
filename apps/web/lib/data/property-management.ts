@@ -48,38 +48,8 @@ export const pmProcess: PMProcessStep[] = [
 ];
 
 // ─── Available Rentals ────────────────────────────────────────────────────────
-export type RentalCategory = "Residential" | "Commercial";
-
-export interface RentalUnit {
-  id: string;
-  image: string;
-  rent: string;
-  address: string;
-  area: string;
-  beds: number;
-  baths: number;
-  sqft: string;
-  category: RentalCategory;
-  status: "Available" | "Leased";
-}
-
-export const rentalCategories = ["All", "Residential", "Commercial"] as const;
-
-// ⚠️ PLACEHOLDER RENTALS — mock data showing how available units render.
-// Replace with real Chapter-managed units. Recommended: move to a Supabase
-// `rentals` table (mirroring the `properties` flow in @chapter/db) so listings
-// are editable without a deploy.
-const RENTAL_PHOTO_RES = "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80";
-const RENTAL_PHOTO_COM = "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80";
-
-export const rentalUnits: RentalUnit[] = [
-  { id: "r1", image: RENTAL_PHOTO_RES, rent: "$1,650/mo", address: "Unit — Osborne Village", area: "Osborne Village", beds: 2, baths: 1, sqft: "850", category: "Residential", status: "Available" },
-  { id: "r2", image: RENTAL_PHOTO_RES, rent: "$2,100/mo", address: "Unit — River Heights", area: "River Heights", beds: 3, baths: 2, sqft: "1,150", category: "Residential", status: "Available" },
-  { id: "r3", image: RENTAL_PHOTO_RES, rent: "$1,250/mo", address: "Suite — Exchange District", area: "Exchange District", beds: 1, baths: 1, sqft: "600", category: "Residential", status: "Available" },
-  { id: "r4", image: RENTAL_PHOTO_COM, rent: "$18/sqft", address: "Office Suite — Downtown", area: "Downtown", beds: 0, baths: 2, sqft: "2,400", category: "Commercial", status: "Available" },
-  { id: "r5", image: RENTAL_PHOTO_COM, rent: "$14/sqft", address: "Retail Bay — St. Boniface", area: "St. Boniface", beds: 0, baths: 1, sqft: "1,800", category: "Commercial", status: "Available" },
-  { id: "r6", image: RENTAL_PHOTO_COM, rent: "$12/sqft", address: "Warehouse — Inkster", area: "Inkster Industrial", beds: 0, baths: 1, sqft: "6,000", category: "Commercial", status: "Available" },
-];
+// Rentals are now database-backed — see `@/lib/data/rentals` (getRentals) and the
+// `rentals` table in @chapter/db. The `RentalUnit` type lives in @chapter/db.
 
 const raw = rawContent as unknown as {
   ownerPortalFeatures: string[];

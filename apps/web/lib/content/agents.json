@@ -1,0 +1,12 @@
+{
+  "agents": [
+    { "id": "a1", "name": "Agent Name", "specialties": "Residential Sales", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a2", "name": "Agent Name", "specialties": "Luxury & Estates", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a3", "name": "Agent Name", "specialties": "First-Time Buyers", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a4", "name": "Agent Name", "specialties": "Investment Properties", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a5", "name": "Agent Name", "specialties": "Commercial", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a6", "name": "Agent Name", "specialties": "Condos & Lofts", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a7", "name": "Agent Name", "specialties": "New Construction", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 },
+    { "id": "a8", "name": "Agent Name", "specialties": "Relocation", "phone": "204-000-0000", "email": "agent@chapterrealestate.ca", "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "listings": 0 }
+  ]
+}

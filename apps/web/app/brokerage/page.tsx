@@ -8,6 +8,7 @@ import {
   AgentsDirectory,
 } from "@/components/brokerage";
 import { getProperties } from "@/lib/data/properties";
+import { getAgents } from "@/lib/data/agents";
 
 export const revalidate = 60;
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BrokeragePage() {
-  const properties = await getProperties();
+  const [properties, agents] = await Promise.all([getProperties(), getAgents()]);
   return (
     <>
       <PageHero label="Real Estate Brokerage" heading="Buy. Sell." headingAccent="Succeed." image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=80" />
@@ -37,7 +38,7 @@ export default async function BrokeragePage() {
       <BuySection />
       <FeaturedListings properties={properties} />
       <SellSection />
-      <AgentsDirectory />
+      <AgentsDirectory agents={agents} />
     </>
   );
 }

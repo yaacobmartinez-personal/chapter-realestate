@@ -2,17 +2,18 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, Bed, Bath, Square } from "lucide-react";
-import { rentalUnits, rentalCategories } from "@/lib/data/property-management";
+import { rentalCategories, type RentalUnit } from "@/lib/data/rentals";
 
-export default function AvailableRentals() {
+export default function AvailableRentals({ rentals }: { rentals: RentalUnit[] }) {
   const [activeFilter, setActiveFilter] = useState<(typeof rentalCategories)[number]>("All");
 
   const filtered =
     activeFilter === "All"
-      ? rentalUnits
-      : rentalUnits.filter((u) => u.category === activeFilter);
+      ? rentals
+      : rentals.filter((u) => u.category === activeFilter);
 
   return (
     <section id="residential" className="py-28 bg-[#f7f7f7] overflow-hidden">
@@ -53,33 +54,35 @@ export default function AvailableRentals() {
                 transition={{ duration: 0.7, delay: (i % 3) * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                 whileHover={{ y: -4, transition: { duration: 0.25 } }}
               >
-                <div className="relative overflow-hidden aspect-4/3">
-                  <Image
-                    fill
-                    src={u.image}
-                    alt={u.address}
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <span className="absolute top-4 left-4 bg-black text-white text-xs tracking-widest uppercase px-3 py-1.5 font-light">{u.category}</span>
-                  <span className="absolute top-4 right-4 bg-[#c8a96e] text-black text-xs tracking-widest uppercase px-3 py-1.5 font-light">{u.status}</span>
-                </div>
-                <div className="p-6">
-                  <p className="text-2xl font-light text-black mb-2">{u.rent}</p>
-                  <p className="text-sm text-gray-700 font-light mb-1">{u.address}</p>
-                  <p className="text-xs text-gray-400 font-light flex items-center gap-1 mb-4"><MapPin size={11} /> {u.area}, Winnipeg</p>
-                  <div className="flex gap-4 text-xs text-gray-500 font-light border-t border-gray-100 pt-4">
-                    {u.category === "Residential" ? (
-                      <>
-                        <span className="flex items-center gap-1"><Bed size={12} /> {u.beds}</span>
-                        <span>·</span>
-                        <span className="flex items-center gap-1"><Bath size={12} /> {u.baths}</span>
-                        <span>·</span>
-                      </>
-                    ) : null}
-                    <span className="flex items-center gap-1"><Square size={12} /> {u.sqft} sqft</span>
+                <Link href={`/rentals/${u.id}`} className="block">
+                  <div className="relative overflow-hidden aspect-4/3">
+                    <Image
+                      fill
+                      src={u.image}
+                      alt={u.address}
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <span className="absolute top-4 left-4 bg-black text-white text-xs tracking-widest uppercase px-3 py-1.5 font-light">{u.category}</span>
+                    <span className="absolute top-4 right-4 bg-[#c8a96e] text-black text-xs tracking-widest uppercase px-3 py-1.5 font-light">{u.status}</span>
                   </div>
-                </div>
+                  <div className="p-6">
+                    <p className="text-2xl font-light text-black mb-2">{u.rent}</p>
+                    <p className="text-sm text-gray-700 font-light mb-1">{u.address}</p>
+                    <p className="text-xs text-gray-400 font-light flex items-center gap-1 mb-4"><MapPin size={11} /> {u.area}, Winnipeg</p>
+                    <div className="flex gap-4 text-xs text-gray-500 font-light border-t border-gray-100 pt-4">
+                      {u.category === "Residential" ? (
+                        <>
+                          <span className="flex items-center gap-1"><Bed size={12} /> {u.beds}</span>
+                          <span>·</span>
+                          <span className="flex items-center gap-1"><Bath size={12} /> {u.baths}</span>
+                          <span>·</span>
+                        </>
+                      ) : null}
+                      <span className="flex items-center gap-1"><Square size={12} /> {u.sqft} sqft</span>
+                    </div>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>

@@ -18,7 +18,6 @@ export const navItems: NavItem[] = [
       { label: "Sell a Home", href: "/brokerage#sell" },
       { label: "Featured Listings", href: "/brokerage#listings" },
       { label: "Our Agents", href: "/brokerage#agents" },
-      { label: "Market Insights", href: "/brokerage#insights" },
     ],
   },
   {
@@ -26,11 +25,10 @@ export const navItems: NavItem[] = [
     href: "/property-management",
     children: [
       { label: "Overview", href: "/property-management" },
-      { label: "Residential", href: "/property-management#residential" },
-      { label: "Commercial", href: "/property-management#commercial" },
+      { label: "Available Rentals", href: "/property-management#residential" },
       { label: "Owner Portal", href: "/property-management#owners" },
       { label: "Tenant Portal", href: "/property-management#tenants" },
-      { label: "Free Rental Analysis", href: "/property-management#analysis" },
+      { label: "Landlord Enquiry", href: "/property-management#analysis" },
     ],
   },
   {

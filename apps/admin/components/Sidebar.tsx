@@ -6,7 +6,9 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Building2,
+  Contact,
   FileText,
+  KeyRound,
   LayoutDashboard,
   LogOut,
   PanelLeftClose,
@@ -19,6 +21,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 const nav = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/properties", label: "Properties", icon: Building2 },
+  { href: "/rentals", label: "Rentals", icon: KeyRound },
+  { href: "/agents", label: "Agents", icon: Contact },
   { href: "/resources", label: "Resources", icon: FileText },
   { href: "/users", label: "Users", icon: Users },
 ];
