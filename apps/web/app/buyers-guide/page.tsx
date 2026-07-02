@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import BuyerGuide from "@/components/brokerage/BuyerGuide";
+import { getBuyerGuideSteps } from "@/lib/data/buyer-guide";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Buyer's Guide — Buying a Home in Winnipeg & Manitoba",
@@ -19,7 +22,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BuyersGuidePage() {
+export default async function BuyersGuidePage() {
+  const steps = await getBuyerGuideSteps();
   return (
     <>
       <PageHero
@@ -28,7 +32,7 @@ export default function BuyersGuidePage() {
         headingAccent="Guide"
         image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=80"
       />
-      <BuyerGuide />
+      <BuyerGuide steps={steps} />
     </>
   );
 }

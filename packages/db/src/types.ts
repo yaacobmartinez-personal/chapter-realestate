@@ -98,6 +98,24 @@ export interface SocialLink {
   sortOrder: number;
 }
 
+export interface MissionVisionItem {
+  id: string;
+  label: string;
+  heading: string;
+  body: string;
+  sortOrder: number;
+}
+
+export interface BuyerGuideStep {
+  id: string;
+  step: string;
+  title: string;
+  shortDesc: string;
+  paragraphs: string[];
+  image: string;
+  sortOrder: number;
+}
+
 export type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; text: string }
@@ -229,6 +247,28 @@ export interface SocialLinkRow {
   name: string;
   href: string;
   enabled: boolean;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface MissionVisionRow {
+  id: string;
+  label: string;
+  heading: string;
+  body: string;
+  sort_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface BuyerGuideStepRow {
+  id: string;
+  step: string;
+  title: string;
+  short_desc: string;
+  paragraphs: string[];
+  image: string;
   sort_order: number;
   created_at?: string;
   updated_at?: string;

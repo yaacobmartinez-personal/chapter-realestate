@@ -1,73 +1,12 @@
 import rawContent from "@/lib/content/brokerage.json";
 
 // ─── Buy — 10-Step Program ────────────────────────────────────────────────────
-export interface BuyStep {
-  step: string;
-  title: string;
-  desc: string;
-}
-
-// Chapter Real Estate's 10-step home buying program (Manitoba).
-export const buySteps: BuyStep[] = [
-  {
-    step: "01",
-    title: "Start with real estate research",
-    desc: "Explore Winnipeg and Manitoba neighbourhoods, track prices, and pinpoint the areas that fit your lifestyle and budget.",
-  },
-  {
-    step: "02",
-    title: "Set your buying budget",
-    desc: "Map out your monthly finances and factor in ownership costs like utilities, property taxes, and condo fees so you know your comfortable range.",
-  },
-  {
-    step: "03",
-    title: "Get pre-qualified for a mortgage",
-    desc: "Sit down with a mortgage advisor to understand your financing options and strengthen your position before you shop.",
-  },
-  {
-    step: "04",
-    title: "Partner with a Chapter agent",
-    desc: "Team up with an experienced Chapter Real Estate agent who guides you across Manitoba — at no cost to you as a buyer.",
-  },
-  {
-    step: "05",
-    title: "Explore homes and communities",
-    desc: "Tour properties in person, take notes, and ask questions about layout, condition, and the surrounding neighbourhood.",
-  },
-  {
-    step: "06",
-    title: "Make an offer",
-    desc: "Craft a competitive offer with your agent's guidance, then navigate counteroffers and terms with confidence.",
-  },
-  {
-    step: "07",
-    title: "Book a professional home inspection",
-    desc: "Arrange an inspection to surface any major issues and confirm the home is safe and sound before you commit.",
-  },
-  {
-    step: "08",
-    title: "Finalize your mortgage",
-    desc: "Choose between fixed and variable rates and amortization terms, and explore first-time buyer programs available in Manitoba.",
-  },
-  {
-    step: "09",
-    title: "Complete the home appraisal",
-    desc: "Your lender arranges an independent valuation to confirm the home's fair market value.",
-  },
-  {
-    step: "10",
-    title: "Sign your closing paperwork",
-    desc: "Complete the final documents with legal and lending support — then pick up the keys to your new home.",
-  },
-];
+// The brokerage Buy section now shares the database-backed buyer's guide steps
+// (see `@/lib/data/buyer-guide`), rendering each step's `shortDesc`.
 
 // ─── Buyer's Guide (full page) ────────────────────────────────────────────────
-export interface BuyGuideStep {
-  step: string;
-  title: string;
-  paragraphs: string[];
-  image: string;
-}
+// Steps are now database-backed — see `@/lib/data/buyer-guide` (getBuyerGuideSteps)
+// and the `buyer_guide_steps` table in @chapter/db. Intro/closing copy stays here.
 
 // Long-form intro for the dedicated /buyers-guide page.
 export const buyerGuideIntro =
@@ -76,99 +15,6 @@ export const buyerGuideIntro =
 // Closing message shown at the end of the guide.
 export const buyerGuideClosing =
   "Congratulations on taking the first step — this is where it all becomes real. Whenever you're ready, a Chapter agent is here to guide you the rest of the way, and long after closing day.";
-
-export const buyerGuideSteps: BuyGuideStep[] = [
-  {
-    step: "01",
-    title: "Start with Real Estate Research",
-    paragraphs: [
-      "Every great move starts with a clear picture of where you want to be. Where do you see yourself living — a condo in the Exchange District, a character home in Wolseley, a family house in River Heights, or a new build in Bridgwater? Start by exploring Winnipeg's neighbourhoods and the surrounding Manitoba communities that fit your lifestyle.",
-      "As you research, separate your non-negotiables from the features you're willing to compromise on. Keep an eye on listing prices across your preferred areas so you develop a feel for the market and what your budget realistically buys. The more informed you are going in, the more confident every decision that follows will be.",
-    ],
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80",
-  },
-  {
-    step: "02",
-    title: "Consider Your Home Buying Budget",
-    paragraphs: [
-      "Instead of asking “what will the bank lend me?”, ask “what am I comfortable spending?” The two are rarely the same. Map out your monthly finances and build in the true cost of ownership — not just the mortgage payment, but utilities, property taxes, insurance, condo fees, and ongoing maintenance.",
-      "Setting a comfortable budget up front protects you from stretching too thin and keeps your search focused on homes that genuinely work for your life. A Chapter agent can help you understand the full cost picture for the areas you're considering.",
-    ],
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80",
-  },
-  {
-    step: "03",
-    title: "Get Pre-Qualified for a Mortgage",
-    paragraphs: [
-      "Before you fall in love with a home, understand what you can finance. Meeting with a mortgage advisor early helps you understand your options, your rate, and the price range you qualify for.",
-      "A pre-qualification (or pre-approval) does two things: it gives you clarity while you search, and it strengthens your position when you're ready to make an offer. In a competitive market, sellers take pre-approved buyers more seriously.",
-    ],
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1200&q=80",
-  },
-  {
-    step: "04",
-    title: "Partner with a Chapter Agent",
-    paragraphs: [
-      "It doesn't cost you anything to work with a real estate agent when buying a home in Manitoba — but it can save you time, stress, and second-guessing. Your Chapter agent works for you: sourcing listings, booking showings, reading the market, and negotiating on your behalf.",
-      "We serve Winnipeg and communities across Manitoba, and we tailor our approach to your goals — whether you're a first-time buyer, upsizing for a growing family, or adding an investment property.",
-    ],
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&q=80",
-  },
-  {
-    step: "05",
-    title: "Explore Homes and Communities",
-    paragraphs: [
-      "Now the exciting part — seeing homes in person. Take notes at every showing and don't be afraid to ask questions about the layout, the condition, and the age of major systems like the roof, furnace, and windows.",
-      "Look beyond the property itself. Consider the neighbourhood: your commute, nearby schools, parks, and amenities, and whether the community fits the way you live. The right home is as much about location and lifestyle as it is about the four walls.",
-    ],
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80",
-  },
-  {
-    step: "06",
-    title: "Make an Offer on a Home",
-    paragraphs: [
-      "When you find the one, your Chapter agent helps you craft a fair, competitive offer based on current market conditions and comparable recent sales. Your offer can include conditions — like financing, a home inspection, or the sale of your current home — to protect you.",
-      "Expect some back-and-forth. Sellers may counter on price, closing date, or terms, and we'll guide you through each round of negotiation until you reach an agreement that works — or decide to walk away.",
-    ],
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=80",
-  },
-  {
-    step: "07",
-    title: "Book a Professional Home Inspection",
-    paragraphs: [
-      "A professional home inspection gives you peace of mind about the home's safety and condition. An inspector examines the structure, roof, electrical, plumbing, heating, and more, and flags anything that needs attention.",
-      "If the inspection surfaces significant issues, you have options: renegotiate the price, request repairs, or — depending on your conditions — walk away. It's a small investment that can save you from costly surprises later.",
-    ],
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80",
-  },
-  {
-    step: "08",
-    title: "Finalize Your Mortgage",
-    paragraphs: [
-      "With an accepted offer in hand, it's time to finalize your financing. You'll choose between a fixed-rate mortgage (predictable payments) and a variable-rate mortgage (which moves with the market), along with an amortization period that fits your budget.",
-      "This is also when programs and rebates come into play. Ask your advisor about CMHC mortgage insurance, first-time home buyer programs, and Manitoba land transfer considerations — they can meaningfully affect your upfront costs.",
-    ],
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200&q=80",
-  },
-  {
-    step: "09",
-    title: "Time for a Home Appraisal",
-    paragraphs: [
-      "Your mortgage lender will arrange an independent appraisal to confirm the fair market value of the property. This protects the lender — and you — by making sure the amount being financed lines up with what the home is actually worth.",
-      "It's a standard step in the process, and your Chapter agent and lender will coordinate it so it happens smoothly.",
-    ],
-    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&q=80",
-  },
-  {
-    step: "10",
-    title: "Sign Your Closing Paperwork",
-    paragraphs: [
-      "You're almost home. In the final stretch, you'll sign your mortgage and closing documents, and a real estate lawyer will guide you through the legal details, title transfer, and final costs.",
-      "Once everything is signed and funds are exchanged, the keys are yours. Congratulations on your new home — this is the moment it all becomes real. And Chapter is here for you well beyond closing day.",
-    ],
-    image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=80",
-  },
-];
 
 // ─── Sellers Page (full content) ──────────────────────────────────────────────
 export interface SellerSection {

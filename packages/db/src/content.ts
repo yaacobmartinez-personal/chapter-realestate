@@ -10,6 +10,10 @@ import type {
   ProcessStepRow,
   SocialLink,
   SocialLinkRow,
+  MissionVisionItem,
+  MissionVisionRow,
+  BuyerGuideStep,
+  BuyerGuideStepRow,
 } from "./types";
 
 // ─── Team / Leadership ────────────────────────────────────────────────────────
@@ -131,4 +135,52 @@ export async function upsertSocialLink(db: SupabaseClient, s: SocialLink): Promi
 export async function deleteSocialLink(db: SupabaseClient, id: string): Promise<void> {
   const { error } = await db.from(SOCIAL).delete().eq("id", id);
   if (error) throw new Error(`deleteSocialLink: ${error.message}`);
+}
+
+// ─── Mission & Vision ─────────────────────────────────────────────────────────
+const MISSION_VISION = "mission_vision";
+
+function rowToMV(r: MissionVisionRow): MissionVisionItem {
+  return { id: r.id, label: r.label, heading: r.heading, body: r.body, sortOrder: r.sort_order };
+}
+export function mvToRow(m: MissionVisionItem): MissionVisionRow {
+  return { id: m.id, label: m.label, heading: m.heading, body: m.body, sort_order: m.sortOrder };
+}
+export async function getMissionVision(db: SupabaseClient): Promise<MissionVisionItem[]> {
+  const { data, error } = await db.from(MISSION_VISION).select("*").order("sort_order", { ascending: true });
+  if (error) throw new Error(`getMissionVision: ${error.message}`);
+  return (data as MissionVisionRow[]).map(rowToMV);
+}
+export async function upsertMissionVision(db: SupabaseClient, m: MissionVisionItem): Promise<MissionVisionItem> {
+  const { data, error } = await db.from(MISSION_VISION).upsert(mvToRow(m), { onConflict: "id" }).select("*").single();
+  if (error) throw new Error(`upsertMissionVision: ${error.message}`);
+  return rowToMV(data as MissionVisionRow);
+}
+export async function deleteMissionVision(db: SupabaseClient, id: string): Promise<void> {
+  const { error } = await db.from(MISSION_VISION).delete().eq("id", id);
+  if (error) throw new Error(`deleteMissionVision: ${error.message}`);
+}
+
+// ─── Buyer's Guide steps ──────────────────────────────────────────────────────
+const BUYER_GUIDE = "buyer_guide_steps";
+
+function rowToGuideStep(r: BuyerGuideStepRow): BuyerGuideStep {
+  return { id: r.id, step: r.step, title: r.title, shortDesc: r.short_desc ?? "", paragraphs: r.paragraphs ?? [], image: r.image, sortOrder: r.sort_order };
+}
+export function guideStepToRow(s: BuyerGuideStep): BuyerGuideStepRow {
+  return { id: s.id, step: s.step, title: s.title, short_desc: s.shortDesc ?? "", paragraphs: s.paragraphs ?? [], image: s.image, sort_order: s.sortOrder };
+}
+export async function getBuyerGuideSteps(db: SupabaseClient): Promise<BuyerGuideStep[]> {
+  const { data, error } = await db.from(BUYER_GUIDE).select("*").order("sort_order", { ascending: true });
+  if (error) throw new Error(`getBuyerGuideSteps: ${error.message}`);
+  return (data as BuyerGuideStepRow[]).map(rowToGuideStep);
+}
+export async function upsertBuyerGuideStep(db: SupabaseClient, s: BuyerGuideStep): Promise<BuyerGuideStep> {
+  const { data, error } = await db.from(BUYER_GUIDE).upsert(guideStepToRow(s), { onConflict: "id" }).select("*").single();
+  if (error) throw new Error(`upsertBuyerGuideStep: ${error.message}`);
+  return rowToGuideStep(data as BuyerGuideStepRow);
+}
+export async function deleteBuyerGuideStep(db: SupabaseClient, id: string): Promise<void> {
+  const { error } = await db.from(BUYER_GUIDE).delete().eq("id", id);
+  if (error) throw new Error(`deleteBuyerGuideStep: ${error.message}`);
 }

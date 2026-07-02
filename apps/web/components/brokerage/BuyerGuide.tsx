@@ -4,9 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { buyerGuideIntro, buyerGuideClosing, buyerGuideSteps } from "@/lib/data/brokerage";
+import { buyerGuideIntro, buyerGuideClosing } from "@/lib/data/brokerage";
+import type { BuyerGuideStep } from "@/lib/data/buyer-guide";
 
-export default function BuyerGuide() {
+export default function BuyerGuide({ steps }: { steps: BuyerGuideStep[] }) {
   return (
     <>
       {/* Intro */}
@@ -35,10 +36,10 @@ export default function BuyerGuide() {
 
       {/* Steps — alternating image / text */}
       <div>
-        {buyerGuideSteps.map(({ step, title, paragraphs, image }, i) => {
+        {steps.map(({ id, step, title, paragraphs, image }, i) => {
           const reversed = i % 2 === 1;
           return (
-            <section key={step} className={reversed ? "bg-[#f7f7f7]" : "bg-white"}>
+            <section key={id} className={reversed ? "bg-[#f7f7f7]" : "bg-white"}>
               <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                   {/* Image */}

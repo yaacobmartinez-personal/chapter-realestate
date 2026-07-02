@@ -9,6 +9,7 @@ import {
 } from "@/components/brokerage";
 import { getProperties } from "@/lib/data/properties";
 import { getAgents } from "@/lib/data/agents";
+import { getBuyerGuideSteps } from "@/lib/data/buyer-guide";
 
 export const revalidate = 60;
 
@@ -30,12 +31,16 @@ export const metadata: Metadata = {
 };
 
 export default async function BrokeragePage() {
-  const [properties, agents] = await Promise.all([getProperties(), getAgents()]);
+  const [properties, agents, guideSteps] = await Promise.all([
+    getProperties(),
+    getAgents(),
+    getBuyerGuideSteps(),
+  ]);
   return (
     <>
       <PageHero label="Real Estate Brokerage" heading="Buy. Sell." headingAccent="Succeed." image="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=80" />
       <SearchBar />
-      <BuySection />
+      <BuySection steps={guideSteps} />
       <FeaturedListings properties={properties} />
       <SellSection />
       <AgentsDirectory agents={agents} />

@@ -1,0 +1,6 @@
+{
+  "items": [
+    { "id": "mv1", "label": "Our Mission", "heading": "To simplify real estate and create lasting value for every client.", "body": "We exist to make property ownership, investment, and management accessible, transparent, and rewarding — for first-time buyers, seasoned investors, and everyone in between.", "sortOrder": 1 },
+    { "id": "mv2", "label": "Our Vision", "heading": "To become the most trusted real estate platform in Canada.", "body": "Starting in Winnipeg, we're building a scalable, technology-driven platform that sets a new standard for how real estate companies operate and serve their communities.", "sortOrder": 2 }
+  ]
+}

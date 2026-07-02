@@ -125,6 +125,28 @@ create table if not exists public.social_links (
   updated_at  timestamptz not null default now()
 );
 
+create table if not exists public.mission_vision (
+  id          text primary key,
+  label       text not null default '',
+  heading     text not null default '',
+  body        text not null default '',
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+create table if not exists public.buyer_guide_steps (
+  id          text primary key,
+  step        text not null default '',
+  title       text not null default '',
+  short_desc  text not null default '',
+  paragraphs  text[] not null default '{}',
+  image       text not null default '',
+  sort_order  integer not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
 -- ─── Form submissions ────────────────────────────────────────────────────────
 create table if not exists public.form_submissions (
   id         uuid primary key default gen_random_uuid(),
@@ -160,7 +182,7 @@ create trigger rentals_set_updated_at before update on public.rentals
 do $$
 declare t text;
 begin
-  foreach t in array array['team_members','testimonials','company_values','process_steps','social_links'] loop
+  foreach t in array array['team_members','testimonials','company_values','process_steps','social_links','mission_vision','buyer_guide_steps'] loop
     execute format('drop trigger if exists %I_set_updated_at on public.%I;', t, t);
     execute format('create trigger %I_set_updated_at before update on public.%I for each row execute function public.set_updated_at();', t, t);
   end loop;
@@ -176,6 +198,8 @@ alter table public.testimonials enable row level security;
 alter table public.company_values enable row level security;
 alter table public.process_steps enable row level security;
 alter table public.social_links enable row level security;
+alter table public.mission_vision enable row level security;
+alter table public.buyer_guide_steps enable row level security;
 -- Form submissions: RLS on with NO public policies — only the service-role key
 -- (used server-side by the web app) can read or write. Never expose publicly.
 alter table public.form_submissions enable row level security;
@@ -218,7 +242,7 @@ create policy "auth write rentals" on public.rentals
 do $$
 declare t text;
 begin
-  foreach t in array array['team_members','testimonials','company_values','process_steps','social_links'] loop
+  foreach t in array array['team_members','testimonials','company_values','process_steps','social_links','mission_vision','buyer_guide_steps'] loop
     execute format('drop policy if exists "public read %s" on public.%I;', t, t);
     execute format('create policy "public read %s" on public.%I for select using (true);', t, t);
     execute format('drop policy if exists "auth write %s" on public.%I;', t, t);

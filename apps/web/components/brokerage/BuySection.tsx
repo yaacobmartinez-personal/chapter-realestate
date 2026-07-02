@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { buySteps } from "@/lib/data/brokerage";
+import type { BuyerGuideStep } from "@/lib/data/buyer-guide";
 
-export default function BuySection() {
+export default function BuySection({ steps }: { steps: BuyerGuideStep[] }) {
   return (
     <section id="buy" className="py-28 bg-[#f7f7f7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -29,9 +29,9 @@ export default function BuySection() {
 
         {/* 10 steps */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-200">
-          {buySteps.map(({ step, title, desc }, i) => (
+          {steps.map(({ id, step, title, shortDesc }, i) => (
             <motion.div
-              key={step}
+              key={id}
               className="bg-[#f7f7f7] p-8 lg:p-10 flex gap-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export default function BuySection() {
               </span>
               <div>
                 <h3 className="text-lg font-light text-black mb-2">{title}</h3>
-                <p className="text-sm text-gray-500 font-light leading-relaxed">{desc}</p>
+                <p className="text-sm text-gray-500 font-light leading-relaxed">{shortDesc}</p>
               </div>
             </motion.div>
           ))}
