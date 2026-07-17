@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -13,10 +14,18 @@ export default function Hero() {
   return (
     <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden bg-black">
       {/* Parallax background */}
-      <motion.div
-        className="absolute inset-0 bg-cover bg-center opacity-45 scale-110"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=80')", y: bgY }}
-      />
+      <motion.div className="absolute inset-0 opacity-45 scale-110" style={{ y: bgY }}>
+        <Image
+          src="/winnipeg.webp"
+          alt=""
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={60}
+          className="object-cover object-center"
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
 
       {/* Animated gold line */}
