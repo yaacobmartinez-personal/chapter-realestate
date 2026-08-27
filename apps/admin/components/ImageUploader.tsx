@@ -5,15 +5,20 @@ import Image from "next/image";
 import { Loader2, Upload, X } from "lucide-react";
 
 /**
- * Uploads images to Cloudflare R2 via /api/upload and tracks the resulting
- * URLs. Emits the URL list as a JSON string in a hidden input named `images`
- * so it round-trips through a plain Server Action form.
+ * Uploads images to Supabase Storage via /api/upload (which optimizes them
+ * server-side) and tracks the resulting URLs. Emits the URL list as a JSON
+ * string in a hidden input named `images` so it round-trips through a plain
+ * Server Action form.
+ *
+ * `folder` picks the key prefix inside the bucket; the route allowlists it.
  */
 export default function ImageUploader({
   initial = [],
+  folder = "properties",
   onChange,
 }: {
   initial?: string[];
+  folder?: "properties" | "rentals" | "agents" | "resources" | "leadership" | "buyer-guide";
   onChange?: (urls: string[]) => void;
 }) {
   const [urls, setUrls] = useState<string[]>(initial);
@@ -35,6 +40,7 @@ export default function ImageUploader({
       for (const file of Array.from(files)) {
         const body = new FormData();
         body.append("file", file);
+        body.append("folder", folder);
         const res = await fetch("/api/upload", { method: "POST", body });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error ?? "Upload failed");
@@ -95,7 +101,10 @@ export default function ImageUploader({
       />
 
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
-      <p className="mt-2 text-xs text-muted">First image is used as the cover. Max 10MB each.</p>
+      <p className="mt-2 text-xs text-muted">
+        First image is used as the cover. Max 10MB each — images are compressed and resized
+        automatically on upload.
+      </p>
     </div>
   );
 }

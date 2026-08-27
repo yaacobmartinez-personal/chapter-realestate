@@ -112,7 +112,7 @@ export default function RentalForm({ rental }: { rental?: RentalUnit }) {
 
         <section>
           <h2 className="mb-3 text-sm font-semibold text-muted">Photos</h2>
-          <ImageUploader initial={initialImages} onChange={setImages} />
+          <ImageUploader initial={initialImages} folder="rentals" onChange={setImages} />
           <p className="mt-2 text-xs text-muted">The first photo is the main image shown on cards.</p>
         </section>
 

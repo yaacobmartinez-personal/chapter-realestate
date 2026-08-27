@@ -39,7 +39,7 @@ export default function BuyerGuideForm({ step }: { step?: BuyerGuideStep }) {
 
       <div>
         <h2 className="mb-3 text-sm font-semibold text-muted">Image</h2>
-        <ImageUploader initial={initialImages} onChange={() => {}} />
+        <ImageUploader initial={initialImages} folder="buyer-guide" onChange={() => {}} />
       </div>
 
       <div className="grid grid-cols-[120px_1fr] gap-4">

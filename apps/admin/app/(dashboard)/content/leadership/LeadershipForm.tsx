@@ -39,7 +39,7 @@ export default function LeadershipForm({ member }: { member?: TeamMember }) {
 
       <div>
         <h2 className="mb-3 text-sm font-semibold text-muted">Headshot</h2>
-        <ImageUploader initial={initialImages} onChange={() => {}} />
+        <ImageUploader initial={initialImages} folder="leadership" onChange={() => {}} />
       </div>
 
       <label className="block">

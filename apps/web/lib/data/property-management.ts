@@ -7,6 +7,15 @@ export interface PMStrength {
   desc: string;
 }
 
+// Photos of Chapter-managed rental properties, shown as a 2x2 grid beside the
+// "Chapter Advantage for Landlords" intro. Files live in `apps/web/public`.
+export const pmGalleryImages = [
+  { src: "/landlords.jpg", alt: "A Chapter-managed rental duplex in Winnipeg" },
+  { src: "/landlords2.jpg", alt: "A Chapter-managed rental property in Winnipeg" },
+  { src: "/landlords3.jpeg", alt: "A Chapter-managed rental property in Winnipeg" },
+  { src: "/landlords4.jpeg", alt: "A Chapter-managed rental property in Winnipeg" },
+];
+
 // Why landlords choose Chapter (adapted for the Manitoba market).
 export const pmStrengths: PMStrength[] = [
   {

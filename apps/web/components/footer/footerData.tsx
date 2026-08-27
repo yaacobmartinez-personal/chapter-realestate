@@ -8,8 +8,8 @@ export const footerLinkGroups: FooterLinkGroup[] = [
     title: "Real Estate",
     links: [
       { label: "Buy a Home", href: "/brokerage#buy" },
-      { label: "Buyer's Guide", href: "/buyers-guide" },
-      { label: "Sell a Home", href: "/sellers" },
+      { label: "Buyer's Guide", href: "/brokerage#buy" },
+      { label: "Sell a Home", href: "/brokerage#sell" },
       { label: "Featured Listings", href: "/brokerage#listings" },
       { label: "Our Agents", href: "/brokerage#agents" },
     ],

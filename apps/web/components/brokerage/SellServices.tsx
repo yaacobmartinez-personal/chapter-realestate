@@ -10,6 +10,8 @@ import {
   sellerSections,
   sellerListingSupport,
   sellerMarketingTools,
+  sellerSectionCtas,
+  sellerSectionCtaDefault,
 } from "@/lib/data/brokerage";
 
 export default function SellServices() {
@@ -18,15 +20,16 @@ export default function SellServices() {
       {/* Intro */}
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <motion.p
-            className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-6 font-light"
+          <motion.h2
+            className="text-4xl md:text-5xl font-light text-black leading-tight mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            Services for Sellers
-          </motion.p>
+            Services for{" "}
+            <span className="font-serif italic text-[#c8a96e]">Sellers</span>
+          </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-gray-600 font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
@@ -43,6 +46,7 @@ export default function SellServices() {
       <div>
         {sellerSections.map(({ title, paragraphs, image }, i) => {
           const reversed = i % 2 === 1;
+          const cta = sellerSectionCtas[title] ?? sellerSectionCtaDefault;
           return (
             <section key={title} className={reversed ? "bg-[#f7f7f7]" : "bg-white"}>
               <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
@@ -69,12 +73,19 @@ export default function SellServices() {
                     viewport={{ once: true, margin: "-80px" }}
                     transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                   >
-                    <h2 className="text-3xl md:text-4xl font-light text-black leading-tight mb-6">{title}</h2>
+                    <h2 className="text-4xl md:text-5xl font-light text-black leading-tight mb-6">{title}</h2>
                     <div className="space-y-4">
                       {paragraphs.map((p, idx) => (
                         <p key={idx} className="text-gray-500 font-light leading-relaxed">{p}</p>
                       ))}
                     </div>
+                    <Link
+                      href={cta.href}
+                      className="group mt-8 inline-flex items-center gap-3 bg-black px-8 py-4 text-sm font-light uppercase tracking-widest text-white transition-colors hover:bg-[#c8a96e]"
+                    >
+                      {cta.label}
+                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </motion.div>
                 </div>
               </div>
@@ -93,7 +104,7 @@ export default function SellServices() {
             transition={{ duration: 0.7 }}
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Full-Service Listing Support</p>
-            <h3 className="text-2xl md:text-3xl font-light text-black mb-4">Working with a Chapter agent, you will:</h3>
+            <h3 className="text-3xl md:text-4xl font-light text-black mb-4">Working with a Chapter agent, you will:</h3>
             <p className="text-sm text-gray-500 font-light leading-relaxed mb-8">
               Our agents have access to the brokerage&apos;s entire database of market information —
               historical stats as well as current real estate reports.
@@ -122,7 +133,7 @@ export default function SellServices() {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Eye-Capturing Marketing</p>
-            <h3 className="text-2xl md:text-3xl font-light text-black mb-4">Your property, beautifully showcased</h3>
+            <h3 className="text-3xl md:text-4xl font-light text-black mb-4">Your property, beautifully showcased</h3>
             <p className="text-sm text-gray-500 font-light leading-relaxed mb-8">
               Our marketing support lets your agent efficiently deliver materials that showcase your
               property — so they can focus on refining your listing strategy and getting you top dollar.
@@ -156,7 +167,7 @@ export default function SellServices() {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-6 font-light">Make a Strategic Sale</p>
-            <h2 className="text-4xl md:text-5xl font-light leading-tight mb-6">
+            <h2 className="text-5xl md:text-6xl font-light leading-tight mb-6">
               Ready to <span className="font-serif italic text-[#c8a96e]">Sell?</span>
             </h2>
             <p className="text-gray-400 font-light leading-relaxed mb-10 max-w-xl mx-auto">{sellerClosing}</p>

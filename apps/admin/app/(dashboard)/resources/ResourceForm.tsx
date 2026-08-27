@@ -97,7 +97,11 @@ export default function ResourceForm({ post }: { post?: BlogPost }) {
 
         <section>
           <h2 className="mb-3 text-sm font-semibold text-muted">Cover image</h2>
-          <ImageUploader initial={post?.image ? [post.image] : []} onChange={setImages} />
+          <ImageUploader
+            initial={post?.image ? [post.image] : []}
+            folder="resources"
+            onChange={setImages}
+          />
         </section>
 
         <label className="block">

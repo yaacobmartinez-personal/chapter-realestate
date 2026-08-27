@@ -4,19 +4,44 @@ import rawContent from "@/lib/content/brokerage.json";
 // The brokerage Buy section now shares the database-backed buyer's guide steps
 // (see `@/lib/data/buyer-guide`), rendering each step's `shortDesc`.
 
-// ─── Buyer's Guide (full page) ────────────────────────────────────────────────
+// ─── Buyer's Guide (/brokerage#buy) ──────────────────────────────────────────────
 // Steps are now database-backed — see `@/lib/data/buyer-guide` (getBuyerGuideSteps)
 // and the `buyer_guide_steps` table in @chapter/db. Intro/closing copy stays here.
 
-// Long-form intro for the dedicated /buyers-guide page.
+// Long-form intro for the buyer's guide block on /brokerage#buy.
 export const buyerGuideIntro =
   "Buying a home in Winnipeg and across Manitoba is an exciting milestone — but it can also feel overwhelming. We created this guide to help you make informed decisions with confidence, from your very first search to the day you get the keys. Here's what to expect, step by step.";
+
+// Per-step call-to-action shown under each step on /brokerage#buy. Keyed by the
+// step's `step` value; steps without an entry fall back to `buyerGuideStepCtaDefault`.
+export interface GuideCta {
+  label: string;
+  href: string;
+}
+
+export const buyerGuideStepCtaDefault: GuideCta = {
+  label: "Talk to a Chapter Agent",
+  href: "/contact#book",
+};
+
+export const buyerGuideStepCtas: Record<string, GuideCta> = {
+  "01": { label: "Browse Winnipeg Listings", href: "/properties" },
+  "02": { label: "Talk Budget with an Agent", href: "/contact#book" },
+  "03": { label: "Get Connected with a Lender", href: "/contact" },
+  "04": { label: "Meet Our Agents", href: "/brokerage#agents" },
+  "05": { label: "Explore Featured Listings", href: "/brokerage#listings" },
+  "06": { label: "Get Offer Guidance", href: "/contact#book" },
+  "07": { label: "Ask Us About Inspections", href: "/contact" },
+  "08": { label: "Questions on Financing?", href: "/contact" },
+  "09": { label: "Ask About Appraisals", href: "/contact" },
+  "10": { label: "Start Your Home Search", href: "/properties" },
+};
 
 // Closing message shown at the end of the guide.
 export const buyerGuideClosing =
   "Congratulations on taking the first step — this is where it all becomes real. Whenever you're ready, a Chapter agent is here to guide you the rest of the way, and long after closing day.";
 
-// ─── Sellers Page (full content) ──────────────────────────────────────────────
+// ─── Sellers (/brokerage#sell) ────────────────────────────────────────────────
 export interface SellerSection {
   title: string;
   paragraphs: string[];
@@ -26,6 +51,20 @@ export interface SellerSection {
 // Hero/intro — "Make a Strategic Sale", rebranded for Chapter + Manitoba.
 export const sellerIntro =
   "Chapter agents know Manitoba. We know the residential and commercial real estate, the neighbourhoods, and what buyers are looking for across Winnipeg and beyond. To get the best price for your property sale, you need representation that understands both your needs and each local market — and we're focused on empowering Manitoba sellers to net the best possible price for their properties.";
+
+// Per-section call-to-action shown under each seller section on /brokerage#sell.
+// Keyed by section title; sections without an entry fall back to the default.
+export const sellerSectionCtaDefault: GuideCta = {
+  label: "Get Your Free Home Valuation",
+  href: "/contact#book",
+};
+
+export const sellerSectionCtas: Record<string, GuideCta> = {
+  "Protecting Your Sale": { label: "Get Your Free Home Valuation", href: "/contact#book" },
+  "Around-the-Clock Assistance": { label: "Talk to a Chapter Agent", href: "/contact" },
+  "Connect With an Agent": { label: "Meet Our Agents", href: "/brokerage#agents" },
+  "Settling the Sale": { label: "Start Your Sale", href: "/contact#book" },
+};
 
 export const sellerClosing =
   "Thinking of selling? Let's build a strategy that nets you the best possible price for your home or commercial property.";

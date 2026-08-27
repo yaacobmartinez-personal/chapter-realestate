@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { BarChart3, Award, Heart } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { pmStrengths } from "@/lib/data/property-management";
+import { pmStrengths, pmGalleryImages } from "@/lib/data/property-management";
 import type { ProcessStep } from "@/lib/data/process";
 
 const iconMap: Record<string, LucideIcon> = { BarChart3, Award, Heart };
@@ -41,19 +41,23 @@ export default function Overview({ steps }: { steps: ProcessStep[] }) {
             </p>
           </motion.div>
           <motion.div
-            className="relative h-120 overflow-hidden"
+            className="grid h-120 grid-cols-2 grid-rows-2 gap-2"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <Image
-              fill
-              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"
-              alt="Property Management"
-              className="object-cover hover:scale-105 transition-transform duration-700"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            {pmGalleryImages.map(({ src, alt }) => (
+              <div key={src} className="relative overflow-hidden">
+                <Image
+                  fill
+                  src={src}
+                  alt={alt}
+                  className="object-cover hover:scale-105 transition-transform duration-700"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+            ))}
           </motion.div>
         </div>
         <div data-stagger className="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-100">

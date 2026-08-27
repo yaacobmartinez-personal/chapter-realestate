@@ -11,8 +11,8 @@ packages/
 ```
 
 The public site reads content from **Supabase**; the admin app writes to it.
-Images are stored in **Cloudflare R2**. Both apps deploy as **separate Vercel
-projects** from this one repo.
+Images are stored in **Supabase Storage**. Both apps deploy as **separate
+Vercel projects** from this one repo.
 
 ---
 
@@ -75,16 +75,28 @@ posts from `resources.json` into Supabase.
 
 ---
 
-## 3. Cloudflare R2 (image storage)
+## 3. Supabase Storage (image storage)
 
-1. Cloudflare dashboard → **R2** → create a bucket (e.g. `chapter-media`).
-2. **R2 → Manage API Tokens** → create a token with Object Read & Write.
-   Copy the Access Key ID and Secret Access Key.
-3. Find your **Account ID** (R2 overview page).
-4. Give the bucket a public URL with CDN: either enable the bucket's public
-   `r2.dev` domain, or (recommended) connect a **custom domain**
-   like `media.chapterrealestate.ca` under the bucket's Settings → Public access.
-   Use that as `R2_PUBLIC_BASE_URL`.
+Run `packages/db/storage.sql` in the Supabase SQL editor. It creates one
+**public** bucket named `images`, capped at 10 MB per object.
+
+No extra credentials: the admin app uploads with the service-role key you
+already set in step 2. Set `SUPABASE_STORAGE_BUCKET` only if you rename the
+bucket (it defaults to `images`).
+
+Everything uploaded through the CMS is namespaced by key prefix —
+`properties/`, `rentals/`, `agents/`, `resources/`, `leadership/`,
+`buyer-guide/` — and served from
+`https://<project>.supabase.co/storage/v1/object/public/images/…`.
+
+### Upload-time optimization
+
+`apps/admin/app/api/upload/route.ts` runs every image through sharp before it
+reaches storage: EXIF-rotated, resized to fit within 2400×2400, metadata
+stripped, and re-encoded as **WebP** (quality 72). Typical camera/phone
+photos come out 80–95% smaller. This matters because the public site serves
+images unoptimized (Cloudflare Workers has no `/_next/image`), so the stored
+file is exactly what visitors download.
 
 > Swapping providers later (Bunny, S3, etc.) is a single-file change —
 > implement `StorageProvider` in `apps/admin/lib/storage/` and point `storage` at it.
@@ -109,7 +121,7 @@ Create **two** Vercel projects pointing at this same Git repo:
 | Project | Root Directory | Domain | Env vars |
 |---|---|---|---|
 | `chapter-web` | `apps/web` | `chapterrealestate.ca`, `www` | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
-| `chapter-admin` | `apps/admin` | `admin.chapterrealestate.ca` | all Supabase keys + all R2 keys |
+| `chapter-admin` | `apps/admin` | `admin.chapterrealestate.ca` | all Supabase keys (+ `SUPABASE_STORAGE_BUCKET` if not `images`) |
 
 For each project: **Settings → Build & Development → Root Directory** = the path
 above. Vercel auto-detects Next.js and installs workspace deps from the repo root.

@@ -91,19 +91,19 @@
     {
       "name": "Barso Homes",
       "desc": "Residential development and custom home building across Winnipeg's premier neighbourhoods.",
-      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80",
+      "image": "/barso-homes.webp",
       "href": "https://barso.ca/property"
     },
     {
       "name": "Barso Concrete",
       "desc": "Commercial concrete and construction services supporting residential and commercial projects.",
-      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
+      "image": "/barso-concrete.webp",
       "href": "https://barso.ca/concrete-solutions"
     },
     {
       "name": "BGC Developments",
       "desc": "Mixed-use and commercial real estate development projects across Manitoba.",
-      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80",
+      "image": "/bgc.webp",
       "href": "https://barso.ca/bgc-developments"
     }
   ],

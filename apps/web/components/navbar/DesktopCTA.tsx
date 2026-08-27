@@ -1,17 +1,11 @@
 import Link from "next/link";
 
-interface DesktopCTAProps {
-  scrolled: boolean;
-}
-
-export default function DesktopCTA({ scrolled }: DesktopCTAProps) {
+export default function DesktopCTA() {
   return (
     <div className="hidden lg:flex items-center gap-4">
       <Link
         href="/contact"
-        className={`text-sm font-light tracking-wide transition-colors ${
-          scrolled ? "text-gray-700 hover:text-black" : "text-white/80 hover:text-white"
-        }`}
+        className="text-sm font-light tracking-wide text-white/80 transition-colors hover:text-white"
       >
         Contact
       </Link>

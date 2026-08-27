@@ -103,7 +103,7 @@ export default function AgentForm({ agent }: { agent?: Agent }) {
 
         <section>
           <h2 className="mb-3 text-sm font-semibold text-muted">Headshot</h2>
-          <ImageUploader initial={a?.image ? [a.image] : []} onChange={setImages} />
+          <ImageUploader initial={a?.image ? [a.image] : []} folder="agents" onChange={setImages} />
         </section>
 
         <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -8,10 +8,9 @@ import DesktopDropdown from "./DesktopDropdown";
 
 interface DesktopNavItemProps {
   item: NavItem;
-  scrolled: boolean;
 }
 
-export default function DesktopNavItem({ item, scrolled }: DesktopNavItemProps) {
+export default function DesktopNavItem({ item }: DesktopNavItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -22,9 +21,7 @@ export default function DesktopNavItem({ item, scrolled }: DesktopNavItemProps) 
     >
       <Link
         href={item.href}
-        className={`flex items-center gap-1 text-sm font-light tracking-wide transition-colors ${
-          scrolled ? "text-gray-700 hover:text-black" : "text-white/80 hover:text-white"
-        }`}
+        className="flex items-center gap-1 text-sm font-light tracking-wide text-white/80 transition-colors hover:text-white"
       >
         {item.label}
         {item.children && <ChevronDown size={13} className="opacity-50" />}

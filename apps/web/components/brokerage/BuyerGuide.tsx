@@ -4,7 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { buyerGuideIntro, buyerGuideClosing } from "@/lib/data/brokerage";
+import {
+  buyerGuideIntro,
+  buyerGuideClosing,
+  buyerGuideStepCtas,
+  buyerGuideStepCtaDefault,
+} from "@/lib/data/brokerage";
 import type { BuyerGuideStep } from "@/lib/data/buyer-guide";
 
 export default function BuyerGuide({ steps }: { steps: BuyerGuideStep[] }) {
@@ -13,15 +18,16 @@ export default function BuyerGuide({ steps }: { steps: BuyerGuideStep[] }) {
       {/* Intro */}
       <section className="py-24 bg-white">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <motion.p
-            className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-6 font-light"
+          <motion.h2
+            className="text-4xl md:text-5xl font-light text-black leading-tight mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            Your 10-Step Home Buying Journey
-          </motion.p>
+            Your 10-Step Home Buying{" "}
+            <span className="font-serif italic text-[#c8a96e]">Journey</span>
+          </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-gray-600 font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
@@ -38,6 +44,7 @@ export default function BuyerGuide({ steps }: { steps: BuyerGuideStep[] }) {
       <div>
         {steps.map(({ id, step, title, paragraphs, image }, i) => {
           const reversed = i % 2 === 1;
+          const cta = buyerGuideStepCtas[step] ?? buyerGuideStepCtaDefault;
           return (
             <section key={id} className={reversed ? "bg-[#f7f7f7]" : "bg-white"}>
               <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
@@ -71,12 +78,19 @@ export default function BuyerGuide({ steps }: { steps: BuyerGuideStep[] }) {
                     transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
                   >
                     <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-4 font-light">Step {step}</p>
-                    <h2 className="text-3xl md:text-4xl font-light text-black leading-tight mb-6">{title}</h2>
+                    <h2 className="text-4xl md:text-5xl font-light text-black leading-tight mb-6">{title}</h2>
                     <div className="space-y-4">
                       {paragraphs.map((p, idx) => (
                         <p key={idx} className="text-gray-500 font-light leading-relaxed">{p}</p>
                       ))}
                     </div>
+                    <Link
+                      href={cta.href}
+                      className="group mt-8 inline-flex items-center gap-3 bg-black px-8 py-4 text-sm font-light uppercase tracking-widest text-white transition-colors hover:bg-[#c8a96e]"
+                    >
+                      {cta.label}
+                      <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </motion.div>
                 </div>
               </div>
@@ -95,7 +109,7 @@ export default function BuyerGuide({ steps }: { steps: BuyerGuideStep[] }) {
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p className="text-xs tracking-[0.25em] uppercase text-[#c8a96e] mb-6 font-light">Welcome Home</p>
-            <h2 className="text-4xl md:text-5xl font-light leading-tight mb-6">
+            <h2 className="text-5xl md:text-6xl font-light leading-tight mb-6">
               Ready to <span className="font-serif italic text-[#c8a96e]">Begin?</span>
             </h2>
             <p className="text-gray-400 font-light leading-relaxed mb-10 max-w-xl mx-auto">

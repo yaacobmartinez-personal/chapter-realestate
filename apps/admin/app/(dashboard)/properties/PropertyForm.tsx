@@ -132,7 +132,7 @@ export default function PropertyForm({ property }: { property?: Property }) {
 
         <section>
           <h2 className="mb-3 text-sm font-semibold text-muted">Images</h2>
-          <ImageUploader initial={p?.images ?? []} onChange={setImages} />
+          <ImageUploader initial={p?.images ?? []} folder="properties" onChange={setImages} />
         </section>
 
         <section className="grid grid-cols-2 gap-4">

@@ -32,7 +32,7 @@ export default function Services() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
           {homeServices.map(({ iconKey, title, description, href, accent }, i) => {
             const Icon = iconMap[iconKey];
             return (
@@ -43,28 +43,25 @@ export default function Services() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <Link href={href} className="group bg-white p-10 flex flex-col gap-6 hover:bg-black transition-colors duration-500 h-full">
-                  <motion.div
-                    className="w-12 h-12 border border-gray-200 group-hover:border-white/20 flex items-center justify-center"
-                    whileHover={{ rotate: 5, scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <Icon size={20} className="text-gray-400 group-hover:text-[#c8a96e] transition-colors" />
-                  </motion.div>
+                <Link href={href} className="bg-black p-10 flex flex-col gap-6 h-full">
+                  <div className="w-12 h-12 border border-white/20 flex items-center justify-center">
+                    <Icon size={20} className="text-[#c8a96e]" />
+                  </div>
                   <div>
                     <p className="text-xs text-[#c8a96e] tracking-widest uppercase font-light mb-3">{accent}</p>
-                    <h3 className="text-xl font-light text-black group-hover:text-white mb-3 transition-colors">{title}</h3>
-                    <p className="text-sm text-gray-500 group-hover:text-gray-400 font-light leading-relaxed transition-colors">{description}</p>
+                    <h3 className="text-xl font-light text-white mb-3">{title}</h3>
+                    <p className="text-sm text-gray-400 font-light leading-relaxed">{description}</p>
                   </div>
-                  <div className="mt-auto flex items-center gap-2 text-xs text-gray-400 group-hover:text-[#c8a96e] transition-colors">
+                  <div className="mt-auto flex items-center gap-2 text-xs text-[#c8a96e]">
                     <span className="tracking-widest uppercase font-light">Explore {title}</span>
-                    <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={12} />
                   </div>
                 </Link>
               </motion.div>
             );
           })}
         </div>
+
       </div>
     </section>
   );
