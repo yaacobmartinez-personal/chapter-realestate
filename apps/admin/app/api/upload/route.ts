@@ -6,6 +6,8 @@ import { optimizeImage } from "@/lib/images/optimize";
 
 // sharp is a native module — keep this handler off the edge runtime.
 export const runtime = "nodejs";
+// sharp at effort:6 on a large photo can outrun the default function timeout.
+export const maxDuration = 30;
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
 const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/avif"]);

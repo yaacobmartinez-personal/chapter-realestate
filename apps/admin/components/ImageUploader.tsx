@@ -12,6 +12,58 @@ import { Loader2, Upload, X } from "lucide-react";
  *
  * `folder` picks the key prefix inside the bucket; the route allowlists it.
  */
+
+/**
+ * Vercel caps a serverless function's request body at 4.5MB and rejects
+ * anything larger at the edge — before our route runs — with an HTML error
+ * page. Phone photos routinely exceed that, so shrink in the browser first;
+ * the server still runs its own sharp pass, this just keeps the wire payload
+ * inside the platform limit.
+ */
+const WIRE_LIMIT = 4 * 1024 * 1024;
+const MAX_EDGE = 2400; // matches lib/images/optimize.ts
+
+async function downscale(file: File): Promise<File> {
+  // Small enough to send as-is — skip the re-encode and keep the original.
+  if (file.size <= WIRE_LIMIT) return file;
+
+  try {
+    // `from-image` honours the EXIF orientation flag, which canvas otherwise drops.
+    const bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+    const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return file;
+    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close();
+
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob(resolve, "image/webp", 0.85),
+    );
+    // Bail out if the browser can't encode WebP, or somehow made it bigger.
+    if (!blob || blob.size >= file.size) return file;
+
+    return new File([blob], file.name.replace(/\.[^.]+$/, "") + ".webp", {
+      type: "image/webp",
+    });
+  } catch {
+    return file; // let the server decide — it returns a proper JSON error
+  }
+}
+
+/** The edge can reject a request with an HTML page; don't parse that as JSON. */
+async function readJson(res: Response): Promise<{ url?: string; error?: string }> {
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { error: `Upload failed (${res.status} ${res.statusText || "error"})` };
+  }
+}
+
 export default function ImageUploader({
   initial = [],
   folder = "properties",
@@ -38,12 +90,22 @@ export default function ImageUploader({
     try {
       const uploaded: string[] = [];
       for (const file of Array.from(files)) {
+        const payload = await downscale(file);
+        if (payload.size > WIRE_LIMIT) {
+          throw new Error(`"${file.name}" is too large to upload — try a smaller image.`);
+        }
         const body = new FormData();
-        body.append("file", file);
+        body.append("file", payload);
         body.append("folder", folder);
         const res = await fetch("/api/upload", { method: "POST", body });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error ?? "Upload failed");
+        const data = await readJson(res);
+        if (!res.ok || !data.url) {
+          throw new Error(
+            res.status === 401
+              ? "Your session expired — reload the page and sign in again."
+              : data.error ?? "Upload failed",
+          );
+        }
         uploaded.push(data.url);
       }
       setUrls((prev) => [...prev, ...uploaded]);

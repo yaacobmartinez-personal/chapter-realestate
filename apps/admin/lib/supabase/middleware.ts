@@ -37,8 +37,15 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   const { pathname } = request.nextUrl;
   const isLogin = pathname === "/login";
   const isAuthCallback = pathname.startsWith("/auth");
+  // API routes are called by fetch(), which follows redirects — sending one to
+  // /login makes the caller parse an HTML page as JSON. They get a 401 instead
+  // and do their own auth check anyway.
+  const isApi = pathname.startsWith("/api");
 
   if (!user && !isLogin && !isAuthCallback) {
+    if (isApi) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
