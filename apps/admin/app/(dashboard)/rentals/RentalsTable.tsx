@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { KeyRound, Trash2 } from "lucide-react";
-import type { RentalUnit } from "@chapter/db";
+import { cover, type RentalUnit } from "@chapter/db";
 import DataTable, { type Column } from "@/components/ui/DataTable";
 import Badge from "@/components/ui/Badge";
 import ConfirmButton from "@/components/ConfirmButton";
@@ -35,7 +35,7 @@ export default function RentalsTable({ rentals }: { rentals: RentalUnit[] }) {
       cell: (r) => (
         <div className="flex items-center gap-3">
           <div className="relative h-11 w-16 shrink-0 overflow-hidden rounded-md bg-surface-2">
-            {r.image && <Image src={r.image} alt={r.address} fill className="object-cover" sizes="64px" unoptimized />}
+            <Image src={cover(r.image, r.images)} alt={r.address} fill className="object-cover" sizes="64px" unoptimized />
           </div>
           <div className="min-w-0">
             <p className="truncate font-medium text-foreground">{r.address || "Untitled"}</p>

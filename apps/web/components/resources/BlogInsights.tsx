@@ -1,4 +1,5 @@
 "use client";
+import { cover } from "@chapter/db";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -28,7 +29,7 @@ export default function BlogInsights({ posts }: { posts: BlogPost[] }) {
           <Link href={`/resources/${featured.slug}`} className="relative overflow-hidden block" style={{ aspectRatio: "4/3" }}>
             <Image
               fill
-              src={featured.image}
+              src={cover(featured.image)}
               alt={featured.title}
               className="object-cover group-hover:scale-105 transition-transform duration-700"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -65,7 +66,7 @@ export default function BlogInsights({ posts }: { posts: BlogPost[] }) {
                 <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
                   <Image
                     fill
-                    src={image}
+                    src={cover(image)}
                     alt={title}
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

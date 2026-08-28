@@ -1,22 +1,59 @@
-"use client";
-
-import { useRef, useCallback } from "react";
-import Map, { Marker, NavigationControl, type MapRef } from "react-map-gl/mapbox";
 import { MapPin } from "lucide-react";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 interface PropertyMapProps {
   lng: number;
   lat: number;
   address: string;
+  city?: string;
+  province?: string;
 }
 
-export default function PropertyMap({ lng, lat, address }: PropertyMapProps) {
-  const mapRef = useRef<MapRef>(null);
+/**
+ * Google Maps as a plain iframe — no JS library, and no API key required.
+ *
+ * Two embed URLs, picked automatically:
+ *
+ *   1. No key (the default): `maps?q=…&output=embed`. This endpoint has served
+ *      keyless embeds for years and is what most "embed a map" snippets use,
+ *      but Google does not document it and gives it no support commitment, so
+ *      it could change without notice.
+ *   2. `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` set: the official Maps Embed API.
+ *      Supported and documented; usage is free of charge, though creating the
+ *      key means setting up a Google Maps Platform project.
+ *
+ * Setting the key is the only step needed to move to the supported path — no
+ * code change. Either way the trade-off versus the old Mapbox version is
+ * Google's standard pin: the custom gold marker isn't expressible in an embed.
+ *
+ * The contact page's office map is still Mapbox (`components/contact/MapEmbed`),
+ * so `mapbox-gl` remains a dependency.
+ */
 
-  const handleLoad = useCallback(() => {
-    mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 0 });
-  }, [lng, lat]);
+/**
+ * Google resolves a text address more reliably than a coordinate pair for a
+ * street listing, so prefer it. Coordinates are the fallback, and `0,0` — what
+ * the admin form stores for an empty lat/lng — counts as unset, not as a real
+ * point in the Gulf of Guinea.
+ */
+function mapQuery({ lng, lat, address, city, province }: PropertyMapProps): string | null {
+  const parts = [address, city, province].map((p) => p?.trim()).filter(Boolean);
+  if (parts.length) return parts.join(", ");
+  if (lat !== 0 || lng !== 0) return `${lat},${lng}`;
+  return null;
+}
+
+export default function PropertyMap(props: PropertyMapProps) {
+  const { address } = props;
+  const query = mapQuery(props);
+  const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+  // Nothing to point at — drop the section rather than render a map of nowhere.
+  if (!query) return null;
+
+  const encoded = encodeURIComponent(query);
+  const src = key
+    ? `https://www.google.com/maps/embed/v1/place?key=${key}&q=${encoded}&zoom=15`
+    : `https://www.google.com/maps?q=${encoded}&z=15&output=embed`;
 
   return (
     <section className="py-20 bg-white">
@@ -26,29 +63,15 @@ export default function PropertyMap({ lng, lat, address }: PropertyMapProps) {
           <h2 className="text-3xl font-light text-black">Neighbourhood Map</h2>
         </div>
 
-        <div className="relative h-[480px] overflow-hidden">
-          <Map
-            ref={mapRef}
-            mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
-            initialViewState={{ longitude: lng, latitude: lat, zoom: 14.5 }}
-            style={{ width: "100%", height: "100%" }}
-            mapStyle="mapbox://styles/mapbox/light-v11"
-            onLoad={handleLoad}
-            attributionControl={false}
-          >
-            <NavigationControl position="bottom-right" showCompass={false} />
-
-            <Marker longitude={lng} latitude={lat} anchor="bottom">
-              <div className="flex flex-col items-center group cursor-default">
-                {/* Address bubble */}
-                <div className="bg-black text-white text-xs font-light tracking-wide px-3 py-1.5 mb-1.5 whitespace-nowrap shadow-lg group-hover:bg-[#c8a96e] transition-colors duration-200">
-                  {address}
-                </div>
-                {/* Pin */}
-                <div className="w-3 h-3 bg-[#c8a96e] rotate-45 -mt-1 shadow-md" />
-              </div>
-            </Marker>
-          </Map>
+        <div className="relative h-[480px] overflow-hidden bg-gray-100">
+          <iframe
+            title={`Map of ${address || query}`}
+            src={src}
+            className="h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
 
           {/* Address overlay */}
           <div className="absolute bottom-5 left-5 bg-white/95 backdrop-blur-sm px-4 py-3 flex items-center gap-2 shadow-sm pointer-events-none">

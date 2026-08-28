@@ -1,5 +1,6 @@
 "use client";
 
+import { cover } from "@chapter/db";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -46,7 +47,7 @@ export default function ArticleDetail({ article, related }: ArticleDetailProps) 
       <section className="relative h-[55vh] bg-black overflow-hidden">
         <Image
           fill
-          src={article.image}
+          src={cover(article.image)}
           alt={article.title}
           className="object-cover opacity-40"
           sizes="100vw"
@@ -174,7 +175,7 @@ export default function ArticleDetail({ article, related }: ArticleDetailProps) 
                 >
                   <Link href={`/resources/${post.slug}`} className="group block bg-white overflow-hidden hover:-translate-y-1 transition-transform duration-300">
                     <div className="relative overflow-hidden aspect-[16/9]">
-                      <Image fill src={post.image} alt={post.title} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" />
+                      <Image fill src={cover(post.image)} alt={post.title} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" />
                     </div>
                     <div className="p-6">
                       <div className="flex items-center gap-2 mb-3">

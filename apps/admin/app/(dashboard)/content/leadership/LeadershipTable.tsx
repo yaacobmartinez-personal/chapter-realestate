@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Contact, Trash2 } from "lucide-react";
-import type { TeamMember } from "@chapter/db";
+import { cover, type TeamMember } from "@chapter/db";
 import DataTable, { type Column } from "@/components/ui/DataTable";
 import ConfirmButton from "@/components/ConfirmButton";
 import EmptyState from "@/components/ui/EmptyState";
@@ -19,7 +19,7 @@ export default function LeadershipTable({ members }: { members: TeamMember[] }) 
       cell: (m) => (
         <div className="flex items-center gap-3">
           <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-surface-2">
-            {m.image && <Image src={m.image} alt={m.name} fill className="object-cover" sizes="44px" unoptimized />}
+            <Image src={cover(m.image)} alt={m.name} fill className="object-cover" sizes="44px" unoptimized />
           </div>
           <div className="min-w-0">
             <p className="truncate font-medium text-foreground">{m.name || "Unnamed"}</p>

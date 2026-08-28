@@ -1,5 +1,6 @@
 "use client";
 
+import { cover } from "@chapter/db";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,7 +59,7 @@ export default function AvailableRentals({ rentals }: { rentals: RentalUnit[] })
                   <div className="relative overflow-hidden aspect-4/3">
                     <Image
                       fill
-                      src={u.image}
+                      src={cover(u.image, u.images)}
                       alt={u.address}
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

@@ -3,15 +3,21 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FileText } from "lucide-react";
-import type { BlogPost } from "@chapter/db";
+import { FileText, Pencil, Trash2 } from "lucide-react";
+import { cover, type BlogPost } from "@chapter/db";
 import DataTable, { type Column } from "@/components/ui/DataTable";
-import DropdownMenu, { menuItemCls } from "@/components/ui/DropdownMenu";
 import Badge from "@/components/ui/Badge";
 import ConfirmButton from "@/components/ConfirmButton";
 import { Input } from "@/components/ui/Field";
 import EmptyState from "@/components/ui/EmptyState";
 import { removeBlogPost } from "./actions";
+
+// Inline row actions — see the note in PropertiesTable for why these replaced
+// the kebab dropdown.
+const iconBtnCls =
+  "grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-foreground";
+const dangerBtnCls =
+  "grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:bg-danger-surface hover:text-danger";
 
 export default function ResourcesTable({ posts }: { posts: BlogPost[] }) {
   const [search, setSearch] = useState("");
@@ -28,7 +34,7 @@ export default function ResourcesTable({ posts }: { posts: BlogPost[] }) {
       cell: (p) => (
         <div className="flex items-center gap-3">
           <div className="relative h-11 w-16 shrink-0 overflow-hidden rounded-md bg-surface-2">
-            {p.image && <Image src={p.image} alt={p.title} fill className="object-cover" sizes="64px" unoptimized />}
+            <Image src={cover(p.image)} alt={p.title} fill className="object-cover" sizes="64px" unoptimized />
           </div>
           <p className="min-w-0 truncate font-medium text-foreground">{p.title || "Untitled"}</p>
         </div>
@@ -42,18 +48,27 @@ export default function ResourcesTable({ posts }: { posts: BlogPost[] }) {
       header: "",
       align: "right",
       cell: (p) => (
-        <DropdownMenu>
-          <Link href={`/resources/${p.slug}`} className={menuItemCls}>Edit</Link>
-          <form action={removeBlogPost} className="border-t border-border">
+        <div className="flex items-center justify-end gap-1" onClick={(e) => e.stopPropagation()}>
+          <Link
+            href={`/resources/${p.slug}`}
+            title="Edit"
+            aria-label={`Edit ${p.title || "article"}`}
+            className={iconBtnCls}
+          >
+            <Pencil size={16} />
+          </Link>
+          <form action={removeBlogPost}>
             <input type="hidden" name="slug" value={p.slug} />
             <ConfirmButton
               message={`Delete "${p.title || "this article"}"? This cannot be undone.`}
-              className={`${menuItemCls} text-danger`}
+              className={dangerBtnCls}
+              title="Delete"
+              aria-label={`Delete ${p.title || "article"}`}
             >
-              Delete
+              <Trash2 size={16} />
             </ConfirmButton>
           </form>
-        </DropdownMenu>
+        </div>
       ),
     },
   ];

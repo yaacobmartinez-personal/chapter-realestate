@@ -7,3 +7,4 @@ export * from "./submissions";
 export * from "./agents";
 export * from "./rentals";
 export * from "./content";
+export * from "./images";

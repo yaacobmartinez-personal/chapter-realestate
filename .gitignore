@@ -43,3 +43,8 @@ cloudflare-env.d.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Single lockfile: package-lock.json. A committed yarn.lock made Vercel install
+# with yarn, which bakes in only the lockfile-generating platform for sharp.
+yarn.lock
+pnpm-lock.yaml

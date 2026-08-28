@@ -31,7 +31,17 @@ export default function DropdownMenu({
         <>
           <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
           <div
-            onClick={() => setOpen(false)}
+            onClick={(e) => {
+              // Submitting a form is the click's *default action*, which the
+              // browser runs after handlers finish. Closing here flushes
+              // synchronously and unmounts the form first, so the submit never
+              // happens — this is why menu deletes silently did nothing.
+              //
+              // Leave the menu open for submit buttons: the server action
+              // revalidates and the row (menu included) re-renders anyway.
+              if ((e.target as HTMLElement).closest("button[type='submit']")) return;
+              setOpen(false);
+            }}
             className={`absolute z-20 mt-1 w-48 overflow-hidden rounded-xl border border-border bg-surface py-1 shadow-lg ${
               align === "right" ? "right-0" : "left-0"
             }`}

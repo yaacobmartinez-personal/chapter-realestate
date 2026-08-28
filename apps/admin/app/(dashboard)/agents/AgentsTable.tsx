@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Contact, Trash2 } from "lucide-react";
-import type { Agent } from "@chapter/db";
+import { cover, type Agent } from "@chapter/db";
 import DataTable, { type Column } from "@/components/ui/DataTable";
 import ConfirmButton from "@/components/ConfirmButton";
 import { Input } from "@/components/ui/Field";
@@ -32,7 +32,7 @@ export default function AgentsTable({ agents }: { agents: Agent[] }) {
       cell: (a) => (
         <div className="flex items-center gap-3">
           <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-surface-2">
-            {a.image && <Image src={a.image} alt={a.name} fill className="object-cover" sizes="44px" unoptimized />}
+            <Image src={cover(a.image)} alt={a.name} fill className="object-cover" sizes="44px" unoptimized />
           </div>
           <div className="min-w-0">
             <p className="truncate font-medium text-foreground">{a.name || "Unnamed"}</p>

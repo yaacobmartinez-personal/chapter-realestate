@@ -1,4 +1,5 @@
 "use client";
+import { cover } from "@chapter/db";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -47,7 +48,7 @@ export default function FeaturedListings({ properties }: { properties: Property[
                 <div className="relative overflow-hidden aspect-[4/3]">
                   <Image
                     fill
-                    src={l.image}
+                    src={cover(l.image, l.images)}
                     alt={l.address}
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 100vw, 33vw"

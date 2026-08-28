@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 import {
   upsertRental,
   deleteRental,
+  findRentalByAddress,
   type RentalUnit,
   type RentalCategory,
   type RentalStatus,
@@ -26,7 +27,8 @@ export type SaveState = { error: string } | null;
 export async function saveRental(_prev: SaveState, formData: FormData): Promise<SaveState> {
   const supabase = await createClient();
 
-  const id = str(formData, "id") || randomUUID();
+  const existingId = str(formData, "id");
+  const id = existingId || randomUUID();
 
   let images: string[] = [];
   try {
@@ -49,7 +51,23 @@ export async function saveRental(_prev: SaveState, formData: FormData): Promise<
     status: (str(formData, "status") || "Available") as RentalStatus,
   };
 
+  if (!rental.address) {
+    return { error: "Address is required." };
+  }
+
   try {
+    // Catches the same property being turned into a rental twice. Not a unique
+    // constraint — two units in one building share a street address — so the
+    // way past it is to make the address say which unit this is.
+    const clash = await findRentalByAddress(supabase, rental.address, existingId || undefined);
+    if (clash) {
+      return {
+        error:
+          `A rental at "${clash.address}" already exists. ` +
+          `Edit that one instead, or add a unit number to tell them apart.`,
+      };
+    }
+
     await upsertRental(supabase, rental);
   } catch (err) {
     return { error: (err as Error).message };

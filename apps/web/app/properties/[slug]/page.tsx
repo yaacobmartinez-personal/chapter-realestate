@@ -24,7 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${property.address} — ${property.price} | Chapter`,
       description: `${property.beds} bed, ${property.baths} bath in ${property.area}. ${property.sqft} sqft.`,
       url: `https://chapterrealestate.ca/properties/${property.slug}`,
-      images: [{ url: property.image }],
+      // Social scrapers largely ignore SVG, so an image-less listing falls back to
+      // the logo rather than the on-page placeholder. Resolved against metadataBase.
+      images: [{ url: property.image || "/logo.png" }],
     },
   };
 }

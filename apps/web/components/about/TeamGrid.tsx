@@ -1,3 +1,4 @@
+import { cover } from "@chapter/db";
 import Image from "next/image";
 import type { TeamMember } from "@/lib/data/leadership";
 
@@ -9,7 +10,7 @@ export default function TeamGrid({ members }: { members: TeamMember[] }) {
           <div className="relative aspect-3/4 overflow-hidden bg-gray-200 mb-4">
             <Image
               fill
-              src={image}
+              src={cover(image)}
               alt={name}
               className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
               sizes="(max-width: 768px) 50vw, 25vw"

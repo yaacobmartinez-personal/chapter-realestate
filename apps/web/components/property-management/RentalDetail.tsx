@@ -1,5 +1,6 @@
 "use client";
 
+import { cover, gallery } from "@chapter/db";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +15,7 @@ export default function RentalDetail({
   rental: RentalUnit;
   related: RentalUnit[];
 }) {
-  const gallery = rental.images.length > 0 ? rental.images : [rental.image];
+  const shots = gallery(rental.images, rental.image);
   const [current, setCurrent] = useState(0);
   const isResidential = rental.category === "Residential";
 
@@ -24,7 +25,7 @@ export default function RentalDetail({
       <section className="relative h-[52vh] md:h-[62vh] bg-black">
         <Image
           fill
-          src={gallery[current]}
+          src={shots[current]}
           alt={rental.address}
           className="object-cover opacity-90"
           sizes="100vw"
@@ -34,10 +35,10 @@ export default function RentalDetail({
       </section>
 
       {/* Thumbnail strip — only when there is more than one image */}
-      {gallery.length > 1 && (
+      {shots.length > 1 && (
         <div className="bg-black">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex gap-2 overflow-x-auto scrollbar-none">
-            {gallery.map((img, i) => (
+            {shots.map((img, i) => (
               <button
                 key={img + i}
                 onClick={() => setCurrent(i)}
@@ -137,7 +138,7 @@ export default function RentalDetail({
                   <div className="relative aspect-4/3 overflow-hidden">
                     <Image
                       fill
-                      src={r.image}
+                      src={cover(r.image, r.images)}
                       alt={r.address}
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 768px) 100vw, 33vw"

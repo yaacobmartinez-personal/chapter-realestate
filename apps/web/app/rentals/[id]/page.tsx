@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${rental.address} — ${rental.rent} | Chapter`,
       description,
       url: `https://chapterrealestate.ca/rentals/${rental.id}`,
-      images: [{ url: rental.image }],
+      // See the note in properties/[slug] — logo, not the SVG placeholder.
+      images: [{ url: rental.image || "/logo.png" }],
     },
   };
 }

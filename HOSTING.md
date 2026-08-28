@@ -56,7 +56,8 @@ The app uses these variables:
 |---|---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase connection | Build **and** runtime | Yes |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Public (read-only) Supabase access | Build **and** runtime | Yes |
-| `NEXT_PUBLIC_MAPBOX_TOKEN` | Map components | Build **and** runtime | Yes |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Contact-page office map | Build **and** runtime | Yes |
+| `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` | Property-page map — upgrades it from the keyless embed to the official Maps Embed API | Build **and** runtime | No |
 | `SUPABASE_SERVICE_ROLE_KEY` | **Secret.** Saving form submissions | Runtime only | Yes |
 | `RESEND_API_KEY` | **Secret.** Emailing form submissions (Resend) | Runtime only | Optional |
 | `RESEND_TO` | Inbox that receives lead emails | Runtime only | Optional |

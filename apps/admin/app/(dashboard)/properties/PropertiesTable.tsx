@@ -3,10 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Building2 } from "lucide-react";
-import type { Property } from "@chapter/db";
+import { Building2, Pencil, Trash2 } from "lucide-react";
+import { cover, type Property } from "@chapter/db";
 import DataTable, { type Column } from "@/components/ui/DataTable";
-import DropdownMenu, { menuItemCls } from "@/components/ui/DropdownMenu";
 import Badge from "@/components/ui/Badge";
 import ConfirmButton from "@/components/ConfirmButton";
 import { Input, Select } from "@/components/ui/Field";
@@ -16,6 +15,14 @@ import { removeProperty } from "./actions";
 function statusTone(s: Property["status"]) {
   return s === "For Sale" ? "success" : s === "Pending" ? "warning" : "neutral";
 }
+
+// Row actions sit inline rather than in a dropdown: the menu was clipped by the
+// table on the last row, and it closed on click — unmounting the delete form
+// before the browser could submit it. Matches the other admin tables.
+const iconBtnCls =
+  "grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-foreground";
+const dangerBtnCls =
+  "grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:bg-danger-surface hover:text-danger";
 
 export default function PropertiesTable({ properties }: { properties: Property[] }) {
   const [search, setSearch] = useState("");
@@ -36,7 +43,7 @@ export default function PropertiesTable({ properties }: { properties: Property[]
       cell: (p) => (
         <div className="flex items-center gap-3">
           <div className="relative h-11 w-16 shrink-0 overflow-hidden rounded-md bg-surface-2">
-            {p.image && <Image src={p.image} alt={p.address} fill className="object-cover" sizes="64px" unoptimized />}
+            <Image src={cover(p.image, p.images)} alt={p.address} fill className="object-cover" sizes="64px" unoptimized />
           </div>
           <div className="min-w-0">
             <p className="truncate font-medium text-foreground">{p.address || "Untitled"}</p>
@@ -53,18 +60,27 @@ export default function PropertiesTable({ properties }: { properties: Property[]
       header: "",
       align: "right",
       cell: (p) => (
-        <DropdownMenu>
-          <Link href={`/properties/${p.id}`} className={menuItemCls}>Edit</Link>
-          <form action={removeProperty} className="border-t border-border">
+        <div className="flex items-center justify-end gap-1" onClick={(e) => e.stopPropagation()}>
+          <Link
+            href={`/properties/${p.id}`}
+            title="Edit"
+            aria-label={`Edit ${p.address || "property"}`}
+            className={iconBtnCls}
+          >
+            <Pencil size={16} />
+          </Link>
+          <form action={removeProperty}>
             <input type="hidden" name="id" value={p.id} />
             <ConfirmButton
               message={`Delete ${p.address || "this property"}? This cannot be undone.`}
-              className={`${menuItemCls} text-danger`}
+              className={dangerBtnCls}
+              title="Delete"
+              aria-label={`Delete ${p.address || "property"}`}
             >
-              Delete
+              <Trash2 size={16} />
             </ConfirmButton>
           </form>
-        </DropdownMenu>
+        </div>
       ),
     },
   ];

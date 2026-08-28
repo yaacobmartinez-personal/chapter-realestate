@@ -1,5 +1,6 @@
 "use client";
 
+import { cover, gallery } from "@chapter/db";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,7 +62,7 @@ function PropertyInquiryForm({ property }: { property: Property }) {
 export default function PropertyDetail({ property, related }: PropertyDetailProps) {
   return (
     <div className="bg-white">
-      <PropertyCarousel images={property.images} address={property.address} tag={property.tag} />
+      <PropertyCarousel images={gallery(property.images, property.image)} address={property.address} tag={property.tag} />
 
       {/* Content */}
       <section className="py-20">
@@ -149,6 +150,8 @@ export default function PropertyDetail({ property, related }: PropertyDetailProp
         lng={property.coordinates.lng}
         lat={property.coordinates.lat}
         address={property.address}
+        city={property.city}
+        province={property.province}
       />
 
       {/* Related listings */}
@@ -175,7 +178,7 @@ export default function PropertyDetail({ property, related }: PropertyDetailProp
                 >
                   <Link href={`/properties/${p.slug}`} className="group block bg-white overflow-hidden hover:-translate-y-1 transition-transform duration-300">
                     <div className="relative overflow-hidden aspect-[4/3]">
-                      <Image fill src={p.image} alt={p.address} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" />
+                      <Image fill src={cover(p.image, p.images)} alt={p.address} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="33vw" />
                       <span className="absolute top-4 left-4 bg-black text-white text-xs tracking-widest uppercase px-3 py-1.5 font-light">{p.tag}</span>
                     </div>
                     <div className="p-5">

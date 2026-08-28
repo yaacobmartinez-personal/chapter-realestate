@@ -5,7 +5,7 @@ import { useFormStatus } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, MapPin, Bed, Bath, Square } from "lucide-react";
-import type { RentalUnit } from "@chapter/db";
+import { cover, type RentalUnit, type Property } from "@chapter/db";
 import ImageUploader from "@/components/ImageUploader";
 import Button from "@/components/ui/Button";
 import { controlCls as inputCls } from "@/components/ui/Field";
@@ -33,6 +33,31 @@ function initialState(r?: RentalUnit): FormState {
     category: r?.category ?? "Residential",
     status: r?.status ?? "Available",
   };
+}
+
+/**
+ * A property row already carries most of what a rental listing needs, so
+ * picking one copies the shared fields across instead of re-typing them.
+ *
+ * `rent` is deliberately left alone — a property's `price` is a sale price,
+ * not a monthly rent — and so is `status`, which starts at "Available".
+ */
+function fromProperty(p: Property, current: FormState): FormState {
+  return {
+    ...current,
+    address: p.address,
+    area: p.area || p.city,
+    beds: String(p.beds ?? ""),
+    baths: String(p.baths ?? ""),
+    sqft: p.sqft,
+    // Property types don't map cleanly onto rental categories; this is a
+    // best guess the user can override with the dropdown below.
+    category: p.type === "Investment" ? "Commercial" : "Residential",
+  };
+}
+
+function propertyImages(p: Property): string[] {
+  return p.images?.length ? p.images : p.image ? [p.image] : [];
 }
 
 function Field({
@@ -67,16 +92,44 @@ function SubmitButton() {
   );
 }
 
-export default function RentalForm({ rental }: { rental?: RentalUnit }) {
+export default function RentalForm({
+  rental,
+  properties = [],
+  takenAddresses = [],
+}: {
+  rental?: RentalUnit;
+  properties?: Property[];
+  /** Addresses that already have a rental — matched the way the server does. */
+  takenAddresses?: string[];
+}) {
   const r = rental;
   const [state, formAction] = useActionState<SaveState, FormData>(saveRental, null);
   const [f, setF] = useState<FormState>(() => initialState(r));
   const initialImages = r?.images?.length ? r.images : r?.image ? [r.image] : [];
   const [images, setImages] = useState<string[]>(initialImages);
+  const [sourceId, setSourceId] = useState("");
 
   const set = (key: keyof FormState) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => setF((prev) => ({ ...prev, [key]: e.target.value }));
+
+  function pickProperty(id: string) {
+    setSourceId(id);
+    const p = properties.find((x) => x.id === id);
+    if (!p) return;
+    setF((prev) => fromProperty(p, prev));
+    // Reuses the property's existing storage URLs — nothing is re-uploaded, and
+    // deleting one here won't touch the property's own photos.
+    setImages(propertyImages(p));
+  }
+
+  // Only offered when creating: an existing rental already has its own values.
+  const showPicker = !r && properties.length > 0;
+
+  const taken = new Set(takenAddresses.map((a) => a.trim().toLowerCase()));
+  const isTaken = (address: string) => taken.has(address.trim().toLowerCase());
+  // Live, so it also catches an address typed by hand — not just a picked one.
+  const duplicate = !r && f.address.trim() !== "" && isTaken(f.address);
 
   const photo = images[0];
   const isResidential = f.category === "Residential";
@@ -110,9 +163,51 @@ export default function RentalForm({ rental }: { rental?: RentalUnit }) {
       <div className="space-y-6">
         {r && <input type="hidden" name="id" value={r.id} />}
 
+        {showPicker && (
+          <section className="rounded-lg border border-border bg-surface-2 p-4">
+            <label className="block">
+              <span className="mb-1 block text-sm font-medium text-foreground">
+                Start from a property
+              </span>
+              <select
+                value={sourceId}
+                onChange={(e) => pickProperty(e.target.value)}
+                className={inputCls}
+              >
+                <option value="">— Blank rental —</option>
+                {properties.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.address}
+                    {p.area ? ` — ${p.area}` : ""}
+                    {isTaken(p.address) ? "  (already a rental)" : ""}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {duplicate && (
+              <p className="mt-2 text-sm text-amber-600" role="alert">
+                A rental at this address already exists. Saving will be blocked — edit that
+                listing instead, or add a unit number to tell them apart.
+              </p>
+            )}
+            <p className="mt-2 text-xs text-muted">
+              Copies the address, area, beds, baths, sqft and photos across. The rental is saved as
+              its own listing — editing it later won&apos;t change the property. Set the rent
+              yourself; the property&apos;s price is a sale price.
+            </p>
+          </section>
+        )}
+
         <section>
           <h2 className="mb-3 text-sm font-semibold text-muted">Photos</h2>
-          <ImageUploader initial={initialImages} folder="rentals" onChange={setImages} />
+          {/* Remount on pick — ImageUploader owns its list after mount, so a new
+              `initial` alone wouldn't show the copied photos. */}
+          <ImageUploader
+            key={sourceId}
+            initial={images}
+            folder="rentals"
+            onChange={setImages}
+          />
           <p className="mt-2 text-xs text-muted">The first photo is the main image shown on cards.</p>
         </section>
 
@@ -145,7 +240,7 @@ export default function RentalForm({ rental }: { rental?: RentalUnit }) {
         <p className="mb-3 text-sm font-semibold text-muted">Live preview</p>
         <div className="max-w-sm overflow-hidden border border-gray-200 bg-white">
           <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
-            {photo && <Image src={photo} alt={f.address || "Rental"} fill className="object-cover" sizes="384px" unoptimized />}
+            <Image src={cover(photo)} alt={f.address || "Rental"} fill className="object-cover" sizes="384px" unoptimized />
             <span className="absolute left-4 top-4 bg-black px-3 py-1.5 text-xs font-light uppercase tracking-widest text-white">
               {f.category}
             </span>

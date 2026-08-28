@@ -1,4 +1,5 @@
 "use client";
+import { cover } from "@chapter/db";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -44,7 +45,7 @@ export default function Team({ leaders }: { leaders: TeamMember[] }) {
               <div className="aspect-[3/4] overflow-hidden bg-gray-200 mb-4 relative">
                 <Image
                   fill
-                  src={image}
+                  src={cover(image)}
                   alt={name}
                   className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                   sizes="(max-width: 768px) 50vw, 25vw"

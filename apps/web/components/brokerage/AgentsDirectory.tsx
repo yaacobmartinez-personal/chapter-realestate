@@ -1,5 +1,6 @@
 "use client";
 
+import { cover } from "@chapter/db";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -88,7 +89,7 @@ export default function AgentsDirectory({ agents }: { agents: Agent[] }) {
                 <div className="relative overflow-hidden bg-gray-100 aspect-3/4">
                   <Image
                     fill
-                    src={image}
+                    src={cover(image)}
                     alt={name}
                     className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                     sizes="(max-width: 768px) 50vw, 25vw"
