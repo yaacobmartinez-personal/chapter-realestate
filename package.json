@@ -13,5 +13,10 @@
     "build:admin": "npm run build -w admin",
     "lint": "npm run lint --workspaces --if-present",
     "db:seed": "npm run seed -w @chapter/db"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "4.3.0",
+    "lightningcss-linux-x64-gnu": "1.32.0",
+    "@unrs/resolver-binding-linux-x64-gnu": "1.12.2"
   }
 }
