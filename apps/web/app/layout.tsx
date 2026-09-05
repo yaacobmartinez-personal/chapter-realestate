@@ -7,6 +7,7 @@ import PageTransition from "@/components/ui/PageTransition";
 import ScrollObserver from "@/components/ui/ScrollObserver";
 import JsonLd from "@/components/JsonLd";
 import { getSocialLinks } from "@/lib/data/social";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,6 +85,7 @@ export default async function RootLayout({
         <ScrollObserver />
         <main className="flex-1"><PageTransition>{children}</PageTransition></main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
