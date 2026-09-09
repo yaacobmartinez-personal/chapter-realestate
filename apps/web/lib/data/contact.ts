@@ -7,6 +7,9 @@ export interface Office {
   city: string;
   phone: string;
   email: string;
+  /** Marker position for the contact-page map. */
+  lat: number;
+  lng: number;
 }
 
 // ─── Business Hours ───────────────────────────────────────────────────────────

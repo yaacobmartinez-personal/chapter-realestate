@@ -5,7 +5,9 @@
       "address": "Unit 3, 20 St Mary's Road",
       "city": "Winnipeg, Manitoba, Canada",
       "phone": "+1 (431) 244-4414",
-      "email": "pm@chapterrealestate.ca"
+      "email": "pm@chapterrealestate.ca",
+      "lat": 49.880299,
+      "lng": -97.127657
     }
   ],
   "businessHours": [
