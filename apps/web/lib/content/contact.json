@@ -2,31 +2,16 @@
   "offices": [
     {
       "name": "Main Office",
-      "address": "123 Portage Ave, Suite 400",
-      "city": "Winnipeg, MB R3B 2G5",
-      "phone": "(204) 555-0100",
-      "email": "hello@chapterrealestate.ca"
+      "address": "Unit 3, 20 St Mary's Road",
+      "city": "Winnipeg, Manitoba, Canada",
+      "phone": "+1 (431) 244-4414",
+      "email": "pm@chapterrealestate.ca"
     },
-    {
-      "name": "Property Management",
-      "address": "456 Corydon Ave",
-      "city": "Winnipeg, MB R3L 0N8",
-      "phone": "(204) 555-0200",
-      "email": "management@chapterrealestate.ca"
-    }
   ],
   "businessHours": [
     {
       "day": "Monday – Friday",
-      "hours": "9:00 AM – 6:00 PM"
-    },
-    {
-      "day": "Saturday",
-      "hours": "10:00 AM – 4:00 PM"
-    },
-    {
-      "day": "Sunday",
-      "hours": "By Appointment"
+      "hours": "9:00 AM – 4:00 PM"
     }
   ]
 }

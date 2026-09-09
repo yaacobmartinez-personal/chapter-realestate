@@ -8,6 +8,8 @@ import {
   Careers,
 } from "@/components/about";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "About Us",
   description:
