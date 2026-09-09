@@ -2,8 +2,10 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Phone, MapPin } from "lucide-react";
+import { offices } from "@/lib/data/contact";
 
 export default function ContactCTA() {
+  const { phone, city } = offices[0];
   return (
     <section className="py-28 bg-black text-white overflow-hidden relative">
       {/* Animated background lines */}
@@ -52,11 +54,11 @@ export default function ContactCTA() {
               </motion.div>
             </div>
             <div className="flex flex-col sm:flex-row gap-6 pt-6 border-t border-white/10">
-              <a href="tel:+12045550100" className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors font-light">
-                <Phone size={14} className="text-[#c8a96e]" />(204) 555-0100
+              <a href={`tel:${phone}`} className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors font-light">
+                <Phone size={14} className="text-[#c8a96e]" />{phone}
               </a>
               <span className="flex items-center gap-3 text-sm text-gray-400 font-light">
-                <MapPin size={14} className="text-[#c8a96e]" />Winnipeg, Manitoba
+                <MapPin size={14} className="text-[#c8a96e]" />{city}
               </span>
             </div>
           </motion.div>
